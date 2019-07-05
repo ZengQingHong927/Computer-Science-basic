@@ -22,4 +22,4 @@ openssl req -new -x509 -days 365 -keys aes-private.key -out cert.crt (-new 生�
 openssl genrsa -aes256 -passout pass:abc123 -out server.key 2048  
 openssl req -new -key server.key -out server.csr（此後輸入密碼、server證書信息完成，也可以命令行指定各類參數）  
 openssl req -new -key server.key -passin pass:abc123 -out server.csr -subj "/C=CN/ST=GD/L=SZ/O=vihoo/OU=dev/CN=vivo.com/emailAddress=yy@vivo.com"（此時生成的csr簽名請求文件可提交至CA進行簽發）  
-openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -passin pass:111111 -CAcreateserial -out server.crt
+openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -passin pass:111111 -CAcreateserial -out server.crt（自簽發crt文件）

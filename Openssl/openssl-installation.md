@@ -2,7 +2,7 @@
 ## Linux  
 * 源碼連結 https://github.com/openssl/openssl.git
 * TLS v1.3 support  (縮短時間和刪除不安全的加密算法)
-### 前置作業toolkit gcc & make  
+### 前置作業toolkit gcc & make (build-essential,libtool)  
 * sudo apt-get update
 * sudo apt-get install gcc & make  
 ### 安裝步驟
@@ -16,3 +16,9 @@
 8.執行cd /usr/local
 9.查看版本openssl version
 ## Mac OS
+### 安裝步驟
+* which openssl
+* openssl version
+* brew install openssl
+* brew upgrade openssl
+* brew link openssl --force

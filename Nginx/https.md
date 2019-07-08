@@ -1,4 +1,4 @@
-# Http/Https - Introduction
+# HTTP/HTTPS - Introduction
 ## SSL證書
 ### 主要用途：加密和身份證明，可向第三方CA機構申請
 ### 證書等級：IV, OV, EV，需要付費
@@ -28,4 +28,29 @@
 * openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt // 生成自簽名證書
 * openssl req -new -key server.key -out server.csr // 生成csr文件
 * openssl x509 -req -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt // 生成帶有CA簽名的證書  
-## 在index file引入server.key和server.crt
+
+## HTTPS建置步驟
+### 1.創建自己的CA機構
+* openssl genrsa -out ca-key.pem -des 1024
+* openssl req -new -key ca-key.pem -out ca-csr.pem
+* openssl x509 -req -in ca-csr.pem -signkey ca-key.pem -out ca-cert.pem
+### 2.創建服務器端證書
+* openssl genrsa -out server-key.pem 1024
+* openssl req -new -key server-key.pem -config openssl.cnf -out server-csr.pem
+* openssl x509 -req -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in server-csr.pem -out server-cert.pem -extensions v3_req -extfile openssl.cnf
+
+### 3.服務器代碼
+---
+var https = require('https');
+var fs = require('fs');
+
+var options = {
+	key: fs.readFileSync('./keys/server-key.pem'),
+	ca: fs.readFileSync('./keys/ca-cert.pem'),
+	cert: fs.readFileSync('./keys/server-cert.pem')
+};
+
+https.createServer(options,function(req,res){
+	res.writeHead(200);
+	res.end('hello world\n');
+}).listen(3000,'127.0.0.1');

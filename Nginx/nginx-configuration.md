@@ -5,6 +5,7 @@ groupadd nobody
 useradd -g nodybody  
 配置文件結構：main，包含Events和Http，Http包含upsteam和多個server，Server包含多個location
 ***
+```
 #user  nobody; // 主機用戶名  
 worker_processes  1; // 工作進程數目根據CPU核心數，每個nginx進程耗費10~20M內存
 
@@ -179,3 +180,4 @@ server {
 #        index  index.html index.htm;
 #    }
 #}
+```

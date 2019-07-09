@@ -1,6 +1,5 @@
 # Nginx-Installation  
-* sudo apt-get install build-essential
-* sudo apt-get install libtool
+* sudo apt-get install build-essential libtool zlib  (toolkit)
 * sudo apt-get install nginx
 
 ### Nginx 相關目錄
@@ -26,4 +25,9 @@ proxy_pass http://127.0.0.1:port
 * fuser -k 80/tcp  
 * ps -A | grep nginx  
 kill -9 pid1  
-kill -9 pid2
+kill -9 pid2  
+
+3. open() "/var/run/nginx/nginx.pid" failed (2: No such file or directory) 編輯 /etc/nginx/nignx.cnf  
+pid /logs/nginx.pid -> /usr/local/nginx/logs/nginx.pid;  
+創建 /usr/local/nginx/logs;  
+nginx -s reload

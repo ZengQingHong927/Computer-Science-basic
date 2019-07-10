@@ -29,6 +29,7 @@ events {
 }
 
 ### 設定http服務器，反向代理功能實現負載均衡
+``` 
 http {
     include       mime.types; // 設定mime類型
     default_type  application/octet-stream;

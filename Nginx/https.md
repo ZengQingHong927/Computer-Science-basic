@@ -40,7 +40,7 @@
 * openssl x509 -req -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in server-csr.pem -out server-cert.pem -extensions v3_req -extfile openssl.cnf
 
 ### 3.服務器代碼
----
+```js
 var https = require('https');  
 var fs = require('fs');  
 
@@ -54,3 +54,4 @@ https.createServer(options,function(req,res){
 	res.writeHead(200);  
 	res.end('hello world\n');  
 }).listen(3000,'127.0.0.1');  
+```

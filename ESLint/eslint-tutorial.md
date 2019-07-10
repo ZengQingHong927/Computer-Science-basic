@@ -10,7 +10,7 @@
 4. 在VSCode設定相關配置 Code->Preferences->Settings，在User和Workspace編輯設定，“eslint.validate”:["javascript","javascriptreact",{"language":"vue","autofix":true}]
 5. airbnb-base代碼風格範例  
 .eslintrc.js
-```
+```js
 module,exports = {
   "env": {
         "browser": true,

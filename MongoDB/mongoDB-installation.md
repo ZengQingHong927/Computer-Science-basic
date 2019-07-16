@@ -19,6 +19,15 @@ echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 6. 啟動mongo，sudo service mongod start，預設監聽端口27017  
 7. 查看mongo 運行狀態，sudo service mongod status
 8. 命令行 mongo，進入mongodb CMI  
+9. 相關資料夾  
+/var/log/mongodb (日誌)  
+/var/lib/mongodb (數據存放路徑)  
+/etc/mongod.conf (設定檔)  
+
+### 卸載
+sudo apt-get purge mongodb-org*  
+sudo rm -r /var/log/mongodb  
+sudo rm -r /var/lib/mongodb  
 ### 安裝GUI Mongo Compass & NoSQLBooster  
 參考網址 https://www.mongodb.com/download-center/compass?jmp=docs  
 參考網址 https://nosqlbooster.com/downloads

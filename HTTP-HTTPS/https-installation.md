@@ -55,3 +55,13 @@ https.createServer(options,function(req,res){
 	res.end('hello world\n');  
 }).listen(3000,'127.0.0.1');  
 ```
+### 4.SSL for Free申請SSL證書
+1. SSL for Free 網址：https://www.sslforfree.com/  
+2. Create Free SSL Certificate 輸入框 輸入申請的網域名稱  
+3. 選擇手動驗證 manual verification & 點擊Manually Verify Domain  
+4. 下載Download File #1，Download File #2  
+5. 在資料夾根路徑創建.well-known/acme-challenge資料夾  
+6. 將剛才下載的兩個檔案放在.well-known/acme-challenge資料夾下
+7. 點擊下一步驟兩個連結，測試是否成功取得.well-known/acme-challenge/file  
+8. 點擊Download SSL Certificate，下載SSL證書  
+9. 將SSL證書上傳至服務器，並引用certificate相關文件  

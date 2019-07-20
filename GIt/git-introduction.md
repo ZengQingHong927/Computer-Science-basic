@@ -31,3 +31,13 @@ git config --global user.name "username"
 git config --global user.email username@example.com  
 - 查看配置  
 git config --list  
+
+## 分支回滚到上一版本
+- 切換分支  
+git checkout new_feature  
+- 查看git log  
+git log  
+- 回滚到指定版本，歷史版本的id是fae6966548e3ae76cfa7f38a461c438cf75ba965  
+git reset --hard fae6966548e3ae76cfa7f38a461c438cf75ba965  
+- 遠端倉庫分支修改  
+git push -f -u origin new_feature

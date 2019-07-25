@@ -22,3 +22,17 @@ p 切換至上一個窗口
 n 切換至下一個窗口  
 “ 當前面板分割為上下兩塊  
 % 當前面板分割為左右兩塊  
+
+## 创建新窗口
+tmux  
+tmux new -s session_name  
+tmux a -t session_name  
+tmux a -t 0  
+## 刪除 session
+tmux kill-session -t 0  
+OR  
+tmux kill-session -t session_name  
+OR  
+tmux kill-session -a // 删除全部  
+## 刪除 tmux server
+tmux kill-server

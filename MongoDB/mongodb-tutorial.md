@@ -9,8 +9,8 @@ https://docs.mongodb.com/manual/reference/configuration-options/
 1. 進入mongo  
 2. 切換至admin數據庫，use admin  
 3. 添加用戶，db.createUser({
-  user: "adminUser",
-  pwd: "adminPwd",
+  user: "username",
+  pwd: "password",
   roles:[{
     role: "userAdminAnyDatabase",
     db: "admin"
@@ -76,8 +76,8 @@ use admin
 3. 在admin db下創建用戶權限和密碼
 db.createUser(
 {
-    user: "nick",
-    pwd: "nick0323",
+    user: "username",
+    pwd: "password",
     roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] // admin db, role 只接受 `userAdmin` and `userAdminAnyDatabase`
 })  
 
@@ -100,17 +100,22 @@ db.auth("nick","nick0323")
 ### 對某一數據庫設定登入權限  
 1. 切換至koa-test db 增加使用者  
 use koa-test  
-db.createUser({user: "Nick",pwd: "nick0501",roles: [ { role: "readWrite", db: "koa-test" } ]})  
+db.createUser({user: "username",pwd: "password",roles: [ { role: "readWrite", db: "koa-test" } ]})  
 2. 查詢次數據庫所有用戶  
 db.getUsers()  
 3. 删除此數據庫所有用戶  
 db.dropAllUsers()  
+4. 創建集合  
+db.createCollection("health");
+5. 查詢document  
+- use koa-test
+- db.health.find()
 
 ### 權限管理  
 1. mongod  
 2. use testdb  
-3. db.createUser({user:'nick',pwd:'nick0112',roles:[{role:'dbAdmin',db:'wmg-sys-app-beta'}]})  
-4. use admin->db.createUser({user:'nick',pwd:'nick0112',roles:[{role:'userAdminAnyDatabase',db:'admin'}]})  
+3. db.createUser({user:'username',pwd:'password',roles:[{role:'dbAdmin',db:'wmg-sys-app-beta'}]})  
+4. use admin->db.createUser({user:'username',pwd:'password',roles:[{role:'userAdminAnyDatabase',db:'admin'}]})  
 5. sudo nano /etc/mongodb.conf
 6. security:  
     authorization: enabled  

@@ -21,7 +21,7 @@ brew services stop postgresql
 - 創建默認名為user的數據庫  
 createdb  
 - 創建默認指定名為alpha的數據庫，owner为username  
-createdb alpha  -O username
+createdb alphadb  -O username
 - 用superuser創建數據庫  
 createdb -U postgres databasename
 - 刪除數據庫  

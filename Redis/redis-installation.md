@@ -35,3 +35,10 @@ slaveof
 bind  
 開啟驗證
 requirepass  
+
+## redis Tools
+redis-server redis伺服器
+redis-cli redis命令列客戶端
+redis-benchmark redis效能測試工具
+redis-check-aof AOF檔案修復工具
+redis-check-rdb RDB檔案檢索工具 

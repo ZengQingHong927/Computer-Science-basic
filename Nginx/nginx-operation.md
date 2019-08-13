@@ -1,16 +1,16 @@
 # Nginx - Basic Operation  
 - 重啟Nginx  
-nginx -s reload  
+sudo nginx -s reload  
 - 快速關閉Nginx，不保存相關信息  
-nginx -s stop  
+sudo nginx -s stop  
 - 平穩關閉Nginx，保存相關信息
-nginx -s quit
+sudo nginx -s quit
 - 測試Nginx
-nginx -t  
+sudo nginx -t  
 - 為Nginx指定一個配置文件
-nginx -c file_name  
+sudo nginx -c file_name  
 - 重新開啟日誌
-nginx -s reopen
+sudo nginx -s reopen
 
 ## nginx: [error] invalid PID number "" in "/run/nginx.pid"
 - sudo nginx -c /etc/nginx/nginx.conf  
@@ -26,3 +26,8 @@ kill -9 pid2
 pid /logs/nginx.pid -> /usr/local/nginx/logs/nginx.pid;  
 創建 /usr/local/nginx/logs;  
 nginx -s reload
+
+## 查詢Nginx服務狀態
+sudo service nginx status
+sudo service nginx restart
+sudo service nginx start

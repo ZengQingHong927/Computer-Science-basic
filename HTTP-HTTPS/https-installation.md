@@ -55,7 +55,38 @@ https.createServer(options,function(req,res){
 	res.end('hello world\n');  
 }).listen(3000,'127.0.0.1');  
 ```
-### 4.SSL for Free申請SSL證書
+### 4.Nginx proxy for HTTPS
+app.js 不需要引入SSL文件
+site-enabled/
+```t
+server {
+
+# ssl on;
+ssl_certificate /etc/nginx/key/certificate.crt;
+ssl_certificate_key     /etc/nginx/key/private.key;
+
+ssl_session_cache       shared:SSL:1m;
+ssl_session_timeout     5m;
+ssl_protocols           TLSv1 TLSv1.1 TLSv1.2;
+ssl_ciphers             ECDHE-RSA-AES128-GCM-SHA-256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+ssl_prefer_server_ciphers       on;
+}
+```
+nginx.conf
+```t
+http{
+	##
+  # SSL Settings
+  ##
+
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+  ssl_prefer_server_ciphers on;
+  ssl_certificate /etc/nginx/key/certificate.crt;
+  ssl_certificate_key /etc/nginx/key/private.key;
+}
+```
+
+### 5.SSL for Free申請SSL證書
 1. SSL for Free 網址：https://www.sslforfree.com/  
 2. Create Free SSL Certificate 輸入框 輸入申請的網域名稱  
 3. 選擇手動驗證 manual verification & 點擊Manually Verify Domain  

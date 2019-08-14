@@ -80,7 +80,6 @@ db.createUser(
     pwd: "password",
     roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] // admin db, role 只接受 `userAdmin` and `userAdminAnyDatabase`
 })  
-
 4. 修改設定檔啟動權限驗證  
 編輯 /etc/mongodb.conf
 security:

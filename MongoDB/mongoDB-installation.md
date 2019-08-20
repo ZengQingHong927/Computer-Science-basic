@@ -1,7 +1,7 @@
 # MongoDB - Installation  
 參考網址 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
-### 安裝步驟  
+## 安裝步驟  
 1. 選擇作業系統環境和安裝版本，使用命令行安裝
 2. 加入public key用於包管理器  
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4  
@@ -24,14 +24,14 @@ echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 /var/lib/mongodb (數據存放路徑)  
 /etc/mongod.conf (設定檔)  
 
-### 卸載
+## 卸載
 sudo apt-get purge mongodb-org*  
 sudo rm -r /var/log/mongodb  
 sudo rm -r /var/lib/mongodb  
-### 安裝GUI Mongo Compass & NoSQLBooster  
+## 安裝GUI Mongo Compass & NoSQLBooster  
 參考網址 https://www.mongodb.com/download-center/compass?jmp=docs  
 參考網址 https://nosqlbooster.com/downloads
-### Compass開啟連線  
+## Compass開啟連線  
 1. Hostname // 連線mongodb主機的域名  
 2. Port // 連線mongodb主機的端口  
 3. Authentication // 連線驗證方式，選username/password  

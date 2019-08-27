@@ -2,3 +2,10 @@
 ## 參考網址：
 - https://zhuanlan.zhihu.com/p/26470223?utm_source=wechat_session&utm_medium=social  
 - https://github.com/RiXiong/weshop/issues/1
+## 商城具備功能
+ - 商品管理
+ - 會員管理
+ - 購物車
+ - 線上支付
+ - 商品搜索
+ - 商品評論（非必要）

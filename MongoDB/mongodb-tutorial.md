@@ -95,7 +95,6 @@ mongo --host {serverIP} --port {port} -u "{username}" -p "{password}" --authenti
 mongo --host {serverIP} --port {port}
 use admin
 db.auth("nick","nick0323")
-
 ### 對某一數據庫設定登入權限  
 1. 切換至koa-test db 增加使用者  
 use koa-test  
@@ -109,7 +108,6 @@ db.createCollection("health");
 5. 查詢document  
 - use koa-test
 - db.health.find()
-
 ### 權限管理  
 1. mongod  
 2. use testdb  
@@ -119,7 +117,6 @@ db.createCollection("health");
 6. security:  
     authorization: enabled  
 7. sudo service mongod restart  
-
 ### 用戶權限
 - Read：允許用戶讀取數據庫  
 - readWrite：允許用戶讀寫數據庫  
@@ -131,13 +128,13 @@ db.createCollection("health");
 - userAdminAnyDatabase：只在admin數據庫可用，賦予用戶所有數據庫的userAdmin權限  
 - dbAdminAnyDatabase：只在admin數據庫可用，賦予用戶所有數據庫的dbAdmin權限  
 - root：只在admin數據庫可用。超級帳號，超級權限  
-
 ### 數據導入導出  
+以JSON格式的數據操作，可讀性較高
 - import  
 参数说明：  
--h:指明数据库宿主机的IP  
--u:指明数据库的用户名  
--p:指明数据库的密码  
+-h: 指明数据库宿主机的IP  
+-u: 指明数据库的用户名  
+-p: 指明数据库的密码  
 -d: 数据库名  
 -c: collection  
 --type: 导入的格式默认json  
@@ -149,15 +146,19 @@ mongoimport -d dbname -c collectionname --file filename --headerline --type json
 
 - export  
 参数说明：  
--h:指明数据库宿主机的IP  
--u:指明数据库的用户名  
--p:指明数据库的密码  
--d:指明数据库的名字  
--c:指明collection(集合)的名字  
+-h: 指明数据库宿主机的IP  
+-u: 指明数据库的用户名  
+-p: 指明数据库的密码  
+-d: 指明数据库的名字  
+-c: 指明collection(集合)的名字  
 --type: 指明输出的格式,默认为json  
--f:指明要导出列(如果--type为csv，则需要加上-f "字段名")  
--o:指明到要导出的文件名  
--q:指明导出数据的过滤条件(以json字符串作为查询条件)  
+-f: 指明要导出列(如果--type为csv，则需要加上-f "字段名")  
+-o: 指明到要导出的文件名  
+-q: 指明导出数据的过滤条件(以json字符串作为查询条件)  
 
 mongoexport -h x.x.x.x:27017 -d online -c logs --type json -o /data/logs.json  
 mongoexport -h x.x.x.x:27017 -d test -c students --type csv -f classid,name,age -o /data/students_csv.dat  
+- 備份和還原
+以BSON格式的數據操作，對數據量大的操作有較高效率
+mongodump -h 127.0.0.1 -d dbname -o save-path
+mongorestore -h 127.0.0.1 -d dbname backup-path

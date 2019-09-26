@@ -11,7 +11,7 @@ userId: { type: mongoose.Schema.Types.ObjectId, ref:'User' } // model name
 ## 原子操作
 給username屬性更新值為Judy
 ```js
-modelName.updateMany({username: 'Kathy'}, {$set: {username: 'Judy'}});
+modelName.updateMany({username: 'Kathy'}, {$set: {username: 'Judy', age: 30, title: 'CTO'}});
 ```
 ## 給schema添加實例方法
 ```js
@@ -20,3 +20,83 @@ schemaName.methods.encryptPassword = async function () {
   this.password = await bcrypt.hash(this.password, salt);
 };
 ```
+## 時間資料形態
+直接用unix time赋值，取值时为GMT时间格式，moment().valueOf()，转换回unix time
+## 关联查询
+```js
+modelName.findById(_id)
+  .populate('modelName',['field','field'...])
+```
+## update and findOneAndUpdate
+需要返回更新後的數據用findOneAndUpdate
+update只返回更新的結果，不返回數據
+## 分頁查尋
+找出全部跳過10個返回4筆數據
+```js
+modelName.find().skip(10).limit(4)
+```
+## 排序
+```js
+modelName.find().sort({field: 1}) // 升序，-1降序
+```
+## 模糊匹配
+```js
+modelName.find({name: /reg/ })
+```
+## 聚合查詢
+```js
+modelName.find().count()
+modelName.aggregate({$group: {_id: 'fieldName', sumScroe:{$sum:'$score'}}}) //{$avg:'$score'}
+```
+## 聯合查詢
+aggregate operation
+$project 增加，刪除，重命名字段
+$match 條件匹配
+$limit 限制結果的數量
+$skip 跳過文檔的數量
+$sort 條件排序
+$group 條件組合結果
+$lookup 用以引入其他集合的數據
+```js
+modelName.aggregate([
+  {
+    $lookup:{
+      from: "modelName",
+      localField: "fieldName",
+      foreignField: "fieldName",
+      as: "field to present" 
+    }
+  },{
+    $lookup:{
+      from: "modelName",
+      localField: "fieldName",
+      foreignField: "fieldName",
+      as: "field to present" 
+    }
+  }
+])
+```
+```js
+// Use ObjectId data type to parse id to do aggregate query
+const ObjectId = mongoose.Types.ObjectId;
+const User = mongoose.model('User')
+
+User.aggregate([
+  {
+    // { $match: { amount: {$lte: 300}, status: req.query.status } },
+    // { $group : { _id: '$status', total: { $sum: '$amount' }}}
+    $match: { _id: ObjectId('560c24b853b558856ef193a3'), status: req.query.status }
+  }
+])
+```
+```js
+// date comparison
+const date = moment(req.query.startDate).format();
+const instance = await CommissionRecord.find({ startDate: { $gte: date } });
+```
+```js
+// format date and date comparison
+instance.endDate = moment(instance.endDate).valueOf() + 365 * 24 * 60 * 60 * 1000;
+console.log(moment(Date.now()+5*365*24*60*60*1000).isBetween(instance.startDate, instance.endDate));
+```
+## 

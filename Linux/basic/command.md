@@ -22,3 +22,7 @@
 查詢套件安裝了哪一些檔案  
 apt install apt-file  
 apt-file update  
+## 查詢内核模组狀態
+service --status-all
+## 查詢作業系統資訊
+cat /etc/os-release

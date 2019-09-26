@@ -4,6 +4,11 @@
 ### 證書等級：IV, OV, EV，需要付費
 * 個人：DV(Domain Validation), IV(Idendity Validatio)
 * 企業：OV(Organization Validation), EV(Extended Validation)
+## 配置https
+* 公鑰 公開加密方式
+* 私鑰 存在服務器唯一解私鑰
+* 簽名 確保數據一致性
+* 證書 確保數據來源真實性
 
 ## SSL生成步驟
 ### 必要文件：private.key, example.csr和example.crt(CA簽發或自己簽發)  

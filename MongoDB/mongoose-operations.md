@@ -21,7 +21,8 @@ schemaName.methods.encryptPassword = async function () {
 };
 ```
 ## 時間資料形態
-直接用unix time赋值，取值时为GMT时间格式，moment().valueOf()，转换回unix time
+MongoDB 數據類型為時間對象 Date Object，存儲時，將時間字符串轉換成時間對象
+直接用unix time赋值，取值时为GMT+00:00时间格式，moment().valueOf()，转换回unix time
 ## 关联查询
 ```js
 modelName.findById(_id)
@@ -34,6 +35,10 @@ update只返回更新的結果，不返回數據
 找出全部跳過10個返回4筆數據
 ```js
 modelName.find().skip(10).limit(4)
+```
+## 時間區間搜索
+```js
+{ $match: { refereeCode: user.profile.refId, createdAt: { $gt: firstDay, $lt: lastDay } } }, // Date object
 ```
 ## 排序
 ```js
@@ -60,22 +65,28 @@ $lookup 用以引入其他集合的數據
 ```js
 modelName.aggregate([
   {
-    $lookup:{
-      from: "modelName",
-      localField: "fieldName",
-      foreignField: "fieldName",
-      as: "field to present" 
+    { '$match': { 'refereeCode': refId, '$or':[ { 'level': 'basic' }, { 'level': 'register' } ], 'createdAt': { '$gt': date } } }, // date必須為Date instance
+    { '$group': { '_id': '$fieldName' } },
+    { '$count': 'total' },
+    { '$lookup':{
+      'from': 'modelName',
+      'localField': 'fieldName',
+      'foreignField': 'fieldName',
+      'as': 'field to present' 
     }
   },{
-    $lookup:{
-      from: "modelName",
-      localField: "fieldName",
-      foreignField: "fieldName",
-      as: "field to present" 
+    '$lookup':{
+      'from': 'modelName',
+      'localField': 'fieldName',
+      'foreignField': 'fieldName',
+      'as': 'field to present' 
     }
+  },{
+    '$project': { 'fieldName.fieldName': 1, 'createdAt':1,'_id':0 },
   }
 ])
 ```
+## 時間處理
 ```js
 // Use ObjectId data type to parse id to do aggregate query
 const ObjectId = mongoose.Types.ObjectId;
@@ -99,4 +110,8 @@ const instance = await CommissionRecord.find({ startDate: { $gte: date } });
 instance.endDate = moment(instance.endDate).valueOf() + 365 * 24 * 60 * 60 * 1000;
 console.log(moment(Date.now()+5*365*24*60*60*1000).isBetween(instance.startDate, instance.endDate));
 ```
-## 
+## 時間偏移
+```js
+const condition = moment().substract(spacing, 'months').format('YYYY-MM-DDTHH:mm:ss.SSS');
+const date = new Date(condition)
+```

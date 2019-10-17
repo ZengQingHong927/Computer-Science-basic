@@ -4,7 +4,8 @@
 日誌存放位置 /var/log/mongodb  
 ### 基本連線配置和用戶管理
 參考網址 https://docs.mongodb.com/manual/tutorial/enable-authentication/  
-https://docs.mongodb.com/manual/reference/configuration-options/  
+https://docs.mongodb.com/manual/reference/configuration-options/
+https://mhl.xyz/MongoDB/mongodump.html  
 ### 創建用戶
 1. 進入mongo  
 2. 切換至admin數據庫，use admin  
@@ -129,6 +130,7 @@ db.createCollection("health");
 - dbAdminAnyDatabase：只在admin數據庫可用，賦予用戶所有數據庫的dbAdmin權限  
 - root：只在admin數據庫可用。超級帳號，超級權限  
 ### 數據導入導出  
+不用進入mongo shell
 以JSON格式的數據操作，可讀性較高
 - import  
 参数说明：  
@@ -158,7 +160,18 @@ mongoimport -d dbname -c collectionname --file filename --headerline --type json
 
 mongoexport -h x.x.x.x:27017 -d online -c logs --type json -o /data/logs.json  
 mongoexport -h x.x.x.x:27017 -d test -c students --type csv -f classid,name,age -o /data/students_csv.dat  
+
 - 備份和還原
 以BSON格式的數據操作，對數據量大的操作有較高效率
 mongodump -h 127.0.0.1 -d dbname -o save-path
 mongorestore -h 127.0.0.1 -d dbname backup-path
+
+- Example(整個遠端數據庫備份)
+mongoexport -h ds123834.mlab.com:23834 -d fusion-dev -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
+mongoimport -d fusion-dev --file filename --headerline --type json/csv -f field
+
+mongodump -h ds123834.mlab.com:23834 -d fusion-dev -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
+mongodump -h ds223343.mlab.com:23343 -d lendingcar-dev-2 -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
+
+mongorestore -h 127.0.0.1 -d fusion-dev /Users/lendingcar/Desktop/koaDB/fusion-dev
+mongorestore -h 127.0.0.1 -d lendingcar-dev-2 /Users/lendingcar/Desktop/koaDB/lendingcar-dev-2

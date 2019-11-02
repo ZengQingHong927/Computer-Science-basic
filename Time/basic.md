@@ -39,3 +39,32 @@ console.log(`Timezone NewYork: ${newYork.format('YYYY-MM-DDTHH:mm:ss.SSS')}`);
 console.log(`Timezone LosAngeles: ${losAngeles.format('YYYY-MM-DDTHH:mm:ss.SSS')}`);
 console.log(`Timezone London: ${london.format('YYYY-MM-DDTHH:mm:ss.SSS')}`);
 ```
+## MongoDB date operation
+```js
+const startDate = new Date(moment().subtract(1, 'months').format('YYYY-MM-DDTHH:mm:ss.SSS'));
+const endDate = new Date(moment().add(12, 'months').format('YYYY-MM-DDTHH:mm:ss.SSS'));
+// or
+const startDate = new Date(moment().subtract(1, 'months').format('YYYY-MM-DD'));
+const endDate = new Date(moment().add(12, 'months').format('YYYY-MM-DD'));
+const instance = await Product.create({ ...req.body, startDate, endDate });
+```
+## Timezone convertion
+https://stackoverflow.com/questions/43113350/how-to-convert-moment-to-another-moment-depending-on-timezone
+```js
+const m = moment.utc(exCreateDate); // UTC-00
+const UTC = m.format('YYYY-MM-DD:THH:mm:ss.SSS');
+const NY = m.clone().tz('America/New_York').format('YYYY-MM-DDTHH:mm:ss.SSS'); // convert UTC to specific timezone
+const CH = m.clone().tz('America/Chicago').format('YYYY-MM-DDTHH:mm:ss.SSS'); // convert UTC to specific timezone
+const DE = m.clone().tz('America/Denver').format('YYYY-MM-DDTHH:mm:ss.SSS'); // convert UTC to specific timezone
+const LA = m.clone().tz('America/Los_Angeles').format('YYYY-MM-DDTHH:mm:ss.SSS'); // convert UTC to specific timezone
+```
+
+## Calculate difference between two dates
+```js
+let pd = moment('2019-11-25T10:30:50.123');
+let rd = moment('2019-11-30T12:20:10.458');
+let differenceDate = rd.diff(pd, 'days'); // years,months,days,weeks,hours,minutes,seconds
+```
+
+## MongoDB
+时间存入都会转换成UTC-00，读取后终端显示转换成当地时间

@@ -1,6 +1,7 @@
 # Replica set - Tutorial  
 - mongodb集群所有實例需要啟動，mongodb副本集才能成功啟動  
-
+url https://www.tutorialkart.com/mongodb/setup-mongodb-replica-set/
+url https://gist.github.com/davisford/bb37079900888c44d2bbcb2c52a5d6e8
 ## 安裝步驟
 1. 在所有電腦主機安裝mongodb  
 2. 編輯 /etc/hosts  

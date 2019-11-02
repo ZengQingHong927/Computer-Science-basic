@@ -1,5 +1,8 @@
 # JavaScript異步編程
 參考網址：http://www.ruanyifeng.com/blog/2018/02/node-event-loop.html
+
+# NodeJS
+参考網址：https://nqdeng.github.io/7-days-nodejs/#3.2.2
 ## 回調函數
 fn1耗時長，若需要fn1執行完然後執行fn2，可用回調函數實現。
 ```js

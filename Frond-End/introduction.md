@@ -18,3 +18,27 @@
 模塊組件加載，增量下載，設計每個頁面資源下載策略，按需下載緩存客戶端。按需下載，延遲加載，預加載，請求合併。
 瀏覽器的緩存，緩存更新，緩存共享，非覆蓋式發布
 Facebook-PHD David Wei：靜態資源管理系統 = 資源表 + 資源加載框架
+## 頁面加載完成
+ function docReady(fn) {
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            // call on next available tick
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+    function getProductList() {
+        axios.get('/index/product/list').then(res => {
+            res.data.map(p => {
+                console.log(p.level)
+                let prod = document.querySelector('#product');
+                var pod = document.createElement("li");
+                pod.innerHTML = `Level: ${p.level}`;
+                prod.appendChild(pod);
+            })
+        })
+    }
+    docReady(()=>{
+        console.log('Welcome my web site-------');
+    })

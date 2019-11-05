@@ -48,3 +48,7 @@ function docReady(fn) {
         
     })
 ```
+## Buffer to String
+url https://stackoverflow.com/questions/41951307/convert-a-json-object-to-buffer-and-buffer-to-json-object-back/41951472
+
+JSON.parse(Buffer)

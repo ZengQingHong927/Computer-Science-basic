@@ -36,3 +36,8 @@ OR
 tmux kill-session -a // 删除全部  
 ## 刪除 tmux server
 tmux kill-server
+## 分割pane
+ctrl+b + % // 垂直分割
+ctrl+b + " // 水平分割
+ctrl+b + 方向鍵 // 移動到其他pane
+ctrl+b + x // 關閉當前pane

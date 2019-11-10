@@ -31,6 +31,10 @@ sudo rm -r /var/lib/mongodb
 ## 安裝GUI Mongo Compass & NoSQLBooster  
 參考網址 https://www.mongodb.com/download-center/compass?jmp=docs  
 參考網址 https://nosqlbooster.com/downloads
+## 啓動異常
+Systemctl
+issue: Failed to start mongod.service: Unit mongod.service not found
+solution: sudo systemctl unmask mongodb
 ## Compass開啟連線  
 1. Hostname // 連線mongodb主機的域名  
 2. Port // 連線mongodb主機的端口  

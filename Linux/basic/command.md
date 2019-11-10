@@ -26,3 +26,5 @@ apt-file update
 service --status-all
 ## 查詢作業系統資訊
 cat /etc/os-release
+## Systemctl系统服务管理
+url https://blog.gtwang.org/linux/linux-basic-systemctl-systemd-service-unit-tutorial-examples/

@@ -1,8 +1,8 @@
 # Git Introduction  
 ## 簡介  
-開源的分布式版本管理系統  
-安裝網址：https://git-scm.com/download/mac  
-
+開源的分布式版本管理系統
+安裝網址：https://git-scm.com/download/mac
+URL https://www.itread01.com/content/1526840415.html
 ## 基本操作  
 - 拉取遠端倉庫  
 git clone url  
@@ -41,3 +41,13 @@ git log
 git reset --hard fae6966548e3ae76cfa7f38a461c438cf75ba965  
 - 遠端倉庫分支修改  
 git push -f -u origin new_feature
+## 推送本地專案至倉庫
+建立本地專案
+1. git init
+2. 在Git服務器建立一個倉庫
+執行git remote add origin
+3. git remote add origin https://xxx.xxx.xxx/xxx.git
+從遠端分支拉取master分支並與本地master分支合併
+4. git pull origin master:master
+提交本地分支到遠端分支
+5. git push -u origin master

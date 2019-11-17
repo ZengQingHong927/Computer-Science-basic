@@ -196,3 +196,6 @@ class Dialog extends React.Component {
 
 }
 ```
+## 綁定數據
+## 綁定對象
+## 綁定屬性

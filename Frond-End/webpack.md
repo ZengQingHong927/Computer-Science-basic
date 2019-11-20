@@ -2,6 +2,7 @@
 URL https://ithelp.ithome.com.tw/articles/10200329?sc=iThelpR
 URL https://ithelp.ithome.com.tw/articles/10200459
 URL https://ithelp.ithome.com.tw/articles/10212909?sc=rss.qu
+URL https://pjchender.github.io/2018/05/17/webpack-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%EF%BC%88webpack-note%EF%BC%89/
 ## Introduction
 前端工程擁有太多方便的東西和語法糖了，例如React的JSX、ES6或CSS的預處理器SASS、SCSS和其他CoffeeScript等等，為了把各式各樣的語言編譯成讓瀏覽器看得懂，也許我們能想到使用Babel來處理JavaScript的部分，但SASS和SCSS也需要再另外去編譯成CSS，而webpack可以把全部前端的文件整合成一個檔案
 ## Step-By-Step
@@ -19,6 +20,10 @@ URL https://ithelp.ithome.com.tw/articles/10212909?sc=rss.qu
     "css-loader": "^3.2.0",           // css加載轉譯
     "sass-loader": "^8.0.0",          // sass加載轉譯
     "style-loader": "^1.0.0"          // 加載樣式
+    "file-loader": "^4.2.0",          // 加載文件
+    "image-webpack-loader": "^6.0.0", // 圖片壓縮加載
+    "img-loader": "^3.0.1",           // 圖片壓縮加載
+    "url-loader": "^2.2.0",           // 加載文件
 
 ## Webpack.config.js 設定配置
 1. test：
@@ -56,7 +61,13 @@ module.exports = {
         //第四個loader編譯SCSS
         { test: /.css$/, exclude: /node_modules/, use: { loader: 'css-loader' } },
         //第四個loader編譯SASS/SCSS
-        { test: /.s[ac]ss$/, exclude: /node_modules/, use: { loader: 'sass-loader' } }
+        { test: /.s[ac]ss$/, exclude: /node_modules/, use: { loader: 'sass-loader' } }，
+        //第五個loader編譯image，outputPath：文件編譯完輸出的路徑，publicPath：資源開放目錄
+        { test: /\.(png|jpg|gif|jpe?g|svg)$/, exclude: /node_modules/, use: [ 
+          { loader: 'url-loader', options: { limit: 40000, name: '[name].[ext]', outputPath:  '../src/asset', publicPath: '/src/asset' } },
+          // { loader: 'image-webpack-loader', options: { bypassOnDebug: true } }
+         ]
+        },
       ]
     },
     //增加一個給devserver的設定

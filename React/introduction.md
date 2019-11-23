@@ -199,6 +199,14 @@ class Dialog extends React.Component {
 
 }
 ```
+<<<<<<< HEAD
+## DOM元素的innerHTML
+```js
+innerHtml = {__html: '<h1>Welcome!!!</h1>'}     // string
+<div id="html-show" dangerouslySetInnerHTML={innerHtml}></div>
+```
+=======
 ## 綁定數據
 ## 綁定對象
 ## 綁定屬性
+>>>>>>> e307cfd1edf3bb5f4d3a9b8d82f35ce06fdab8fe

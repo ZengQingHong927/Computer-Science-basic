@@ -4,7 +4,7 @@
 2. 組件初始化會執行componentWillUpdate()
 3. 組件渲染，使用rendor()在網頁輸出組件內容
 4. 組建渲染完成，執行componentDidMount()
-5. 當組件更新前執行調用shouldComponentUpdate()  // 返回true則執行componentWillUpdate()
+5. 當組件更新前執行調用shouldComponentUpdate(newProps,newState)  // 返回true則執行componentWillUpdate()
 6. 執行組建渲染，render()
 7. 當組件狀態更新並完成渲染後，執行componentDidUpdate()
 8. 當組件被移出時會執行調用一次componentWillUnmount()

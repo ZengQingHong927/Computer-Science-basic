@@ -87,12 +87,127 @@ onHandleChange (e) {
 ```
 ## 表單處理
 ```js
-        <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.onChange} />
-        <input type="radio" value="1" checked={this.stae.gender == 1} onChange={this.onChange} />
-        <input type="radio" value="2" checked={this.state.gender == 2} onChange={this.onChange} />
-        <br/> 
-        <input type="submit" defaultValue="Submit" />
+   class Exercise extends React.Component {
+  constructor (props) {
+    super (props);
+    this.state = {
+      username: '',
+      gender: 0,
+      msg:'',
+      city: '',
+      cities: ['Shanghai','Taipei','San Fressico'],
+      hobby: [
+        { title: 'Jogging', checked: false },
+        { title: 'Dancing', checked: false },
+        { title: 'Movie', checked: false },
+        { title: 'Web Programming', checked: false },
+      ]
+    };
+    this.onChange = this.onChange.bind (this);
+    this.onChangeGender = this.onChangeGender.bind (this);
+    this.onChangeCity = this.onChangeCity.bind (this);
+    this.onChangeHobby = this.onChangeHobby.bind (this);
+    this.onChangeMsg = this.onChangeMsg.bind (this);
+    this.onSubmit = this.onSubmit.bind (this);
+  }
+
+  onChangeGender (e) {
+    this.setState ({gender: e.target.value});
+  }
+
+  onChangeCity (e) {
+    this.setState ({city: e.target.value}, () => {
+      console.log (this.state.city);
+    });
+  }
+
+  onChangeHobby (key) {
+    let hobby = this.state.hobby;
+    hobby[key].checked = !hobby[key].checked;
+    this.setState({hobby});
+  }
+
+  onChangeMsg (e) {
+    this.setState ({msg: e.target.value}, () => {
+      console.log (this.state.msg);
+    })
+  }
+
+  onChange (e) {
+    this.setState ({username: e.target.value});
+  }
+
+  onSubmit (e) {
+    // Prevent form submit event
+    e.preventDefault ();
+    console.log (this.state)
+  }
+
+  render () {
+    return (
+      <div>
+        <h1>Basic Information</h1>
+        <form onSubmit={this.onSubmit}>
+          Username:
+          <input ref="username" type="text" value={this.state.username} onChange={this.onChange}/>
+          <br />
+          <br />
+          Gender:
+          <input ref="gender" type="radio" value='1' checked={this.state.gender == '1'} onChange={this.onChangeGender}/>Male
+          <input ref="gender" type="radio" value='2' checked={this.state.gender == '2'} onChange={this.onChangeGender}/>Female
+          <br />
+          <br />
+          City:
+          <select value={this.state.city} onChange={this.onChangeCity}>
+            {
+              this.state.cities.map((value,key) => {
+                return <option key={key}>{value}</option>
+              })
+            }
+          </select>
+          <br />
+          <br />
+          {
+            this.state.hobby.map((value,key) => {
+              return (
+                <span key={key}>
+                  {value.title}<input type="checkbox" checked={value.checked} onChange={this.onChangeHobby.bind(this, key)} key={key} />
+                </span>
+              )
+            })
+          }
+          <br />
+          <br />
+          Message:
+          <input type="textarea" value={this.state.msg} onChange={this.onChangeMsg} />
+          <br />
+          <br />
+          <input type="submit" defaultValue="Submit"/>
         </form>
+      </div>
+    )
+  }
+}     
+```
+## 父組件給子組件傳值
+defaultProps: 父子組件傳值中，若父組件不給子組件傳值，則子組件可以使用預設值
+propTypes: 子組件驗證父組件傳值的數據類型合法性
+```js
+import PropType from 'prop-type';
+
+
+class Child extends React.Pure.Component {
+
+}
+
+Child.defaultProps = {
+        title: 'Web Development'
+}
+
+Child.propTypes = {
+        title: PropTypes.string,
+        price: PropTypes.number
+}
+
 
 ```

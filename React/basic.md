@@ -1,4 +1,14 @@
 # Basic Concept
+## 生命周期函數
+組件加載前，組建加載後，組建更新數據前，組建銷毀後，觸發一系列的函數  
+1. 組建加載前觸發的生命周期函數：  
+contructor, componentWillMount, render, componentDidMount  
+2. 組建數據更新的時候觸發的生命周期函數：
+shouldComponentMount, componentWillUpdate, render, componentDidUpdate  
+3. 父組件裏面改變props傳值時觸發的生命周期函數：  
+componentWillRecieve  
+4. 組件銷毀時觸發的生命周期函數：  
+componentWillUnmount  
 ## Special case for JSX
 綁定屬性
 ```js

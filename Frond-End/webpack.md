@@ -35,6 +35,12 @@ URL https://pjchender.github.io/2018/05/17/webpack-%E5%AD%B8%E7%BF%92%E7%AD%86%E
     1.loader：指定進行編譯的套件，這裡指定剛剛下載的babel-loader。
     2.option：指定loader套件中的presets是哪一個，因為我們要編譯的是JSX，所以這裡輸入@babel/preset-react。
 運行webpack-dev-server，localhost:9000/views/index.html
+4. 多個文件打包爲單個輸出文件
+  entry: ['main.js','index.js']
+5. 多個文件打包成多個輸出文件
+  entry: {a:'main.js', b:'index.js'}
+6. 若爲對文件打包成多個輸出文件, name爲鍵值a,b
+  path: [name].js
 ```js
 //引用path模組
 const path = require('path');
@@ -49,6 +55,7 @@ module.exports = {
         //打包後的路徑，這裡使用path模組的resolve()取得絕對位置，也就是目前專案的根目錄
         path: path.resolve(__dirname, 'built'),
     },
+    watch: true,
     module: {
       //rules的值是一個陣列可以存放多個loader物件
       rules: [
@@ -76,6 +83,54 @@ module.exports = {
       port: 9000,
       inline: true,
       historyApiFallback: true
+    }
+};
+```
+```js
+//引用path模組
+const path = require('path');
+const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+    //這個webpack打包的對象，這裡面加上剛剛建立的index.js
+    entry: {
+        index: path.resolve(__dirname, 'src/js/index.js')
+    },
+    output: {
+        //這裡是打包後的檔案名稱
+        filename: 'bundle.js',
+        //打包後的路徑，這裡使用path模組的resolve()取得絕對位置，也就是目前專案的根目錄
+        path: path.resolve(__dirname, 'public/built'),
+    },
+    // watch: true,
+    module: {
+      //rules的值是一個陣列可以存放多個loader物件
+      rules: [
+        //第一個loader編譯JSX
+        // { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
+        //第二個loader編譯ES6
+        // { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } },
+        { test: /(\.js|\.jsx)$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env','@babel/preset-react'] } } },
+        //第三個loader編譯CSS
+        { test: /.css$/, exclude: /node_modules/, use: { loader: 'style-loader' } },
+        //第四個loader編譯SCSS
+        { test: /.css$/, exclude: /node_modules/, use: { loader: 'css-loader' } },
+        //第四個loader編譯SASS/SCSS
+        { test: /.s[ac]ss$/, exclude: /node_modules/, use: { loader: 'sass-loader' } }
+      ]
+    },
+    plugins: [
+      // new CleanWebpackPlugin(),
+      new webpack.HotModuleReplacementPlugin()
+    ],
+    //增加一個給devserver的設定
+    devServer: {
+      //指定開啟port為9000
+      port: 9000,
+      inline: true,
+      historyApiFallback: true,
+      hot: true
     }
 };
 ```

@@ -134,3 +134,46 @@ module.exports = {
     }
 };
 ```
+```js
+module.exports = {
+    //這個webpack打包的對象，這裡面加上剛剛建立的index.js
+    entry: {
+        index: path.resolve(__dirname, 'src/js/index.js')
+    },
+    output: {
+        //這裡是打包後的檔案名稱
+        filename: 'bundle.js',
+        //打包後的路徑，這裡使用path模組的resolve()取得絕對位置，也就是目前專案的根目錄
+        path: path.resolve(__dirname, 'public/built'),
+    },
+    // watch: true,
+    module: {
+      //rules的值是一個陣列可以存放多個loader物件
+      rules: [
+        //第一個loader編譯JSX
+        // { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
+        //第二個loader編譯ES6
+        // { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } },
+        { test: /(\.js|\.jsx)$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env','@babel/preset-react'] } } },
+        //第三個loader編譯CSS
+        { test: /.css$/, exclude: /node_modules/, use: { loader: 'style-loader' } },
+        //第四個loader編譯SCSS
+        { test: /.css$/, exclude: /node_modules/, use: { loader: 'css-loader' } },
+        //第四個loader編譯SASS/SCSS
+        { test: /.s[ac]ss$/, exclude: /node_modules/, use: { loader: 'sass-loader' } }
+      ]
+    },
+    plugins: [
+      // new CleanWebpackPlugin(),
+      new webpack.HotModuleReplacementPlugin()
+    ],
+    //增加一個給devserver的設定
+    devServer: {
+      //指定開啟port為9000
+      port: 9000,
+      inline: true,
+      historyApiFallback: true,
+      hot: true
+    }
+};
+```

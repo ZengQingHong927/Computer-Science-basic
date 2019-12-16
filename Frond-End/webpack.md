@@ -4,6 +4,7 @@ URL https://ithelp.ithome.com.tw/articles/10200329?sc=iThelpR
 URL https://ithelp.ithome.com.tw/articles/10200459
 URL https://ithelp.ithome.com.tw/articles/10212909?sc=rss.qu
 URL https://pjchender.github.io/2018/05/17/webpack-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%EF%BC%88webpack-note%EF%BC%89/
+URL https://andrew-flower.com/blog/Async-Await-with-React
 
 ## Introduction
 
@@ -79,6 +80,8 @@ module.exports = {
         { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
         //第二個loader編譯ES6
         { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } },
+        //@babel/transform-runtime解決在React使用Async/Await syntax
+        { test: /(\.js|\.jsx)$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env', '@babel/preset-react'], plugins: ['@babel/transform-runtime'] } } },
         //第三個loader編譯CSS
         { test: /.css$/, exclude: /node_modules/, use: { loader: 'style-loader' } },
         //第四個loader編譯SCSS

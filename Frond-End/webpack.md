@@ -25,12 +25,13 @@ URL https://andrew-flower.com/blog/Async-Await-with-React
 
 ## Dependency to built
 
-    "@babel/core": "^7.7.0",		    //
-    "@babel/preset-env": "^7.7.1",	    // 轉譯ES6為ES5
+    "@babel/core": "^7.7.0",		      //
+    "@babel/preset-env": "^7.7.1",	  // 轉譯ES6為ES5
     "@babel/preset-react": "^7.7.0",	// 處理JSX
     "babel-loader": "^8.0.6",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10"，
+    "@babel/plugin-transform-runtime",// Async/Await error in React
     "css-loader": "^3.2.0",           // css加載轉譯
     "sass-loader": "^8.0.0",          // sass加載轉譯
     "style-loader": "^1.0.0"          // 加載樣式
@@ -60,48 +61,62 @@ URL https://andrew-flower.com/blog/Async-Await-with-React
 
 ```js
 //引用path模組
-const path = require('path');
+const path = require ('path');
+const webpack = require ('webpack');
+const { CleanWebpackPlugin } = require ('clean-webpack-plugin');
+const HtmlWebpackPlugin = require ('html-webpack-plugin');
+
 module.exports = {
     //這個webpack打包的對象，這裡面加上剛剛建立的index.js
     entry: {
-        index: path.resolve(__dirname, 'src/js/index.jsx')
+        index: path.resolve(__dirname, 'src/js/index.js')
     },
     output: {
         //這裡是打包後的檔案名稱
         filename: 'bundle.js',
         //打包後的路徑，這裡使用path模組的resolve()取得絕對位置，也就是目前專案的根目錄
-        path: path.resolve(__dirname, 'built'),
+        path: path.resolve(__dirname, 'dist'),
     },
-    watch: true,
+    // watch: true,  // 文件變更自動編譯生成bundle.js
     module: {
-      //rules的值是一個陣列可以存放多個loader物件
+      // rules的值是一個陣列可以存放多個loader物件
       rules: [
         //第一個loader編譯JSX
-        { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
+        // { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
         //第二個loader編譯ES6
-        { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } },
-        //@babel/transform-runtime解決在React使用Async/Await syntax
+        // { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } },
         { test: /(\.js|\.jsx)$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env', '@babel/preset-react'], plugins: ['@babel/transform-runtime'] } } },
         //第三個loader編譯CSS
-        { test: /.css$/, exclude: /node_modules/, use: { loader: 'style-loader' } },
+        { test: /.css$/, exclude: /node_modules/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },
         //第四個loader編譯SCSS
-        { test: /.css$/, exclude: /node_modules/, use: { loader: 'css-loader' } },
-        //第四個loader編譯SASS/SCSS
-        { test: /.s[ac]ss$/, exclude: /node_modules/, use: { loader: 'sass-loader' } }，
-        //第五個loader編譯image，outputPath：文件編譯完輸出的路徑，publicPath：資源開放目錄, outputPath:編譯完輸出路徑，publicPath:運行web時讀取圖檔的路徑（static resource path 依據server端配置的靜態資源路徑）
-        { test: /\.(png|jpg|gif|jpe?g|svg)$/, exclude: /node_modules/, use: [
-          { loader: 'url-loader', options: { limit: 40000, name: '[name].[ext]', outputPath:  '../src/asset', publicPath: '/src/asset' } },
-          // { loader: 'image-webpack-loader', options: { bypassOnDebug: true } }
-         ]
-        },
-      ]
-    },
+        // { test: /.css$/, exclude: /node_modules/, use: { loader: 'css-loader' } },
+        //第五個loader編譯SASS/SCSS
+        { test: /.s[ac]ss$/, exclude: /node_modules/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }] },
+        //第六個loader編譯圖檔
+        { test: /\.(png|jpg|gif|jpe?g|svg)$/, exclude: /node_modules/, use: [ 
+          { loader: 'url-loader', options: { limit: 40000, name: '[name]-[hash].[ext]', outputPath:  '../dist/asset', publicPath: '/asset' } }
+        ]}
+      ]},
+    plugins: [
+      // new CleanWebpackPlugin(),
+      // new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin ({
+        template: './views/index.html',         // 參照物
+      })
+    ],
     //增加一個給devserver的設定
     devServer: {
       //指定開啟port為9000
+      // contentBase: './views',
       port: 9000,
-      inline: true,
-      historyApiFallback: true
+      historyApiFallback: {
+        index: '/views/index.html'
+      },
+      stats: {
+        colors: true,
+        chunks: false
+      },
+      // hot: true
     }
 };
 ```

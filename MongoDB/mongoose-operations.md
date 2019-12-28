@@ -116,6 +116,7 @@ PersonModel.update(
 );
 ```
 ## 聯合查詢
+URL https://stackoverflow.com/questions/36019713/mongodb-nested-lookup-with-3-levels  
 aggregate operation
 $project 增加，刪除，重命名字段
 $match 條件匹配
@@ -136,20 +137,22 @@ modelName.aggregate([
       'foreignField': 'fieldName',
       'as': 'field to present' 
     }
-  },{
-    '$lookup':{
-      'from': 'modelName',
-      'localField': 'fieldName',
-      'foreignField': 'fieldName',
-      'as': 'field to present' 
-    },
+  },
     {'$lookup':{
       'from': 'users',
       'localField': 'user',
       'foreignField': '_id',
-      'as': 'info'
-    }}
-  },{
+      'as': 'userinfo'
+    }},
+    {'$unwind': '$userinfo'}, // 將數組壓平
+    {'$lookup':{
+            'from': 'memberships',
+            'localField': 'userinfo.membership',
+            'foreignField': '_id',
+            'as': 'memberinfo'
+    }},
+    {'$unwind': '$memberinfo'},
+  ,{
     '$project': { 'fieldName.fieldName': 1, 'createdAt':1,'_id':0 },
   }
 ])

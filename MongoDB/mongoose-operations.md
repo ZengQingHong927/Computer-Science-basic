@@ -107,7 +107,7 @@ PersonModel.update(
     done
 );
 ```
-## 字段类型为数组（添加）
+## 字段类型为数组（刪除）
 ```js
 PersonModel.update(
     { _id: person._id }, 
@@ -128,7 +128,7 @@ $lookup 用以引入其他集合的數據
 modelName.aggregate([
   {
     { '$match': { 'refereeCode': refId, '$or':[ { 'level': 'basic' }, { 'level': 'register' } ], 'createdAt': { '$gt': date } } }, // date必須為Date instance
-    { '$group': { '_id': '$fieldName' } },
+    {'$group': { '_id': '$type', 'total': {'$sum': '$amount'}, 'count': { '$sum': 1 }}},
     { '$count': 'total' },
     { '$lookup':{
       'from': 'modelName',
@@ -142,7 +142,13 @@ modelName.aggregate([
       'localField': 'fieldName',
       'foreignField': 'fieldName',
       'as': 'field to present' 
-    }
+    },
+    {'$lookup':{
+      'from': 'users',
+      'localField': 'user',
+      'foreignField': '_id',
+      'as': 'info'
+    }}
   },{
     '$project': { 'fieldName.fieldName': 1, 'createdAt':1,'_id':0 },
   }

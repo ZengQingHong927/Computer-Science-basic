@@ -63,3 +63,13 @@ import { Link as RouterLink } from 'react-router-dom';
 
 
 ```
+
+## portal
+https://marmelab.com/react-admin-demo
+```js
+
+let container = document.querySelector('#title');
+let titleElement = <div><Helmet title='Thrilled' /><Typography>Thrilled</Typography></div>
+
+createPortal (titleElement, container)
+```

@@ -244,3 +244,97 @@ const routes = [
 ];
 ```
 ## 嵌套路由父子組件傳值，路由模塊化
+```js
+import { renderRoutes } from 'react-router-config';
+import { Router } from 'react-router-dom';
+
+<Router>
+  {renderRoutes(routes)}
+</Router>
+
+
+const routes = [
+  {
+    path: '/',
+    exact: true,
+    component: () => <Redirect to="/presentation" />
+  },
+  {
+    path: '/auth',
+    component: AuthLayout,
+    routes: [
+      {
+        path: '/auth/login',
+        exact: true,
+        component: lazy(() => import('views/Login'))
+      },
+      {
+        path: '/auth/register',
+        exact: true,
+        component: lazy(() => import('views/Register'))
+      },
+      {
+        component: () => <Redirect to="/errors/error-404" />
+      }
+    ]
+  },
+  {
+    path: '/errors',
+    component: ErrorLayout,
+    routes: [
+      {
+        path: '/errors/error-401',
+        exact: true,
+        component: lazy(() => import('views/Error401'))
+      },
+      {
+        path: '/errors/error-404',
+        exact: true,
+        component: lazy(() => import('views/Error404'))
+      },
+      {
+        path: '/errors/error-500',
+        exact: true,
+        component: lazy(() => import('views/Error500'))
+      },
+      {
+        component: () => <Redirect to="/errors/error-404" />
+      }
+    ]
+  },
+  {
+    route: '*',
+    component: DashboardLayout,
+    routes: [
+      {
+        path: '/calendar',
+        exact: true,
+        component: lazy(() => import('views/Calendar'))
+      },
+      {
+        path: '/changelog',
+        exact: true,
+        component: lazy(() => import('views/Changelog'))
+      },
+      {
+        path: '/chat',
+        exact: true,
+        component: lazy(() => import('views/Chat'))
+      },
+      {
+        path: '/chat/:id',
+        exact: true,
+        component: lazy(() => import('views/Chat'))
+      },
+      {
+        path: '/getting-started',
+        exact: true,
+        component: lazy(() => import('views/GettingStarted'))
+      },
+      {
+        component: () => <Redirect to="/errors/error-404" />
+      }
+    ]
+  }
+];
+```

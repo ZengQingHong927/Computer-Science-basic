@@ -2,8 +2,9 @@
 ## 簡介
 開源的分布式版本管理系統
 安裝網址：https://git-scm.com/download/mac
-URL https://www.itread01.com/content/1526840415.html
-URL https://www.slideshare.net/WillHuangTW/git-merge-rebase
+https://www.itread01.com/content/1526840415.html
+https://www.slideshare.net/WillHuangTW/git-merge-rebase
+https://backlog.com/git-tutorial/tagging/add-tag/
 ## 基本操作
 - 拉取遠端倉庫
 git clone url

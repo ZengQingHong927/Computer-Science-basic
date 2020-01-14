@@ -121,3 +121,8 @@ h1 em { color: green }
 <h1>This is a <em>important</em>topic about security</h1> // 有效
 <h1>This is a <strong><em>important</em></strong>topic about security</h1>  // 有效
 ```
+
+## Height
+1. 内容区域
+100% vs 100vh
+div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显示为整个银幕视窗

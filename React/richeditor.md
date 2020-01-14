@@ -6,9 +6,13 @@ URL: https://segmentfault.com/a/1190000019833834
 
 ## tool
 draftjs-to-html
-{convertToRaw} from draft-js
-{convertFromRaw} from draft-js
-{EditorState} from draft-js
+import  Reactmarkdown from 'react-markdown/with-html'
+import {convertToRaw} from 'draft-js'
+import {convertFromRaw} from draft-js
+import {EditorState} from draft-js
 <div dangerouslySetInnerHTML={__html: rawHTML} />
+or
+<Markdown source={innerHtml} escapeHtml={false}>
+
 let draft_Raw = convertToRaw (contentState)
 EditorState.createWithContent (convertFromRaw)

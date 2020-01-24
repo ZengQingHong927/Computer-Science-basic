@@ -17,3 +17,6 @@ GitHub Pull Request
 npm intellisense
 Path intellisense
 Markdown All in One
+
+# Visual Studio Code is unable to watch for file changes in this large workspace error
+https://blog.csdn.net/davidhopper/article/details/79620425

@@ -55,4 +55,4 @@ git push -f -u origin new_feature
 5. git push -u origin master  
 
 ## 免輸入帳號密碼  
-git config --global credential.helper wincred  
+git config --global credential.helper store  

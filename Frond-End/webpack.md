@@ -1,11 +1,12 @@
 # Webpack Basic
 
-URL https://ithelp.ithome.com.tw/articles/10200329?sc=iThelpR
-URL https://ithelp.ithome.com.tw/articles/10200459
-URL https://ithelp.ithome.com.tw/articles/10212909?sc=rss.qu
-URL https://pjchender.github.io/2018/05/17/webpack-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%EF%BC%88webpack-note%EF%BC%89/
-URL https://andrew-flower.com/blog/Async-Await-with-React
-URL https://stackoverflow.com/questions/49602092/webpack-ignores-webpack-config-js  
+https://ithelp.ithome.com.tw/articles/10200329?sc=iThelpR  
+https://ithelp.ithome.com.tw/articles/10200459  
+https://ithelp.ithome.com.tw/articles/10212909?sc=rss.qu  
+https://pjchender.github.io/2018/05/17/webpack-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%EF%BC%88webpack-note%EF%BC%89/  
+https://andrew-flower.com/blog/Async-Await-with-React  
+https://stackoverflow.com/questions/49602092/webpack-ignores-webpack-config-js  
+https://segmentfault.com/a/1190000012718374#articleHeader9  
 
 ## Introduction
 

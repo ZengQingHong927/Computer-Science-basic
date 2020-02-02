@@ -8,13 +8,15 @@
   "breadcrumbs.enabled": false,
   // 添加 react 支持
   "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    {
-      "language": "react",
-      "autoFix": true
-    }
+      "javascript",
+      "javascriptreact"
+      {
+          "language": "react",
+          "autoFix": true
+      }
   ],
-  "workbench.iconTheme": "vscode-icons",
-  "eslint.autoFixOnSave": true,
+  "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+  },
+  "workbench.iconTheme": "material-icon-theme",
 }

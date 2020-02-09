@@ -1,5 +1,7 @@
 # Redis - Installation  
 URL https://www.digitalocean.com/community/tutorials/how-to-install-redis-from-source-on-ubuntu-18-04
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04
+https://tecadmin.net/install-redis-ubuntu/
 ## 安裝步驟  
 1. apt套件管理
 sudo apt-get update
@@ -16,9 +18,9 @@ make install PREFIX=/usr/local/redis
 cp ~/redis-5.0.5/redis.conf /usr/local/redis/bin
 - 創建目錄儲存redis數據
 mkdir /usr/local/redisdb
-- 修改配置文件，dir /usr/local/redisdb
+- 修改配置文件，dir /usr/local/redisdb, search # The working directory
 dir /usr/local/redisdb
-- 設置日誌路徑
+- 設置日誌路徑 search logfile
 logfile "/usr/local/redis/redis.log"
 
 ## redis 配置文件
@@ -36,6 +38,8 @@ slaveof
 bind
 開啟驗證
 requirepass
+管理redis服務的應用
+supervised
 
 ## redis Tools
 redis-server redis伺服器

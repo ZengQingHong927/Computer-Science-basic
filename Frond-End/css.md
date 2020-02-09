@@ -1,6 +1,8 @@
 # CSS Basic
 
 ## Webpack 編譯安裝 SCSS 套件
+http://www.ruanyifeng.com/blog/2012/06/sass.html  
+
 
 npm install sass-loader node-sass css-loader mini-css-extract-plugin optimize-css-assets-webpack-plugin --save-dev
 
@@ -126,3 +128,6 @@ h1 em { color: green }
 1. 内容区域
 100% vs 100vh
 div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显示为整个银幕视窗
+
+## Flex  
+https://wcc723.github.io/css/2017/07/21/css-flex/  

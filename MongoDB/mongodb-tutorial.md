@@ -173,5 +173,4 @@ mongoimport -d fusion-dev --file filename --headerline --type json/csv -f field
 mongodump -h ds123834.mlab.com:23834 -d fusion-dev -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
 mongodump -h ds223343.mlab.com:23343 -d lendingcar-dev-2 -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
 
-mongorestore -h 127.0.0.1 -d fusion-dev /Users/lendingcar/Desktop/koaDB/fusion-dev
-mongorestore -h 127.0.0.1 -d lendingcar-dev-2 /Users/lendingcar/Desktop/koaDB/lendingcar-dev-2
+mongorestore --host 127.0.0.1 --port 27020 -d blog /Home/Vermeer/Programming/koaDB/blog

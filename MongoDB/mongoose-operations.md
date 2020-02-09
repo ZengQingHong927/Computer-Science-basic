@@ -1,4 +1,62 @@
 # Mongoose CRUD Operations
+
+## Mongoose建立連線
+1. mongoose.connect(uri(s), [options], [options.useMongoClient], [callback])返回一個MongooseThenable對象，定義schema生成model操作數據  
+example:  
+```js
+  var URL = 'mongodb://localhost:27017/test3';
+
+  mongoose.connect(URL,function(err){
+    if(err){
+      console.warn('connection fail：'+err);
+    }else {
+      console.log('connection success：'+URL);
+    }
+  });
+```
+2. mongoose.createConnection([uri], [options], [options.config], [options.config.autoIndex], [options.useMongoClient])返回一個Connection對象。Connection對象中包含model，collection，dropDatabase等操作數據庫的方法，也包含connected，disconnected，error等事件觸發方法，但是没有Schema 
+example:  
+```js
+  var mongoose = require('mongoose');
+  var URL = 'mongodb://localhost:27017/test2';
+
+  // 只是創建了一個Connection對象，能夠操作數據庫，但是不能操作具體的document
+  var db = mongoose.createConnection(URL);
+
+  db.on('connected',function(err){
+  if(err){
+      console.warn('connection fail：'+err);
+    }else {
+      console.log('connection success：'+URL);
+    }
+  });
+``` 
+3. mongoose.connection是mongoose模塊的默認引用，返回一個Connetion對象。因爲connect()方法并不能監聽數據庫連接情况，一般情况與connet()方法搭配使用  
+example:  
+```js
+  mongoose.connect(URL);
+
+  var db = mongoose.connection;//获取connection实例
+  //使用Connetion监听连接状态
+  db.on('connected',function(err){
+    if(err){
+        console.log('连接数据库失败：'+err);
+    }else{
+        console.log('连接数据库成功！');
+    }
+  });
+
+  var userSchema = new Schema({
+    name:String,
+    date:Date
+  });
+  var User = mongoose.model('usert',userSchema);//默认表名：userts
+
+  var userm = new User({
+    name:'yanghao',
+    date:new Date()
+  });
+```
 ## 加入時間屬性timestampes
 ```js
 new mongoose.Schema({},{ timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt', deletedAt: 'deletedAt'} });

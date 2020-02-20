@@ -1,5 +1,7 @@
 # Mongoose Schema
+https://stackoverflow.com/questions/35509611/mongoose-save-array-of-strings
 
+## Schema定義 
 ```js
 let autoIncrement = require ('mongoose-auto-increment-fix);
 
@@ -30,4 +32,40 @@ accountSchema.plugin(autoIncrement.plugin, {
 });
 
 module.exports.accountModel = mongoose.model ('pf_account', accountSchema);
+```
+## 在model和instance上自定義方法  
+
+statics是定義在models上
+methods是定義在instances上
+
+
+```js
+
+// define a schema
+var animalSchema = new Schema({ name: String, type: String });
+
+// assign a function to the "methods" object of our animalSchema
+animalSchema.methods.findSimilarTypes = function (cb) {
+  return this.model('Animal').find({ type: this.type }, cb);
+}
+
+// Now all of our animal document instances have a findSimilarTypes method available to it.
+
+// assign a function to the "statics" object of our animalSchema
+animalSchema.statics.findByName = function (name, cb) {
+  return this.find({ name: new RegExp(name, 'i') }, cb);
+}
+
+var Animal = mongoose.model('Animal', animalSchema);
+Animal.findByName('fido', function (err, animals) {
+  console.log(animals);
+});
+
+Animal.findByName('fido', function(err, fido){
+    // fido => { name: 'fido', type: 'dog' }
+    fido.findSimilarTypes(function(err, dogs){
+      // dogs => [ {name:'fido',type:'dog} , {name:'sheeba',type:'dog'} ]
+  });
+});
+
 ```

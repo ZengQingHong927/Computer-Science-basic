@@ -62,3 +62,10 @@ git config --global credential.helper store
 - git fetch remote_repo：这将更新名称为remote_repo 的远程repo上的所有branch的最新commit-id，将其记录。   
 git fetch remote_repo remote_branch_name：这将这将更新名称为remote_repo 的远程repo上的分支： remote_branch_name。
 git fetch remote_repo remote_branch_name:local_branch_name：这将这将更新名称为remote_repo 的远程repo上的分支： remote_branch_name ，并在本地创建local_branch_name 本地分支保存远端分支的所有数据。
+
+## code commit flow
+1. git add .  
+2. git commit -m "message"  
+2. git fetch origin master --tags  
+3. git rebase v1.xx.xxx  
+4. git push origin master --tags

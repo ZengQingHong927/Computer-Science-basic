@@ -1,6 +1,7 @@
 # Openssl Installation
 ## Linux  
 * 源碼連結 https://github.com/openssl/openssl.git
+* https://blog.csdn.net/qq_34924407/article/details/89427164
 * TLS v1.3 support  (縮短時間和刪除不安全的加密算法)
 ### 前置作業toolkit gcc & make (build-essential,libtool)  
 * sudo apt-get update

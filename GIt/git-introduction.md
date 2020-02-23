@@ -69,3 +69,9 @@ git fetch remote_repo remote_branch_name:local_branch_name：这将这将更新�
 2. git fetch origin master --tags  
 3. git rebase v1.xx.xxx  
 4. git push origin master --tags
+
+## gitignore  
+https://www.cnblogs.com/kevingrace/p/5690241.html  
+*.log  
+*.tmp  
+node_modules/

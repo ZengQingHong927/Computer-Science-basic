@@ -52,7 +52,7 @@ userlist_deny=NO
 - sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/cert/vsftpd.pem -out /etc/cert/vsftpd.pem  
 - sudo nano /etc/vsftpd.conf  
 
-```t
+```txt
 rsa_cert_file=/etc/cert/vsftpd.pem
 rsa_private_key_file=/etc/cert/vsftpd.pem
 ssl_enable=YES
@@ -75,6 +75,7 @@ ssl_ciphers=HIGH
 
 vsftpd.conf新增設定項
 ```txt
+allow_writeable_chroot=YES
 pasv_max_port=11000
 user_sub_token=$USER
 local_root=/home/$USER/ftp
@@ -91,3 +92,10 @@ ssl_sslv3=NO
 require_ssl_reuse=NO
 ssl_ciphers=HIGH
 ```
+## process failed solution
+https://askubuntu.com/questions/922056/vsftp-service-failed  
+https://blog.csdn.net/wangyaninglm/article/details/80400078  
+https://blog.csdn.net/sinat_27741463/article/details/86596947  
+https://www.linuxhilinux.com/2017/10/how-to-configure-or-setup-ftp-on-aws.html  
+https://blog.csdn.net/frank1q/article/details/46853981  
+https://linuxhint.com/setup_ftp_server_vsftpd_ubuntu/  

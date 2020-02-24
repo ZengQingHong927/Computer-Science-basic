@@ -63,7 +63,6 @@ import { Link as RouterLink } from 'react-router-dom';
 
 
 ```
-
 ## portal
 https://marmelab.com/react-admin-demo
 ```js
@@ -73,3 +72,7 @@ let titleElement = <div><Helmet title='Thrilled' /><Typography>Thrilled</Typogra
 
 createPortal (titleElement, container)
 ```
+## useRef
+https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+https://github.com/thchia/useInterval/blob/master/index.js
+https://github.com/streamich/react-use/blob/master/src/useTimeoutFn.ts

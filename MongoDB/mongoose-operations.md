@@ -1,8 +1,8 @@
 # Mongoose CRUD Operations
 
 ## Mongoose建立連線
-1. mongoose.connect(uri(s), [options], [options.useMongoClient], [callback])返回一個MongooseThenable對象，定義schema生成model操作數據  
-example:  
+1. mongoose.connect(uri(s), [options], [options.useMongoClient], [callback])返回一個MongooseThenable對象，定義schema生成model操作數據
+example:
 ```js
   var URL = 'mongodb://localhost:27017/test3';
 
@@ -14,8 +14,8 @@ example:
     }
   });
 ```
-2. mongoose.createConnection([uri], [options], [options.config], [options.config.autoIndex], [options.useMongoClient])返回一個Connection對象。Connection對象中包含model，collection，dropDatabase等操作數據庫的方法，也包含connected，disconnected，error等事件觸發方法，但是没有Schema 
-example:  
+2. mongoose.createConnection([uri], [options], [options.config], [options.config.autoIndex], [options.useMongoClient])返回一個Connection對象。Connection對象中包含model，collection，dropDatabase等操作數據庫的方法，也包含connected，disconnected，error等事件觸發方法，但是没有Schema
+example:
 ```js
   var mongoose = require('mongoose');
   var URL = 'mongodb://localhost:27017/test2';
@@ -30,9 +30,9 @@ example:
       console.log('connection success：'+URL);
     }
   });
-``` 
-3. mongoose.connection是mongoose模塊的默認引用，返回一個Connetion對象。因爲connect()方法并不能監聽數據庫連接情况，一般情况與connet()方法搭配使用  
-example:  
+```
+3. mongoose.connection是mongoose模塊的默認引用，返回一個Connetion對象。因爲connect()方法并不能監聽數據庫連接情况，一般情况與connet()方法搭配使用
+example:
 ```js
   mongoose.connect(URL);
 
@@ -99,7 +99,7 @@ modelName.find().skip(10).limit(4)
     filterQuery: async (ctx) => {
         let search = qs.parse(ctx.querystring);
         let condition = _.omit(search, ['sortYear', 'sortPrice']);
-        
+
         // sort order exSellPrice, exRentalPrice, exYear
         let sort = {};
 
@@ -160,7 +160,7 @@ modelName.aggregate({$group: {_id: 'fieldName', sumScroe:{$sum:'$score'}}}) //{$
 ## 字段类型为数组（添加）
 ```js
 PersonModel.update(
-    { _id: person._id }, 
+    { _id: person._id },
     { $push: { friends: friend } },
     done
 );
@@ -168,13 +168,13 @@ PersonModel.update(
 ## 字段类型为数组（刪除）
 ```js
 PersonModel.update(
-    { _id: person._id }, 
+    { _id: person._id },
     { $pull: { projectId: { $in: user.projectId }} },
     done
 );
 ```
 ## 聯合查詢
-URL https://stackoverflow.com/questions/36019713/mongodb-nested-lookup-with-3-levels  
+URL https://stackoverflow.com/questions/36019713/mongodb-nested-lookup-with-3-levels
 aggregate operation
 $project 增加，刪除，重命名字段
 $match 條件匹配
@@ -193,7 +193,7 @@ modelName.aggregate([
       'from': 'modelName',
       'localField': 'fieldName',
       'foreignField': 'fieldName',
-      'as': 'field to present' 
+      'as': 'field to present'
     }
   },
     {'$lookup':{
@@ -271,3 +271,46 @@ const instance = await Exfavorite.findById(user.exFavorites._id)
 ## Transaction
 utl https://stackoverflow.com/questions/51228059/mongo-db-4-0-transactions-with-mongoose-nodejs-express
 url https://medium.com/@radheyg11/mongodb-transaction-with-node-js-b81618bebae8
+## 更新Embedded Document field
+https://dba.stackexchange.com/questions/157149/how-can-i-update-a-single-field-in-an-array-of-embedded-documents/157162
+https://docs.mongodb.com/manual/reference/operator/update/set/
+
+```js
+// original document
+{
+  _id: 100,
+  sku: "abc123",
+  quantity: 250,
+  instock: true,
+  reorder: false,
+  details: { model: "14Q2", make: "xyz" },
+  tags: [ "apparel", "clothing" ],
+  ratings: [ { by: "ijk", rating: 4 } ]
+}
+
+db.products.update(
+   { _id: 100 },
+   { $set:
+      {
+        quantity: 500,
+        details: { model: "14Q3", make: "xyz" },
+        tags: [ "coats", "outerwear", "clothing" ]
+      }
+   }
+)
+
+db.products.update(
+   { _id: 100 },
+   { $set: { "details.make": "zzz" } }
+)
+
+db.products.update(
+   { _id: 100 },
+   { $set:
+      {
+        "tags.1": "rain gear",
+        "ratings.0.rating": 2
+      }
+   }
+)
+```

@@ -1,5 +1,6 @@
 # Nginx-Https/Http-setting  
-### Setting for HTTPS Server proxy  
+## Setting for HTTPS Server proxy  
+https://aotu.io/notes/2016/08/16/nginx-https/index.html  
 ```t
 server {
 

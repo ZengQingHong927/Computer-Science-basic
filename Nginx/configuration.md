@@ -1,5 +1,7 @@
 # Load Balance
 ## config
+sites-available/
+
 http {
     ...
     upstream backaaa {

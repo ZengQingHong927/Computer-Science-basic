@@ -21,6 +21,7 @@ fuser -k 80/tcp
 ps -A | grep nginx  
 kill -9 pid1  
 kill -9 pid2  
+sudo netstat -tulpn  
 
 ## open() "/var/run/nginx/nginx.pid" failed (2: No such file or directory) 編輯 /etc/nginx/nignx.cnf  
 pid /logs/nginx.pid -> /usr/local/nginx/logs/nginx.pid;  
@@ -31,3 +32,5 @@ nginx -s reload
 sudo service nginx status
 sudo service nginx restart
 sudo service nginx start
+## 測試配置文件
+sudo nginx -t -c /etc/nginx/nginx.conf

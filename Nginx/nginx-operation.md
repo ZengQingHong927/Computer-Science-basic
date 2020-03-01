@@ -34,3 +34,24 @@ sudo service nginx restart
 sudo service nginx start
 ## 測試配置文件
 sudo nginx -t -c /etc/nginx/nginx.conf
+
+## firewal list
+檢查防火牆
+sudo ufw app list
+Available applications:
+Nginx Full
+Nginx HTTP
+Nginx HTTPS
+OpenSSH
+
+sudo ufw allow 'Nginx HTTP'
+sudo ufw status
+	
+Status: active
+ 
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere                  
+Nginx HTTP                 ALLOW       Anywhere                  
+OpenSSH (v6)               ALLOW       Anywhere (v6)             
+Nginx HTTP (v6)            ALLOW       Anywhere (v6)

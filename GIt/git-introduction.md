@@ -5,6 +5,7 @@
 https://www.itread01.com/content/1526840415.html  
 https://www.slideshare.net/WillHuangTW/git-merge-rebase  
 https://backlog.com/git-tutorial/tagging/add-tag/  
+https://linuxhint.com/best_git_gui_clients_ubuntu/  
 ## 基本操作  
 - 拉取遠端倉庫  
 git clone url  

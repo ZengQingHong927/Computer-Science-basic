@@ -1,4 +1,5 @@
 # Nginx - configuration  
+https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/
 ```t
 http {
   # 设置 gzip, gzip_buffers,timeout

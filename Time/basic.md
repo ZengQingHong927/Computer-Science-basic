@@ -67,4 +67,4 @@ let differenceDate = rd.diff(pd, 'days'); // years,months,days,weeks,hours,minut
 ```
 
 ## MongoDB
-时间存入都会转换成UTC-00，读取后终端显示转换成当地时间
+時間輸入都會轉換成UTC-00，從數據庫讀取時間值，會自動轉換成當地時間

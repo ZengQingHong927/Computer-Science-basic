@@ -12,13 +12,17 @@ var formidable = require (‘formidable’);
 // Koa把file文件放在ctx.req对象上处理
 req === ctx.req;
 
-let   form = new formidable.IncomingForm (opts);
-form.parse (req, function (err, fields, files) {
-        if (err) return reject (err);
-                console.log ('- file upload parse fields::', JSON.stringify (fields, null, 4));
-                console.log ('- file upload parse files::', JSON.stringify (files, null, 4));
-                resolve ({fields, files});
-        });
+function FormidableP (req, opts) {
+        return new Promise ((resolve, reject) => {
+                let   form = new formidable.IncomingForm (opts);
+                form.parse (req, function (err, fields, files) {
+                        if (err) return reject (err);
+                        console.log ('- file upload parse fields::', JSON.stringify (fields, null, 4));
+                        console.log ('- file upload parse files::', JSON.stringify (files, null, 4));
+                        resolve ({fields, files});
+                });
+        })
+}
 
 /* 待处理File数据格式
 "file": {
@@ -29,18 +33,27 @@ form.parse (req, function (err, fields, files) {
     }
 */
 
-
+let { files } = await FormidableP(ctx.req);
 
 console.log (`- filename: ${filename}`);
-        let     extname         = path.extname (filename);
-        let     lowerExtname    = extname.toLowerCase ();
-        console.log (`lowerExtname: ${lowerExtname}`);
-        if (lowerExtname !== '.jpg' && lowerExtname !== '.jpeg' && lowerExtname !== '.png') {
-                throw new Consts.YMError (Consts.kBillingErrorFileTypeError, `文件类型错误，当前为: ${extname}`);
-        }
+let     extname         = path.extname (filename);
+let     lowerExtname    = extname.toLowerCase ();
+console.log (`lowerExtname: ${lowerExtname}`);
+if (lowerExtname !== '.jpg' && lowerExtname !== '.jpeg' && lowerExtname !== '.png') {
+        throw new Consts.YMError (Consts.kBillingErrorFileTypeError, `文件类型错误，当前为: ${extname}`);
+}
 
-        let     newFilename     = `sporder_voucher_${orderid}_${Date.now ()}${extname}`;
-        let     filepath        = `/uploads/${newFilename}`;
-        let     path0           = `${config.file_dir}${filepath}`;
-        await fs.promises.copyFile (file.path, path0);
-        await fs.promises.unlink (file.path);
+let     newFilename     = `photo_${Date.now ()}${extname}`;
+let     filepath        = `/uploads/${newFilename}`;
+let     path0           = `${config.file_dir}${filepath}`;
+await fs.promises.copyFile (file.path, path0);
+await fs.promises.unlink (file.path);
+
+## 前端
+<input type='file' ref={fileRef} onChange={handleFileUpload} onClick={() => fileRef.current.focus()}/>
+
+function handleFileUpload (e) {
+        e.target.files // files object
+
+        fetch API // params: file object
+}

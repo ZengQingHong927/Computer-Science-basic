@@ -130,4 +130,16 @@ h1 em { color: green }
 div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显示为整个银幕视窗
 
 ## Flex  
+- container: 
+  display: flex; (弹性布局)
+  flex-direction: row | row-reverse | column | column-reverse; （项目的排列方向）
+  flex-wrap: nowrap | wrap | wrap-reverse; （如果一条轴线排不下，如何换行）
+  flex-flow: <flex-direction> <flex-wrap>; （flex-direction属性和flex-wrap属性的简写）
+  justify-content: flex-start | flex-end | center | space-between | space-around; （项目在主轴上的对齐方式）
+  align-items: flex-start | flex-end | center | baseline | stretch; (项目在交叉轴上对齐方式)
+  align-content:  flex-start | flex-end | center | space-between | space-around | stretch; (多根轴线的对齐方式)
+
+
+item
 https://wcc723.github.io/css/2017/07/21/css-flex/  
+https://www.runoob.com/w3cnote/flex-grammar.html

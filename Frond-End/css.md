@@ -1,7 +1,7 @@
 # CSS Basic
 
 ## Webpack 編譯安裝 SCSS 套件
-http://www.ruanyifeng.com/blog/2012/06/sass.html  
+http://www.ruanyifeng.com/blog/2012/06/sass.html
 
 
 npm install sass-loader node-sass css-loader mini-css-extract-plugin optimize-css-assets-webpack-plugin --save-dev
@@ -62,6 +62,7 @@ module.exports = {
 
 ## CSS Basic
 
+### 元素选择器
 CSS 樣式表空格表示 DOM 階層式應用
 
 ```js
@@ -213,8 +214,8 @@ div+p 紧接在div后所有的p标签
 100% vs 100vh
 div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显示为整个银幕视窗
 
-## Flex  
-- container: 
+## Flex
+- container:
   display: flex; (弹性布局)
   flex-direction: row | row-reverse | column | column-reverse; （项目的排列方向）
   flex-wrap: nowrap | wrap | wrap-reverse; （如果一条轴线排不下，如何换行）
@@ -223,7 +224,15 @@ div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显
   align-items: flex-start | flex-end | center | baseline | stretch; (项目在交叉轴上对齐方式)
   align-content:  flex-start | flex-end | center | space-between | space-around | stretch; (多根轴线的对齐方式)
 
+```js
+// 第二个div flexGrow会把 Title div和Input div撑开至最外层的div宽度
+<div >
+  <div>Title</div>
+  <div style={{flexGrow: 1}} />
+  <div>Input</div>
+</div>
+```
 
 item
-https://wcc723.github.io/css/2017/07/21/css-flex/  
+https://wcc723.github.io/css/2017/07/21/css-flex/
 https://www.runoob.com/w3cnote/flex-grammar.html

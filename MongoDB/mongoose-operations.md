@@ -314,3 +314,21 @@ db.products.update(
    }
 )
 ```
+## Conditional query documents with multi-fields exists
+https://stackoverflow.com/questions/38320003/mongodb-checking-to-see-if-multiple-fields-exist-in-a-collection
+
+```js
+db.collection.find({
+  $and : [
+    { userId: { $exists: true } },
+    { artId : { $exists: true } }
+  ]
+})
+
+db.collection.find({
+  $or : [
+    { userId: { $exists: true } },
+    { artId : { $exists: true } }
+  ]
+})
+```

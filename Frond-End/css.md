@@ -78,7 +78,7 @@ h1 p { font-size 30px }
 - 後代選擇器
 
 1. 子元素選擇器
-   h1 > sytong { color: red }
+   h1 > strong { color: red }
 
 ```js
 <h1>This is <strong>very</strong> important topic</h1>  // 有效果
@@ -123,6 +123,90 @@ h1 em { color: green }
 <h1>This is a <em>important</em>topic about security</h1> // 有效
 <h1>This is a <strong><em>important</em></strong>topic about security</h1>  // 有效
 ```
+7. 
+p:before {
+  content: 'Happy'
+}
+
+```js
+<p>我是唐老鸭。</p>
+<p>我住在 Duckburg。</p>
+
+<p><b>注释：</b>对于在 IE8 中工作的 :before，必须声明 DOCTYPE。</p>
+
+
+// Happy我是唐老鸭
+```
+
+p:after {
+  content: 'Happy'
+}
+
+```js
+<p>我是唐老鸭。</p>
+<p>我住在 Duckburg。</p>
+
+<p><b>注释：</b>对于在 IE8 中工作的 :before，必须声明 DOCTYPE。</p>
+
+
+// 我是唐老鸭。Happy
+```
+选择其 class 属性值以 "test" 开头的每个 <div> 元素。
+div[class^="test"] {
+ background:#ffff00;
+}
+
+```js
+  <div class="first_test">第一个 div 元素。</div>
+  <div class="second">第二个 div 元素。</div>
+  <div class="test">第三个 div 元素。</div>
+  <p class="test">这是段落中的文本。</p>
+
+// 第一个 div 元素。
+// 第二个 div 元素。
+// 第三个 div 元素。  背景颜色为黄色
+// 这是段落中的文本。
+
+```
+选择其 class 属性值以 "test" 结尾的每个 <div> 元素。
+div[class$="test"] {
+  background:#ffff00;
+}
+
+```js
+  <div class="first_test">第一个 div 元素。</div>
+  <div class="second">第二个 div 元素。</div>
+  <div class="test">第三个 div 元素。</div>
+  <p class="test">这是段落中的文本。</p>
+
+// 第一个 div 元素。  背景颜色为黄色
+// 第二个 div 元素。
+// 第三个 div 元素。  背景颜色为黄色
+// 这是段落中的文本。
+
+```
+选择其 class 属性值以 "test" 包含的每个 <div> 元素。
+div[class*="test"] {
+  background:#ffff00;
+}
+
+```js
+  <div class="first_test">第一个 div 元素。</div>
+  <div class="second">第二个 div 元素。</div>
+  <div class="test">第三个 div 元素。</div>
+  <p class="test">这是段落中的文本。</p>
+
+// 第一个 div 元素。  背景颜色为黄色
+// 第二个 div 元素。
+// 第三个 div 元素。  背景颜色为黄色
+// 这是段落中的文本。
+
+```
+div,p 所有的div和p标签
+div>p 父元素为div的所有p标签
+div p div下所有的p标签
+div+p 紧接在div后所有的p标签
+
 
 ## Height
 1. 内容区域

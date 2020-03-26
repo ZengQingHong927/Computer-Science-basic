@@ -209,6 +209,22 @@ div p div下所有的p标签
 div+p 紧接在div后所有的p标签
 
 
+7. scss css selector
+```js
+li {
+  /* some style 1 */
+
+  &::after {
+    /* some style 2 */
+  }
+
+}
+// 功能等于
+li { /* some style 1 */ }
+li::after { /* some style 2 */ }
+```
+
+
 ## Height
 1. 内容区域
 100% vs 100vh

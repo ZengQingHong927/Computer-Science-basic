@@ -332,3 +332,58 @@ db.collection.find({
   ]
 })
 ```
+
+
+1. update an array value in the specific field
+```js
+{
+   _id: 1,
+   fruits: [ "apples", "pears", "oranges", "grapes", "bananas" ],
+   vegetables: [ "carrots", "celery", "squash", "carrots" ]
+}
+{
+   _id: 2,
+   fruits: [ "plums", "kiwis", "oranges", "bananas", "apples" ],
+   vegetables: [ "broccoli", "zucchini", "carrots", "onions" ]
+}
+
+db.stores.update(
+    { },
+    { $pull: { fruits: { $in: [ "apples", "oranges" ] }, vegetables: "carrots" } },
+    { multi: true }
+)
+
+{
+  "_id" : 1,
+  "fruits" : [ "pears", "grapes", "bananas" ],
+  "vegetables" : [ "celery", "squash" ]
+}
+{
+  "_id" : 2,
+  "fruits" : [ "plums", "kiwis", "bananas" ],
+  "vegetables" : [ "broccoli", "zucchini", "onions" ]
+}
+
+```
+```js
+db.collection.findOneAndUpdate(
+   <filter>,
+   <update document or aggregation pipeline>, // Changed in MongoDB 4.2
+   {
+     projection: <document>,
+     sort: <document>,
+     maxTimeMS: <number>,
+     upsert: <boolean>,
+     returnNewDocument: <boolean>,
+     collation: <document>,
+     arrayFilters: [ <filterdocument1>, ... ]
+   }
+)
+
+filter: { "name" : "A.B. Abracus" },
+update: { $set: { "name" : "A.B. Abracus", "assignment" : 5}, $inc : { "points" : 5 } },
+options: { sort: { "points" : 1 }, upsert:true, returnNewDocument : true }
+
+filter: The same query selector as in find() operation
+
+```

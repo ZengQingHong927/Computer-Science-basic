@@ -1,6 +1,7 @@
 # React-Markdown
 https://github.com/rexxars/react-markdown
 - react-markdown/with-html
+https://ourcodeworld.com/articles/read/532/how-to-render-markdown-as-pure-react-components  
 
 ## Example
 ```js

@@ -387,3 +387,26 @@ options: { sort: { "points" : 1 }, upsert:true, returnNewDocument : true }
 filter: The same query selector as in find() operation
 
 ```
+
+## 删除字段
+```js
+Account.update (
+  {"priviledges5":{$exists: true}},
+  {$unset: {"priviledges5": ""}},
+  false,
+  true)
+```
+
+## 聚合查询增加临时字段
+```js
+YMAccount.aggregateP ([
+  {$match: query},
+  {$addFields: {
+          priviledges4Length:     {$size: '$priviledges4'}}},
+  {$sort: {
+          priviledges4Length:     -1
+  }},
+  {$skip: limit * pageidx},
+  {$limit: limit}
+]);
+```

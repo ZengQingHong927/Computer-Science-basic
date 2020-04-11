@@ -1,5 +1,12 @@
 # React-Router-DOM
 
+## react-router-dom BrowserRouter 无法跳转问题  
+https://blog.csdn.net/N_Lucifer/article/details/86547943
+
+BrowserRouter 是使用了H5的api, 如果是使用了BrowserRouter的话一旦路径改变，那么浏览器就会去请求服务端，但是这个路径根本是不存在的 所有页面就会显示404，而如果是使用hashHistory的话 那么我们的路径中就会增加一个#，这个#号后面的路径改变后是不会再去请求后台服务器。
+如果做服务端渲染的话建议使用BrowserHistory, 在开发阶段可以在webpack devServer中配置historyApiFallback: true，
+否则的话还是建议用hashHistory
+
 根組件依據路由動態加載組件
 exact path 嚴格匹配（成功匹配第一個後，不會繼續往後匹配）
 

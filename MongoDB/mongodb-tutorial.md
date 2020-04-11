@@ -10,8 +10,8 @@ https://mhl.xyz/MongoDB/mongodump.html
 1. 進入mongo  
 2. 切換至admin數據庫，use admin  
 3. 添加用戶，db.createUser({
-  user: "username",
-  pwd: "password",
+  user: "username", // Nick
+  pwd: "password",  // abc123
   roles:[{
     role: "userAdminAnyDatabase",
     db: "admin"

@@ -151,6 +151,17 @@ modelName.find().sort({field: 1}) // 升序，-1降序
 ## 模糊匹配
 ```js
 modelName.find({name: /reg/ })
+
+let     query   = {$or: []};
+text.split (' ').forEach (kw => {
+        let     re   = new RegExp (kw, 'i');
+
+        query.$or.push ({field1: {$regex: re}});
+        query.$or.push ({field2: {$regex: re}});
+});
+
+db.collection.find(query);
+
 ```
 ## 聚合查詢
 ```js

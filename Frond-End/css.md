@@ -1,7 +1,8 @@
 # CSS Basic
 
-## 前端特效  
+## 前端特效瀑布流  
 https://blog.csdn.net/tridiamond6/article/details/105222289
+https://juejin.im/post/5ddb7a7c51882573520fb185
 
 ## Webpack 編譯安裝 SCSS 套件
 http://www.ruanyifeng.com/blog/2012/06/sass.html

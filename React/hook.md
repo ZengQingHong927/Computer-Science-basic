@@ -76,3 +76,55 @@ createPortal (titleElement, container)
 https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 https://github.com/thchia/useInterval/blob/master/index.js
 https://github.com/streamich/react-use/blob/master/src/useTimeoutFn.ts
+
+## useInterval
+https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+https://github.com/thchia/useInterval/blob/master/index.js
+https://github.com/streamich/react-use/blob/master/src/useTimeoutFn.ts
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  let delay = 0;
+  if (count < 10) {
+    delay = 1000
+  }
+  else {
+    delay = null;
+  }
+
+
+  useInterval(() => {
+    // Your custom logic here
+    setCount(count + 1);
+  }, delay);
+
+  return <h1>{count}</h1>;
+}
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest function.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<Counter />, rootElement);
+```

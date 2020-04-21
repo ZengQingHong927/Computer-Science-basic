@@ -1,6 +1,7 @@
 # Fetch
+https://javascript.info/fetch-crossorigin
 'node-fetch'
-
+```js
 headers = {
         'Content-Type': 'application/json'|'application/x-www-form-urlencoded; charset=UTF-8' | 'multipart/form-data',
         'Authorization': 'Bearer xxxxxxxxxxxxxxxx',
@@ -57,3 +58,4 @@ try {
 catch (e) {
 
 }
+```

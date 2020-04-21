@@ -128,3 +128,6 @@ function useInterval(callback, delay) {
 const rootElement = document.getElementById("root");
 ReactDOM.render(<Counter />, rootElement);
 ```
+
+## useContext
+https://stackoverflow.com/questions/38806148/react-pass-props-down-to-all-descendant-components

@@ -34,9 +34,9 @@ https://segmentfault.com/a/1190000012718374#articleHeader9
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"，
     "@babel/plugin-transform-runtime",// Async/Await error in React
-    "css-loader": "^3.2.0",           // css加載轉譯
+    "css-loader": "^3.2.0",           // css加載轉譯，轉譯成CommonJS文件（樣式字符串），打包進JS文件
     "sass-loader": "^8.0.0",          // sass加載轉譯
-    "style-loader": "^1.0.0"          // 加載樣式
+    "style-loader": "^1.0.0"          // 加載樣式，將CommenJS中的樣式文件引入Header
     "file-loader": "^4.2.0",          // 加載文件
     "image-webpack-loader": "^6.0.0", // 圖片壓縮加載
     "img-loader": "^3.0.1",           // 圖片壓縮加載
@@ -63,57 +63,65 @@ https://segmentfault.com/a/1190000012718374#articleHeader9
 
 ```js
 //引用path模組
-const path = require ('path');
-const webpack = require ('webpack');
-const { CleanWebpackPlugin } = require ('clean-webpack-plugin');
+//引用path模組
+const path = require('path');
+const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require ('html-webpack-plugin');
 
 module.exports = {
     //這個webpack打包的對象，這裡面加上剛剛建立的index.js
     entry: {
-        index: path.resolve(__dirname, 'src/js/index.js')
+        index: path.join(__dirname, 'src/js/index.js')
     },
     output: {
-        //這裡是打包後的檔案名稱
-        filename: 'bundle.js',
+        //這裡是打包後的檔案名稱，or [name].[hash:8].js
+        // filename: 'bundle.js',
+        filename: '[name].[hash:8].js',
         //打包後的路徑，這裡使用path模組的resolve()取得絕對位置，也就是目前專案的根目錄
-        path: path.resolve(__dirname, 'dist'),
+        path: path.join (__dirname, 'dist'),
     },
-    // watch: true,  // 文件變更自動編譯生成bundle.js
+    mode: 'development',
+    // watch: true,
     module: {
-      // rules的值是一個陣列可以存放多個loader物件
+      //rules的值是一個陣列可以存放多個loader物件
       rules: [
         //第一個loader編譯JSX
         // { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react', '@babel/preset-env'] } } },
         //第二個loader編譯ES6
         // { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } },
         { test: /(\.js|\.jsx)$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env', '@babel/preset-react'], plugins: ['@babel/transform-runtime'] } } },
-        //第三個loader編譯CSS
-        { test: /.css$/, exclude: /node_modules/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },
-        //第四個loader編譯SCSS
-        // { test: /.css$/, exclude: /node_modules/, use: { loader: 'css-loader' } },
-        //第五個loader編譯SASS/SCSS
-        { test: /.s[ac]ss$/, exclude: /node_modules/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }] },
+        //第三個loader編譯CSS，loader由後往前編譯執行css-loader>style-loader
+        { test: /.css$/, exclude: /node_modules/, use: [{loader: 'style-loader' }, {loader: 'css-loader'}] },
+        //第四個loader編譯LESS，loader由後往前編譯執行less-loader>css-loader>style-loader>
+        { test: /.less$/, exclude: /node_modules/, use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'less-loader'}]},
+        //第五個loader編譯SASS/SCSS，loader由後往前編譯執行sass-loader>css-loader>style-loader
+        { test: /.s[ac]ss$/, exclude: /node_modules/, use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'sass-loader'}]},
         //第六個loader編譯圖檔
-        { test: /\.(png|jpg|gif|jpe?g|svg)$/, exclude: /node_modules/, use: [ 
-          { loader: 'url-loader', options: { limit: 40000, name: '[name]-[hash].[ext]', outputPath:  '../dist/asset', publicPath: '/asset' } }
-        ]}
+        { test: /\.(png|jpg|gif|jpe?g|svg)$/i, exclude: /node_modules/, use: { loader: 'file-loader', options: { limit: 40960, name: '[name]-[hash:8].[ext]', outputPath: '../dist/asset/image', publicPath: '/asset/image' } } }, 
+        //第七個loader編譯多媒體檔
+        { test: /\.(mp4|mp3|ogg|webm|wav|flac|acc)(\?.*)?$/i, exclude: /node_modules/, use: { loader: 'file-loader', options: { limit: 40960, name: '[name]-[hash:8].[ext]', outputPath: '../dist/asset/media', publicPath: '/asset' } } },
+        //第七個loader編譯多媒體檔
+        { test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i, exclude: /node_modules/, use: { loader: 'file-loader', options: { limit: 40960, name: '[name]-[hash:8].[ext]', outputPath: '../dist/asset/fonts', publicPath: '/asset' } } },
       ]},
     plugins: [
       // new CleanWebpackPlugin(),
-      // new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin ({
-        template: './views/index.html',         // 參照物
-      })
+        template: path.resolve(__dirname, 'views/index.html'),         // 參照物
+        favicon: './src/image/favicon/favicon-32x32.png'
+      }),
+      new webpack.HotModuleReplacementPlugin(),
     ],
     //增加一個給devserver的設定
     devServer: {
       //指定開啟port為9000
-      // contentBase: './views',
+      contentBase: path.resolve(__dirname, 'dist'),
       port: 9000,
-      historyApiFallback: {
-        index: '/views/index.html'
-      },
+      inline: true,
+      // historyApiFallback: {
+      //   index: '/dist/index.html'
+      // },
+      historyApiFallback: true,   // Browserrouter 
       stats: {
         colors: true,
         chunks: false

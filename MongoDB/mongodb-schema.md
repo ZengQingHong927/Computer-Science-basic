@@ -21,6 +21,7 @@ let accountSchema = new mongoose.Schema ({
   newAccount:		{ type: Boolean, default: true },
 });
 
+// 復合索引(compound index)
 accountSchema.index({ name: 1 }, {unique: 1});
 accountSchema.index({ id: 1 }, {unique: 1});
 

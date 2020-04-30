@@ -130,3 +130,5 @@ module.exports = {
     }
 };
 ```
+## webpack bundle module chunk  
+https://juejin.im/post/5d70ad50f265da03cf7aae91

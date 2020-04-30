@@ -10,11 +10,16 @@ BrowserRouter 是使用了H5的api, 如果是使用了BrowserRouter的话一旦�
 根組件依據路由動態加載組件
 exact path 嚴格匹配（成功匹配第一個後，不會繼續往後匹配）
 
+## 頁面跳轉  
+1. DOM跳轉 route 指定主件，Link改變url跳轉
+2. JS跳轉 history.push () , history.goBack()
+
 ## 頁面傳值
 
 1. get 傳值, this.props.location.search // http://xxx.xxx.com/xxx?aid=
 2. 動態路由, this.props.match.params // http://xxx.xxx.com/xxx/:aid
-3. localStorage
+3. localStorage  
+4. state傳參
 
 ```js
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';

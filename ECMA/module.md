@@ -40,13 +40,37 @@ import * as module from './module'
 ## CommonJS
 - 導出/exports或module.exports
 - 導入/require
-
+- 相同模塊只加載一次（判斷模塊引用的絕對路徑）,保證模塊單例
 ```js
-module.exports.add = function add (a, b) {
-        return a+b
-}
+// index.js
+require("./moduleA");
+var m = require("./moduleB");
+console.log(m);
 
-exports.sub = function sub (a, b) {
-        return a-b
-}
+// moduleA.js
+var m = require("./moduleB");
+setTimeout(() => console.log(m), 1000);
+
+// moduleB.js
+var m = new Date().getTime();
+module.exports = m;
+```
+## AMD  
+AMD: Asynchronous module definition，意爲異步模塊定義，不同於 CommonJS 規範的同步加載，AMD所有模塊默认都是異步加載，满足web開發的需要，因爲如果在web端也使用同步加載，那麼頁面在解析腳本文件過程中可能使頁面暂停響應。  
+第一個參數寫明入口模塊的依賴列表，第二個參數作为回调參數依次會傳入前面依赖的導出值。  
+```js
+// index.js
+require(['moduleA', 'moduleB'], function(moduleA, moduleB) {
+        console.log(moduleB);
+});
+// moduleA.js
+define(function(require) {
+        var m = require('moduleB');
+        setTimeout(() => console.log(m), 1000);
+});
+// moduleB.js
+define(function(require) {
+        var m = new Date().getTime();
+        return m;
+});
 ```

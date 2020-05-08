@@ -57,3 +57,19 @@ function handleFileUpload (e) {
 
         fetch API // params: file object
 }
+
+## 重传机制
+```js
+let     fetch_resp;
+for (let i = 0; i < nretries; i ++) {
+        try {
+                fetch_resp       =
+                await fetch1 (options.url, options);
+                if (fetch_resp)         break;
+        }
+        catch (err) {
+                if (i === nretries - 1)      throw err;
+                console.log (`- fetch失败，进行重试`);
+        }
+}
+```

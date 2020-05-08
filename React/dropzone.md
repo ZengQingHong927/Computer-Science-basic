@@ -4,6 +4,7 @@ https://github.com/felixrieseberg/React-Dropzone-Component
 https://malcoded.com/posts/react-dropzone/
 https://medium.com/@mannycodes/build-a-react-drag-drop-progress-file-uploader-fb874c515a7
 https://polaris.shopify.com/components/actions/drop-zone
+https://upmostly.com/tutorials/upload-a-file-from-a-react-component
 ```js
 (bytes, decimals = 2) => {
   if (bytes === 0) return '0 Bytes';

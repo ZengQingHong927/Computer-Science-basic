@@ -131,3 +131,4 @@ ReactDOM.render(<Counter />, rootElement);
 
 ## useContext
 https://stackoverflow.com/questions/38806148/react-pass-props-down-to-all-descendant-components
+https://medium.com/simply/state-management-with-react-hooks-and-context-api-at-10-lines-of-code-baf6be8302c

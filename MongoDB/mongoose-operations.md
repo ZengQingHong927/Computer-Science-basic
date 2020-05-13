@@ -149,6 +149,7 @@ modelName.find().skip(10).limit(4)
 modelName.find().sort({field: 1}) // 升序，-1降序
 ```
 ## 模糊匹配
+https://docs.mongodb.com/manual/reference/operator/query/or/
 ```js
 modelName.find({name: /reg/ })
 
@@ -420,4 +421,18 @@ YMAccount.aggregateP ([
   {$skip: limit * pageidx},
   {$limit: limit}
 ]);
+```
+
+##
+```js
+findManyByDateRangeAndName (name, start, end, options, ...rest) {
+	options             = options || {};
+	options.sort        = {date: -1};
+
+	let     query       = {
+			name,
+			date:       {$gte: start, $lt: end}
+	};
+	// return super.findMany2P (query, options, ...rest);
+}
 ```

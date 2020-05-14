@@ -436,3 +436,11 @@ findManyByDateRangeAndName (name, start, end, options, ...rest) {
 	// return super.findMany2P (query, options, ...rest);
 }
 ```
+## 查询并更新 findOneAndUpdate
+appends each element of [ 90, 92, 85 ] to the scores array and select last 3 items in scores array
+
+```js
+  var query  = {name: 'klimt'}
+  var update = {$set: { name: 'jason bourne'}, $push: { scores: { $each: [ 90, 92, 85 ], $slice: -3 } } };
+  Model.findOneAndUpdate(query, update, options, callback)
+```

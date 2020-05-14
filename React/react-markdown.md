@@ -1,9 +1,14 @@
 # React-Markdown
 https://github.com/rexxars/react-markdown
 - react-markdown/with-html
-https://ourcodeworld.com/articles/read/532/how-to-render-markdown-as-pure-react-components  
+https://ourcodeworld.com/articles/read/532/how-to-render-markdown-as-pure-react-components
+https://juejin.im/post/5a727bb06fb9a01cad7c7dc5
+
 
 ## Example
+import prism.js css style to CodeBlock
+复制node_modules/prismjs/themes/xxxxx.css，到项目src/css，并在项目直接import
+
 ```js
         import remarkToc from 'remark-toc';
         import remarkRuby from 'remark-ruby';

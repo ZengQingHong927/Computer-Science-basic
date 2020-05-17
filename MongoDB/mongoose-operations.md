@@ -1,8 +1,10 @@
 # Mongoose CRUD Operations
 
 ## Mongoose建立連線
-1. mongoose.connect(uri(s), [options], [options.useMongoClient], [callback])返回一個MongooseThenable對象，定義schema生成model操作數據
+
+- mongoose.connect(uri(s), [options], [options.useMongoClient], [callback])返回一個MongooseThenable對象，定義schema生成model操作數據
 example:
+
 ```js
   var URL = 'mongodb://localhost:27017/test3';
 
@@ -14,8 +16,10 @@ example:
     }
   });
 ```
-2. mongoose.createConnection([uri], [options], [options.config], [options.config.autoIndex], [options.useMongoClient])返回一個Connection對象。Connection對象中包含model，collection，dropDatabase等操作數據庫的方法，也包含connected，disconnected，error等事件觸發方法，但是没有Schema
+
+- mongoose.createConnection([uri], [options], [options.config], [options.config.autoIndex], [options.useMongoClient])返回一個Connection對象。Connection對象中包含model，collection，dropDatabase等操作數據庫的方法，也包含connected，disconnected，error等事件觸發方法，但是没有Schema
 example:
+
 ```js
   var mongoose = require('mongoose');
   var URL = 'mongodb://localhost:27017/test2';
@@ -31,8 +35,10 @@ example:
     }
   });
 ```
-3. mongoose.connection是mongoose模塊的默認引用，返回一個Connetion對象。因爲connect()方法并不能監聽數據庫連接情况，一般情况與connet()方法搭配使用
+
+- mongoose.connection是mongoose模塊的默認引用，返回一個Connetion對象。因爲connect()方法并不能監聽數據庫連接情况，一般情况與connet()方法搭配使用
 example:
+
 ```js
   mongoose.connect(URL);
 
@@ -57,44 +63,64 @@ example:
     date:new Date()
   });
 ```
+
 ## 加入時間屬性timestampes
+
 ```js
 new mongoose.Schema({},{ timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt', deletedAt: 'deletedAt'} });
 or timestamps: true
 ```
+
 ## 關聯表的索引建立
+
 ```js
 userId: { type: mongoose.Schema.Types.ObjectId, ref:'User' } // model name
 ```
+
 ## 原子操作
+
 給username屬性更新值為Judy
+
 ```js
 modelName.updateMany({username: 'Kathy'}, {$set: {username: 'Judy', age: 30, title: 'CTO'}});
 ```
+
 ## 給schema添加實例方法
+
 ```js
 schemaName.methods.encryptPassword = async function () {
   const salt = await bcrypt.genSalt(7);
   this.password = await bcrypt.hash(this.password, salt);
 };
 ```
+
 ## 時間資料形態
+
 MongoDB 數據類型為時間對象 Date Object，存儲時，將時間字符串轉換成時間對象
 直接用unix time赋值，取值时为GMT+00:00时间格式，moment().valueOf()，转换回unix time
+
 ## 关联查询
+
 ```js
 modelName.findById(_id)
   .populate('modelName',['field','field'...])
 ```
+
 ## update and findOneAndUpdate
+
 需要返回更新後的數據用findOneAndUpdate
 update只返回更新的結果，不返回數據
+
 ## 分頁查尋
+
 找出全部跳過10個返回4筆數據
+
 ```js
 modelName.find().skip(10).limit(4)
 ```
+
 ## Filter Query
+
 ```js
     filterQuery: async (ctx) => {
         let search = qs.parse(ctx.querystring);
@@ -140,16 +166,25 @@ modelName.find().skip(10).limit(4)
         return ctx.body = instances;
     }
 ```
+
 ## 時間區間搜索
+
 ```js
 { $match: { refereeCode: user.profile.refId, createdAt: { $gt: firstDay, $lt: lastDay } } }, // Date object
 ```
+
 ## 排序
+
 ```js
 modelName.find().sort({field: 1}) // 升序，-1降序
 ```
+
 ## 模糊匹配
-https://docs.mongodb.com/manual/reference/operator/query/or/
+
+<https://docs.mongodb.com/manual/reference/operator/query/or/>
+<https://www.cnblogs.com/coolslider/p/7832083.html>
+<https://stackoverflow.com/questions/35321004/mongodb-query-in-with-regex-array-of-element>
+
 ```js
 modelName.find({name: /reg/ })
 
@@ -164,12 +199,16 @@ text.split (' ').forEach (kw => {
 db.collection.find(query);
 
 ```
+
 ## 聚合查詢
+
 ```js
 modelName.find().count()
 modelName.aggregate({$group: {_id: 'fieldName', sumScroe:{$sum:'$score'}}}) //{$avg:'$score'}
 ```
+
 ## 字段类型为数组（添加）
+
 ```js
 PersonModel.update(
     { _id: person._id },
@@ -177,7 +216,9 @@ PersonModel.update(
     done
 );
 ```
+
 ## 字段类型为数组（刪除）
+
 ```js
 PersonModel.update(
     { _id: person._id },
@@ -185,8 +226,10 @@ PersonModel.update(
     done
 );
 ```
+
 ## 聯合查詢
-URL https://stackoverflow.com/questions/36019713/mongodb-nested-lookup-with-3-levels
+
+URL <https://stackoverflow.com/questions/36019713/mongodb-nested-lookup-with-3-levels>
 aggregate operation
 $project 增加，刪除，重命名字段
 $match 條件匹配
@@ -195,6 +238,7 @@ $skip 跳過文檔的數量
 $sort 條件排序
 $group 條件組合結果
 $lookup 用以引入其他集合的數據
+
 ```js
 modelName.aggregate([
   {
@@ -227,7 +271,9 @@ modelName.aggregate([
   }
 ])
 ```
+
 ## 時間處理
+
 ```js
 // Use ObjectId data type to parse id to do aggregate query
 const ObjectId = mongoose.Types.ObjectId;
@@ -241,28 +287,37 @@ User.aggregate([
   }
 ])
 ```
+
 ```js
 // date comparison
 const date = moment(req.query.startDate).format();
 const instance = await CommissionRecord.find({ startDate: { $gte: date } });
 ```
+
 ```js
 // format date and date comparison
 instance.endDate = moment(instance.endDate).valueOf() + 365 * 24 * 60 * 60 * 1000;
 console.log(moment(Date.now()+5*365*24*60*60*1000).isBetween(instance.startDate, instance.endDate));
 ```
+
 ## 時間偏移
+
 ```js
 const condition = moment().substract(spacing, 'months').format('YYYY-MM-DDTHH:mm:ss.SSS');
 const date = new Date(condition)
 ```
+
 ## 查找更新返回新數據
+
 ```js
 const instance = await Exfavorite.findOneAndUpdate(filter, update, {new: true});
 ```
+
 ## Nested Populate
-url http://frontendcollisionblog.com/mongodb/2016/01/24/mongoose-populate.html
-url https://github.com/strapi/strapi/issues/877
+
+url <http://frontendcollisionblog.com/mongodb/2016/01/24/mongoose-populate.html>
+url <https://github.com/strapi/strapi/issues/877>
+
 ```js
 const instance = await Exfavorite.findById(user.exFavorites._id)
       .populate({ path: 'exCars', populate: [
@@ -280,12 +335,16 @@ const instance = await Exfavorite.findById(user.exFavorites._id)
         { path: 'exInsuranceImg' }
       ] });
 ```
+
 ## Transaction
-utl https://stackoverflow.com/questions/51228059/mongo-db-4-0-transactions-with-mongoose-nodejs-express
-url https://medium.com/@radheyg11/mongodb-transaction-with-node-js-b81618bebae8
+
+utl <https://stackoverflow.com/questions/51228059/mongo-db-4-0-transactions-with-mongoose-nodejs-express>
+url <https://medium.com/@radheyg11/mongodb-transaction-with-node-js-b81618bebae8>
+
 ## 更新Embedded Document field
-https://dba.stackexchange.com/questions/157149/how-can-i-update-a-single-field-in-an-array-of-embedded-documents/157162
-https://docs.mongodb.com/manual/reference/operator/update/set/
+
+<https://dba.stackexchange.com/questions/157149/how-can-i-update-a-single-field-in-an-array-of-embedded-documents/157162>
+<https://docs.mongodb.com/manual/reference/operator/update/set/>
 
 ```js
 // original document
@@ -326,8 +385,10 @@ db.products.update(
    }
 )
 ```
+
 ## Conditional query documents with multi-fields exists
-https://stackoverflow.com/questions/38320003/mongodb-checking-to-see-if-multiple-fields-exist-in-a-collection
+
+<https://stackoverflow.com/questions/38320003/mongodb-checking-to-see-if-multiple-fields-exist-in-a-collection>n>
 
 ```js
 db.collection.find({
@@ -345,8 +406,8 @@ db.collection.find({
 })
 ```
 
-
 1. update an array value in the specific field
+
 ```js
 {
    _id: 1,
@@ -377,6 +438,7 @@ db.stores.update(
 }
 
 ```
+
 ```js
 db.collection.findOneAndUpdate(
    <filter>,
@@ -401,6 +463,7 @@ filter: The same query selector as in find() operation
 ```
 
 ## 删除字段
+
 ```js
 Account.update (
   {"priviledges5":{$exists: true}},
@@ -410,6 +473,7 @@ Account.update (
 ```
 
 ## 聚合查询增加临时字段
+
 ```js
 YMAccount.aggregateP ([
   {$match: query},
@@ -423,20 +487,22 @@ YMAccount.aggregateP ([
 ]);
 ```
 
-##
 ```js
 findManyByDateRangeAndName (name, start, end, options, ...rest) {
-	options             = options || {};
-	options.sort        = {date: -1};
+ options             = options || {};
+ options.sort        = {date: -1};
 
-	let     query       = {
-			name,
-			date:       {$gte: start, $lt: end}
-	};
-	// return super.findMany2P (query, options, ...rest);
+ let     query       = {
+  name,
+  date:       {$gte: start, $lt: end}
+ };
+// return super.findMany2P (query, options, ...rest);
 }
+
 ```
+
 ## 查询并更新 findOneAndUpdate
+
 appends each element of [ 90, 92, 85 ] to the scores array and select last 3 items in scores array
 
 ```js

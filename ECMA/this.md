@@ -1,6 +1,8 @@
 # this  
-1. 函數直接執行  
-自然執行時this指向window或undefined
+
++ 函數直接執行  
+自然執行時this指向window或undefined (瀏覽器)，global（node環境）
+
 ```js
         function func () {
                 console.log (this)  // this->window
@@ -8,8 +10,10 @@
 
         func ();
 ```
-2. 函數被別人調用  
+
++ 函數被別人調用  
 this指向執行時誰點出來就是誰
+
 ```js
         function func () {
                 console.log (this)  // this->window
@@ -21,8 +25,11 @@ this指向執行時誰點出來就是誰
 
         a.myfunc();
 ```
-3. new 一個實例被實例調用  
+
++ new 一個實例，被實例調用  
+
 new出來的對象
+
 ```js
         function func () {
                 console.log (this)  // this->window
@@ -36,7 +43,8 @@ new出來的對象
         var     person = new Person ('react');
 ```
 
-4. apply, call, bind  
++ apply, call, bind  
+
 ```js
 var person = {
         name: 'react'
@@ -59,8 +67,10 @@ function Car (color) {
 }
 
 var car = new Car ('blue')
+
 ```
-5. 箭頭函數  
+
++ 箭頭函數  
 離箭頭函數最近的函數（執行上下文），不受call，apply，bind和板門三把斧
 
 ```js

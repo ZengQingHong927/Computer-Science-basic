@@ -1,6 +1,6 @@
 # CSS Basic
 
-## 前端特效瀑布流  
+## 前端特效瀑布流
 https://blog.csdn.net/tridiamond6/article/details/105222289
 https://juejin.im/post/5ddb7a7c51882573520fb185
 
@@ -128,7 +128,7 @@ h1 em { color: green }
 <h1>This is a <em>important</em>topic about security</h1> // 有效
 <h1>This is a <strong><em>important</em></strong>topic about security</h1>  // 有效
 ```
-7. 
+7.
 p:before {
   content: 'Happy'
 }
@@ -255,18 +255,18 @@ div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显
 
 item
 https://wcc723.github.io/css/2017/07/21/css-flex/
-https://www.runoob.com/w3cnote/flex-grammar.html  
+https://www.runoob.com/w3cnote/flex-grammar.html
 
-## Grid  
-1. 網格容器  
-2. 網格項  
-3. 網格線  
+## Grid
+1. 網格容器
+2. 網格項
+3. 網格線
 ![grid-line](./grid-line.png)
-4. 網格軌道  
+4. 網格軌道
 ![grid-track](./grid-track.png)
-5. 網格單元  
+5. 網格單元
 ![grid-cell](./grid-cell.png)
-6. 網格區  
+6. 網格區
 ![grid-area](./grid-area.png)
 
 網格布局
@@ -284,14 +284,14 @@ https://www.runoob.com/w3cnote/flex-grammar.html
 - align-items   start | end | center | stretch
 - justify-content  start | end | center | stretch | space-around | space-between | space-evenly
 - align-content  start | end | center | stretch | space-around | space-between | space-evenly
-- grid-auto-columns  
-- grid-auto-rows  
-- grid-auto-flow : row（默认） | column | dense  
+- grid-auto-columns
+- grid-auto-rows
+- grid-auto-flow : row（默认） | column | dense
 
 display: grid | inline-grid | subgrid
-grid: 塊級網格  
-inline-grid: 行內網格  
-subgrid: 容器本身是網格項（嵌套網格容器)  
+grid: 塊級網格
+inline-grid: 行內網格
+subgrid: 容器本身是網格項（嵌套網格容器)
 ```js
 <div class="container">
   <div class="item item-1"></div>
@@ -303,11 +303,11 @@ subgrid: 容器本身是網格項（嵌套網格容器)
 ```
 
 
-grid-template-columns, grid-template-rows track-size ... | line-name track-size ...  
-設置行列大小，在行軌道和列軌道兩邊是網格線  
+grid-template-columns, grid-template-rows track-size ... | line-name track-size ...
+設置行列大小，在行軌道和列軌道兩邊是網格線
 track-size: css長度，百分比或fr單位(100px, 20%, 2fr)
-line-name: 網格線名稱  
-設置爲auto時，自動分配名稱和大小  
+line-name: 網格線名稱
+設置爲auto時，自動分配名稱和大小
 ```js
 .container{
   display: grid;
@@ -325,7 +325,7 @@ line-name: 網格線名稱
 
 
 
-grid-template-areas  
+grid-template-areas
 網格模板，重復網格區（grid-area）名稱可以跨越網格單元，'.'代表空網格單元。
 
 ```js
@@ -350,16 +350,16 @@ grid-template-areas
                          "footer footer footer footer"
 }
 ```
-![grid-template-area](./grid-template-area.png)  
+![grid-template-area](./grid-template-area.png)
 
 
 grid-column-gap
-網格單元間距  
+網格單元間距
 ```js
 .container{
     display:grid;
     grid-template-columns: 100px 50px 100px;
-    grid-template-rows: 80px auto 80px; 
+    grid-template-rows: 80px auto 80px;
     grid-column-gap: 10px;
     grid-row-gap: 15px;
 }
@@ -368,15 +368,15 @@ grid-column-gap
 
 
 justify-items:  start | end | center | stretch
-垂直於列網格線對齊  
+垂直於列網格線對齊
 - start ![justify-start](./justify-start.png)
 - center ![justify-center](./justify-center.png)
 - end ![justify-end](./justify-end.png)
 - stretch ![justify-stretch](./justify-stretch.png)
 
 
-align-items: start | end | center | stretch  
-垂直於行網格線對齊  
+align-items: start | end | center | stretch
+垂直於行網格線對齊
 - start ![align-start](./align-start.png)
 - center ![align-center](./align-center.png)
 - end ![align-end](./align-end.png)
@@ -384,54 +384,61 @@ align-items: start | end | center | stretch
 
 
 justify-content: start | end | center | stretch | space-around | space-between | space-evenly
-總網格數小於容器網格數時的對齊，垂直於列對齊  
-- start ![justify-content-start](./justify-content-start.png)  
-- center ![justify-content-center](./justify-content-center.png)  
-- end ![justify-content-end](./justify-content-end.png)  
-- stretch ![justify-content-stretch](./justify-content-stretch.png)  
-- space-around ![justify-content-space-around](./justify-content-space-around.png)  
-- space-between ![justify-content-space-between](./justify-content-space-between.png)  
-- space-evenly ![justify-content-space-evenly](./justify-content-space-evenly.png)  
+總網格數小於容器網格數時的對齊，垂直於列對齊
+- start ![justify-content-start](./justify-content-start.png)
+- center ![justify-content-center](./justify-content-center.png)
+- end ![justify-content-end](./justify-content-end.png)
+- stretch ![justify-content-stretch](./justify-content-stretch.png)
+- space-around ![justify-content-space-around](./justify-content-space-around.png)
+- space-between ![justify-content-space-between](./justify-content-space-between.png)
+- space-evenly ![justify-content-space-evenly](./justify-content-space-evenly.png)
 
 
 align-content: start | end | center | stretch | space-around | space-between | space-evenly
-總網格數小於容器網格數時的對齊，垂直於行對齊  
-- start ![align-content-start](./align-content-start.png)  
-- center ![align-content-center](./align-content-center.png)  
-- end ![align-content-end](./align-content-end.png)  
-- stretch ![align-content-stretch](./align-content-stretch.png)  
-- space-around ![align-content-space-around](./align-content-space-around.png)  
-- space-between ![align-content-space-between](./align-content-space-between.png)  
-- space-evenly ![align-content-space-evenly](./align-content-space-evenly.png)  
+總網格數小於容器網格數時的對齊，垂直於行對齊
+- start ![align-content-start](./align-content-start.png)
+- center ![align-content-center](./align-content-center.png)
+- end ![align-content-end](./align-content-end.png)
+- stretch ![align-content-stretch](./align-content-stretch.png)
+- space-around ![align-content-space-around](./align-content-space-around.png)
+- space-between ![align-content-space-between](./align-content-space-between.png)
+- space-evenly ![align-content-space-evenly](./align-content-space-evenly.png)
 
 
-網格項可設置的屬性  
-- grid-column-start  
-- grid-column-end  
-- grid-row-start  
-- grid-row-end  
-- grid-column  
-- grid-row  
-- grid-area  
-- justify-self  
-- align-self  
+網格項可設置的屬性
+- grid-column-start
+- grid-column-end
+- grid-row-start
+- grid-row-end
+- grid-column
+- grid-row
+- grid-area
+- justify-self
+- align-self
 
 grid-column-start:  number | name | span number | span name | auto
-通過網格線來定義網格的位置  
+通過網格線來定義網格的位置
 
 line: 指定編號
 span <number>: 跨越軌道的數量
 span <name>: 跨越軌道直到網格線名字
-auto: 自動展示位置  
+auto: 自動展示位置
 
 
-grid-area: name | row-start / column-start / row-end / column-end  
-定義網格名字  
+grid-area: name | row-start / column-start / row-end / column-end
+定義網格名字
 
 
-justify-self: justify-self: start | end | center | stretch  
-定義單個網格項垂直於列網格線的對齊方式  
+justify-self: justify-self: start | end | center | stretch
+定義單個網格項垂直於列網格線的對齊方式
 
 
-align-self: start | end | center | stretch  
+align-self: start | end | center | stretch
 定義單個網格項垂直於行網格線的對齊方式
+
+### 图片缩放（img scale）
+<https://blog.csdn.net/datou0529/article/details/52040381>
+
+```js
+  <img style={{margin: '0 60px', transform: 'scale(2)'}} src={filepath} alt='图片未找到' />
+```

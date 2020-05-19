@@ -1,11 +1,7 @@
 # Fetch
 
 <https://javascript.info/fetch-crossorigin>
-
-<https://stackoverflow.com/questions/46946380/fetch-api-request-timeout>
-
-<https://javascript.info/fetch-crossorigin>
-node-fetch
+'node-fetch'
 
 ```js
 headers = {
@@ -101,88 +97,4 @@ try {
 catch (e) {
 
 }
-```
-
-fetch with timeout
-
-```js
-function timeout(ms, promise) {
-  return new Promise(function(resolve, reject) {
-    setTimeout(function() {
-      reject(new Error("timeout"))
-    }, ms)
-    promise.then(resolve, reject)
-  })
-}
-
-timeout(1000, fetch('/hello')).then(function(response) {
-  // process response
-}).catch(function(error) {
-  // might be a timeout error
-})
-```
-
-```js
-// 前端Fetch封装
-
-function postP (api, data, mode) {
-        data    = data || {};
-
-        let     url;
-        let     body;
-
-        let     contentType     = 'application/json';
-
-        if (mode === 1) {
-                body    = data;
-                contentType     = 'application/octet-stream';
-                url     = api;
-        }
-        else {
-                body    = JSON.stringify (data);
-                url     = api;
-        }
-
-
-        return fetch (url, {
-                method:         'POST',
-                headers: {
-                        'Accept':           'application/json',
-                        'Content-Type':     contentType
-                },
-                credentials:    'include',
-                body,
-        });
-}
-
-
-function postA (api, data, erm) {
-        let     response        =
-        await postP (api, data);
-
-        if (response.status !== 200) {
-                throw Error (500, 'request fail');
-        }
-
-        let     response_json   = await response.json();
-        // let resobj = response_json;
-        if (response_json.status !== 100) {
-                throw new Error (response_json.status, response_json.message || erm)
-        }
-        return response_json;
-}
-
-function prePostA (api, data, erm) {
-        let     resobg;
-        try {
-                resobj  = await postA (api, data, erm);
-        }
-        catch (e) {
-                resobj  = {status: err.status, message: err.message}
-        }
-
-        return resobj;
-}
-
-
 ```

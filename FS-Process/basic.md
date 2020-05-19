@@ -1,5 +1,5 @@
 # 基本文件處理
-##
+
 ```js
 fs.accessSync(dir,fs.constants.F_OK); // 是否存在
 let stat = fs.statSync(dir);          // 文件狀態
@@ -13,5 +13,7 @@ if (stat.isFile()) {                  // 文件？
   });
 }
 ```
-# Buffer Image Process
-url:https://stackoverflow.com/questions/24523532/how-do-i-convert-an-image-to-a-base64-encoded-data-url-in-sails-js-or-generally
+
+## Buffer Image Process
+
+<https://stackoverflow.com/questions/24523532/how-do-i-convert-an-image-to-a-base64-encoded-data-url-in-sails-js-or-generally>

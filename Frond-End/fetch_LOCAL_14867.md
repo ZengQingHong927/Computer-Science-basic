@@ -1,11 +1,7 @@
 # Fetch
-
 <https://javascript.info/fetch-crossorigin>
-
 <https://stackoverflow.com/questions/46946380/fetch-api-request-timeout>
-
-<https://javascript.info/fetch-crossorigin>
-node-fetch
+'node-fetch'
 
 ```js
 headers = {
@@ -104,7 +100,6 @@ catch (e) {
 ```
 
 fetch with timeout
-
 ```js
 function timeout(ms, promise) {
   return new Promise(function(resolve, reject) {

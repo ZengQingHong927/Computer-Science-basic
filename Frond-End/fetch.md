@@ -231,3 +231,108 @@ await fs.promises.unlink (file.path);
 // update document with specific fileId, ex: document.img_url = filePath
 
 ```
+
+```js
+function customizedFetchP (url, method, queryParams, options0) {
+        method          = method || 'GET';
+        options0        = options0 || {};
+        let     queryStr     = querystring.stringify (queryParams);
+
+        let   { contentType,
+                returnType,
+                fetch:      fetch0,
+                headers:    headers0,
+                safe,
+                nretries,
+                // redirect,
+                ignore_200err,
+                ...rest }       = options0;
+
+        nretries     = nretries || 1;
+
+        let     headers     = {};
+        let     body;
+        if (method === 'GET') {
+                if (queryParams) {
+                        url     = `${url}?${queryStr}`;
+                }
+                returnType      = returnType || 'text';
+        }
+        else {
+                if (contentType === 'json') {
+                        headers['Content-Type']    = 'application/json';
+                        body        = JSON.stringify (queryParams);
+                }
+                else {
+                        headers['Content-Type']    = 'application/x-www-form-urlencoded; charset=UTF-8';
+                        body        = queryStr;
+                }
+
+                returnType      = returnType || 'json';
+        }
+
+        Object.assign (headers, headers0);
+
+        let     options     = {
+                url,
+                method,
+                headers,
+                // agent:      socksAgent,
+                body,
+                // redirect,
+                timeout:    3000,
+        };
+
+        Object.assign (options, rest);
+        // console.log (`- options: ${JSON.stringify (options)}`);
+
+
+        let     fetch1      = fetch0 || fetch;
+
+        let     resobj;
+        try {
+                let     fetch_resp;
+                for (let i = 0; i < nretries; i ++) {
+                        try {
+                                fetch_resp       =
+                                await fetch1 (options.url, options);
+                                if (fetch_resp)         break;
+                        }
+                        catch (err) {
+                                if (i === nretries - 1)      throw err;
+                                console.log (`- fetch失败，进行重试`);
+                        }
+                }
+
+                if (!ignore_200err && fetch_resp.status !== 200) {
+                        throw new Consts.YMError (Consts.kBillingErrorNetworkError, `请求失败HTTP${fetch_resp.status}`);
+                }
+
+                if (returnType === 'text') {
+                        resobj  = await fetch_resp.text ();
+                }
+                else if (returnType === 'json') {
+                        resobj  = await fetch_resp.json ();
+                }
+                else if (returnType === 'buffer') {
+                        resobj  = await fetch_resp.buffer ();
+                        // console.log (`- return buffer`);
+                }
+                else if (returnType === 'url') {
+                        resobj  = fetch_resp.url;
+                }
+                else if (returnType === 'raw') {
+                        resobj  = fetch_resp;
+                }
+        }
+        catch (err) {
+                // console.log (`- err.code: ${err.code}`);
+                console.log (`- err.message: ${err.message}`);
+                console.log (`- err.stack: ${err.stack}`);
+                return throw new Error ()
+        }
+
+        return resobj;
+}
+
+```

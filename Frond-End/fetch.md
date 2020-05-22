@@ -158,7 +158,7 @@ function postP (api, data, mode) {
 
 function postA (api, data, erm) {
         let     response        =
-        await postP (api, data);
+        await postP (api, data, 0);
 
         if (response.status !== 200) {
                 throw Error (500, 'request fail');
@@ -184,5 +184,50 @@ function prePostA (api, data, erm) {
         return resobj;
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+import      Dropzone                        from 'react-dropzone';
+
+function onUpload (fileObj) {
+        let     resobj  =
+        await this.prePostA (`/api/file/upload?fileId=${fileId}&filename=${filename}`, fileObj);
+}
+
+function onHandleUpload (files) {
+        if (!files[0] || !files[0].name) {
+                console.log ('no files');
+                return;
+        }
+
+        onUpload (files[0]);
+}
+
+<Dropzone onDrop={onHandleDrop} onFileDialogCancel={onCancelDrop} >
+        {({getRootProps, getInputProps}) => (
+                <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <div className="dropzone">拖入文件</div>
+                </div>
+        )}
+</Dropzone>
+
+// backend api
+
+// check ctx.is('application/octet-stream')
+let   { filename, fileId }      = ctx.request.query;
+
+let   { files }                 = formidable (ctx.req)
+let     file                    = files.file
+let     extname                 = path.extname(filename);
+let     lowerExtname            = extname.toLowerCase (extname);
+
+// check extname type
+let     newFilename             =`${fileId}_${Date.now()}${extname}`;
+let     filePath                =`/uploads/${newfilename}`;
+let     savePath                = `${config.upload_dir}${filePath}`;
+
+await fs.promises.copyFile (file.path, savePath);
+await fs.promises.unlink (file.path);
+
+// update document with specific fileId, ex: document.img_url = filePath
 
 ```

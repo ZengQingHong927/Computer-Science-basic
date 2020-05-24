@@ -1,6 +1,5 @@
 # Progress Tick
-
-<https://material-ui.com/components/progress/>
+https://material-ui.com/components/progress/
 
 ```js
         const [loading, setLoading] = React.useState(false);

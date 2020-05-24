@@ -1,7 +1,5 @@
-# Redis - Operation
-
-## 基本操作
-
+# Redis - Operation  
+## 基本操作  
 - 指定配置文件啟動redis服務器
 ./redis-server redis.conf
 - 進入redis客戶端，進行驗證
@@ -16,8 +14,7 @@ select [number]
 - 客戶端關閉redis服務器
 shutdown
 
-## 基本操作數據
-
+#基本操作數據
 SET mykey abc123
 GET mykey
 DEL mykey

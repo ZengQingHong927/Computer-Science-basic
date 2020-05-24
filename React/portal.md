@@ -1,4 +1,4 @@
-# Portal
+## Portal
 
 ```js
 function Title (props) {
@@ -20,16 +20,21 @@ function Title (props) {
         </div>;
 
         let    titleElementCloned       = cloneElement (titleElement);
-        return createPortal (titleElement, container);
+        return createPortal (titleElement, container); 
 }
 
 
-function OtherComponent (props) {
-
+funciton OtherComponent (props) {
+        ...
+        ...
         return (
                 <React.Fragment>
+                ...
+                ...
                         <div id='title-id'/> // Portal will rerender this tag
                 </React.Fragment>
         )
 }
+
+
 ```

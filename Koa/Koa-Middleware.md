@@ -1,25 +1,38 @@
 # App Configuration
+
 ## timestamp
+
 require ('console-stamp') (console, {pattern: 'yyyy/mm/dd HH:MM:ss.l'})
+
 ## logger
+
+```js
 app.use (require('koa-logger'))
+```
+
 ## cors
+
 koa2-cors
 app.use (cors({
-        maxAge: 24 * 60 * 60 * 1000
+        maxAge: 24 *60* 60 * 1000
         credentials: true,
         methods: 'GET, POST, PUT, DELETE, HEAD, OPTIONS'
         headers: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 }))
+
 ## koa-session2
-https://www.itread01.com/p/1000466.html
-https://www.colabug.com/2018/0927/4714341/
+
+<https://www.itread01.com/p/1000466.html>
+<https://www.colabug.com/2018/0927/4714341/>
+
+```js
 var session2 = require ('koa-session2');
 var Store = require ('koa-session2').Store;
 
 app.use (session2 ({
         store: new MongoSessionStore
 }))
+```
 
 ```js
 // 改寫session.store
@@ -74,7 +87,10 @@ class MongoSessionStore extends Store {
 ```
 
 ## compress
+
 koa-compress
+
+```js
 app.use (compress ({
         filter: function () {
                 let compressible = /application\/json/i.test (content_type);
@@ -83,12 +99,18 @@ app.use (compress ({
         threshold: 2048,
         flush: require(zlib).Z_SYNC_FLUSH
 }))
+```
+
 ## body-parser
+
 koa-bodyparser
 parse text/xml type body as a text string
+
+```js
 app.use (bodyParser ({
         extendTypes: {
                 text: ['text/xml', 'application/xml', 'text/html']
         },
         enableTypes: ['json', 'form', 'text']
 }))
+```

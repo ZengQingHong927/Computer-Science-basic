@@ -1,12 +1,14 @@
-# Koa - File Process
-https://github.com/koajs/examples/blob/master/upload/app.js
+# Koa - Back-End File Handler
+
+<https://github.com/koajs/examples/blob/master/upload/app.js>
 
 MongoDB - how to update a single field  in an array of an embedded document
-https://dba.stackexchange.com/questions/157149/how-can-i-update-a-single-field-in-an-array-of-embedded-documents/157162
+<https://dba.stackexchange.com/questions/157149/how-can-i-update-a-single-field-in-an-array-of-embedded-documents/157162>
 
 React - Rich Editor
-https://github.com/jpuri/react-draft-wysiwyg
+<https://github.com/jpuri/react-draft-wysiwyg>
 
+```js
 var formidable = require (‘formidable’);
 
 // Koa把file文件放在ctx.req对象上处理
@@ -39,7 +41,13 @@ console.log (`- filename: ${filename}`);
 let     extname         = path.extname (filename);
 let     lowerExtname    = extname.toLowerCase ();
 console.log (`lowerExtname: ${lowerExtname}`);
-if (lowerExtname !== '.jpg' && lowerExtname !== '.jpeg' && lowerExtname !== '.png') {
+let     allowedFormat = [
+        '.jpg',
+        '.jpeg',
+        '.png',
+]
+
+if (!allowedFormat.includes (lowerExtname)) {
         throw new Consts.YMError (Consts.kBillingErrorFileTypeError, `文件类型错误，当前为: ${extname}`);
 }
 
@@ -48,8 +56,11 @@ let     filepath        = `/uploads/${newFilename}`;
 let     path0           = `${config.file_dir}${filepath}`;
 await fs.promises.copyFile (file.path, path0);
 await fs.promises.unlink (file.path);
+```
 
 ## 前端
+
+```js
 <input type='file' ref={fileRef} onChange={handleFileUpload} onClick={() => fileRef.current.focus()}/>
 
 function handleFileUpload (e) {
@@ -57,8 +68,10 @@ function handleFileUpload (e) {
 
         fetch API // params: file object
 }
+```
 
-## 重传机制
+## 重傳機制
+
 ```js
 let     fetch_resp;
 for (let i = 0; i < nretries; i ++) {

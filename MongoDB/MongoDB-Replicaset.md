@@ -1,4 +1,4 @@
-# Replica Set - Tutorial
+# Replica Set Tutorial
 
 - mongodb集群所有實例需要啟動，mongodb副本集才能成功啟動  
 <https://www.tutorialkart.com/mongodb/setup-mongodb-replica-set/>

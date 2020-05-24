@@ -13,12 +13,15 @@ app.use (require('koa-logger'))
 ## cors
 
 koa2-cors
+
+```js
 app.use (cors({
         maxAge: 24 *60* 60 * 1000
         credentials: true,
         methods: 'GET, POST, PUT, DELETE, HEAD, OPTIONS'
         headers: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-}))
+}));
+```
 
 ## koa-session2
 

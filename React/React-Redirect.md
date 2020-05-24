@@ -1,7 +1,7 @@
 # React Router Redirect
 
 路由跳轉（登入 or 搜尋）
-ref: https://reacttraining.com/react-router/web/example/auth-workflow
+<https://reacttraining.com/react-router/web/example/auth-workflow>
 組件狀態改變會執行重新渲染
 
 1. import Redirect

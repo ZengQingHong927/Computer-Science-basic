@@ -1,5 +1,6 @@
-# Authentication-React
-https://kentcdodds.com/blog/authentication-in-react-applications
+# React-Authentication
+
+<https://kentcdodds.com/blog/authentication-in-react-applications>
 
 ```js
 import  { useContext } from 'react';
@@ -47,7 +48,7 @@ export {
 
 import {AuthContextProvider} from './AuthContext'
 
-// 最外层路由加入authctxprovider
+// 最外層路由加入authctxprovider
 function App (props) {
 
         return (
@@ -64,20 +65,20 @@ function App (props) {
 ```
 
 ```js
-Import { useLcoalStorage } from ‘react-use’
+import { useLcoalStorage } from 'react-use';
 
 function useLocalStorageCustomized (key, initialVal) {
 
-	let [ localState, setLocalState ]	= useLcoalStorage (key, initialVal)
-	let [ memState, setMemState ]	= useState (localState);
+    let [ localState, setLocalState ]   = useLcoalStorage(key, initialVal)
+    let [ memState, setMemState ]       = useState(localState);
 
 
-	function setState (val) {
-		setLocalState (val)
-		setMemState (val)
-	}
+    function setState(val) {
+        setLocalState(val)
+        setMemState(val)
+    }
 
-	return [ memState, setState ];
+    return [ memState, setState ];
 
 }
 ```

@@ -18,7 +18,7 @@ function Title (props) {
                 <Typography variant="h4" color="inherit" >{title}</Typography>
         </div>;
 
-        // 将titleelement放进container
+        // 將titleelement放進container
         return createPortal (titleElement, container);
 }
 

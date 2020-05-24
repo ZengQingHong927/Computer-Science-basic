@@ -1,12 +1,17 @@
-# MongoDB - Tutorial  
+# MongoDB - Tutorial
+
 配置文件位置 /etc/mongod.conf  
 數據存放位置 /var/lib/mongodb  
 日誌存放位置 /var/log/mongodb  
+
 ### 基本連線配置和用戶管理
-參考網址 https://docs.mongodb.com/manual/tutorial/enable-authentication/  
-https://docs.mongodb.com/manual/reference/configuration-options/
-https://mhl.xyz/MongoDB/mongodump.html  
+
+<https://docs.mongodb.com/manual/tutorial/enable-authentication/>
+<https://docs.mongodb.com/manual/reference/configuration-options/>
+<https://mhl.xyz/MongoDB/mongodump.html>
+
 ### 創建用戶
+
 1. 進入mongo  
 2. 切換至admin數據庫，use admin  
 3. 添加用戶，db.createUser({
@@ -21,8 +26,10 @@ https://mhl.xyz/MongoDB/mongodump.html
 5. 修改/etc/mongod.conf secutiry  
 6. 重啓mongod，sudo service mongod restart  
 7. mongo --port 27017 -u "adminUser" -p "adminPwd" --authenticationDatabase "admin"
+
 ### 配置文件
-```
+
+```js
 # mongod.conf
 
 # for documentation of all options, see:
@@ -66,8 +73,10 @@ security: // 啟用驗證
 #auditLog:
 
 #snmp:
-```  
+```
+
 ### 進入Mongo CLI設定用戶權限
+
 1. 連線MongoDB  
 mongo --host {serverIP} --port {port}  
 2. 先不開啟授權，進入mongo切換至admin db  
@@ -89,14 +98,17 @@ security:
 5. 重新啟動mongoDB
 sudo service mongod restart
 
-6. 以帳號密碼登入授權資料庫  
-- 方法1  
-mongo --host {serverIP} --port {port} -u "{username}" -p "{password}" --authenticationDatabase "admin"  
-- 方法2  
+6. 以帳號密碼登入授權資料庫
+
+- 方法1
+mongo --host {serverIP} --port {port} -u "{username}" -p "{password}" --authenticationDatabase "admin"
+- 方法2
 mongo --host {serverIP} --port {port}
 use admin
 db.auth("nick","nick0323")
+
 ### 對某一數據庫設定登入權限  
+
 1. 切換至koa-test db 增加使用者  
 use koa-test  
 db.createUser({user: "username",pwd: "password",roles: [ { role: "readWrite", db: "koa-test" } ]})  
@@ -107,9 +119,12 @@ db.dropAllUsers()
 4. 創建集合  
 db.createCollection("health");
 5. 查詢document  
+
 - use koa-test
 - db.health.find()
-### 權限管理  
+
+### 權限管理
+
 1. mongod  
 2. use testdb  
 3. db.createUser({user:'username',pwd:'password',roles:[{role:'dbAdmin',db:'wmg-sys-app-beta'}]})  
@@ -117,8 +132,10 @@ db.createCollection("health");
 5. sudo nano /etc/mongodb.conf
 6. security:  
     authorization: enabled  
-7. sudo service mongod restart  
+7. sudo service mongod restart
+
 ### 用戶權限
+
 - Read：允許用戶讀取數據庫  
 - readWrite：允許用戶讀寫數據庫  
 - dbAdmin：允許用戶執行管理函數，如索引創建，刪除，查看統計或訪問system.profile  
@@ -129,10 +146,14 @@ db.createCollection("health");
 - userAdminAnyDatabase：只在admin數據庫可用，賦予用戶所有數據庫的userAdmin權限  
 - dbAdminAnyDatabase：只在admin數據庫可用，賦予用戶所有數據庫的dbAdmin權限  
 - root：只在admin數據庫可用。超級帳號，超級權限  
+
 ### 數據導入導出  
+
 不用進入mongo shell
 以JSON格式的數據操作，可讀性較高
-- import  
+
+- import
+
 参数说明：  
 -h: 指明数据库宿主机的IP  
 -u: 指明数据库的用户名  

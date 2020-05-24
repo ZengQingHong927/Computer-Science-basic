@@ -1,5 +1,7 @@
 # 索引管理 - CMD操作
+
 ## 創建索引
+
 db.COLLECTION_NAME.ensureIndex(keys[,options])
 
 keys:建立索引的參數列表。如：{KEY:1}，其中key表示屬性，1表示升序排序，也可使用使用數字-1降序。
@@ -13,16 +15,19 @@ expireAfterSeconds,integer，指定索引過期的時間。
 storageEngine,document，允许用户配置索引的存儲引擎。
 
 ## 查看索引
+
 查看集合所有的索引  
 db.COLLECTION_NAME.getIndexes()
 查看索引鍵
 db.COLLECTION_NAME.getIndexKeys()
 
 ## 刪除索引
+
 刪除指定的索引
 db.COLLECTION_NAME.dropIndex()
 刪除全部索引
 db.COLLECTION_NAME.dropIndexes()
 
 ## 重建索引
+
 db.COLLECTION_NAME.getIndexSpecs()

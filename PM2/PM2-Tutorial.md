@@ -1,11 +1,14 @@
 # PM2 - Tutorials
+
 * 用途
 進程管理工具，包括守護進程，監控，日誌等功能
-* 官方文檔 http://pm2.keymetrics.io/docs/usage/quick-start
----
+
+* 官方文檔 <http://pm2.keymetrics.io/docs/usage/quick-start>
+
 * 安裝
-npm install pm2 -g // 全局安裝
-$HOME/.pm2 // 日誌存放路徑
+npm install pm2 -g 全局安裝
+$HOME/.pm2 日誌存放路徑
+
 * 基本指令
 pm2 start app.js
 pm2 start app.js -i 4 // 啟用cluster mode，四個應用程序自動進行負載均衡
@@ -23,4 +26,5 @@ pm2 delete all
 pm2 delete "pm2啟動應用的id"
 
 ## grep pid
-https://stackoverflow.com/questions/34829550/how-do-i-get-just-the-app-id-with-pm2
+
+<https://stackoverflow.com/questions/34829550/how-do-i-get-just-the-app-id-with-pm2>

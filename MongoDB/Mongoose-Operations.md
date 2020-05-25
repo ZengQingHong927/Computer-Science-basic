@@ -510,3 +510,9 @@ appends each element of [ 90, 92, 85 ] to the scores array and select last 3 ite
   var update = {$set: { name: 'jason bourne'}, $push: { scores: { $each: [ 90, 92, 85 ], $slice: -3 } } };
   Model.findOneAndUpdate(query, update, options, callback)
 ```
+
+## Two phase commit
+<https://docs.mongodb.com/v3.4/tutorial/perform-two-phase-commits/>
+<http://learnmongodbthehardway.com/article/transactions/>
+<https://github.com/mongodb/node-mongodb-native/releases/tag/v3.2.1>
+<https://docs.mongodb.com/manual/core/transactions-in-applications/>

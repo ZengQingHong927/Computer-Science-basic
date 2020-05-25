@@ -117,3 +117,6 @@ app.use (bodyParser ({
         enableTypes: ['json', 'form', 'text']
 }))
 ```
+
+## cosnole-stamp
+

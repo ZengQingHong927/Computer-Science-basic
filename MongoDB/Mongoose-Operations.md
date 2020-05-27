@@ -516,3 +516,91 @@ appends each element of [ 90, 92, 85 ] to the scores array and select last 3 ite
 <http://learnmongodbthehardway.com/article/transactions/>
 <https://github.com/mongodb/node-mongodb-native/releases/tag/v3.2.1>
 <https://docs.mongodb.com/manual/core/transactions-in-applications/>
+
+## MongoDB Design
+
+```js
+
+var fs              = require ('fs');
+var path            = require ('path');
+var mongodb         = require ('mongodb');
+// var config      = require ('../config/config');
+
+var configMongoDB   = {
+        ObjectID:               mongodb.ObjectID,
+        Long:                   mongodb.Long,
+        // mongocfg.mongo_url  = config.mongo_url;
+
+        client:                 undefined,
+        db:                     undefined,
+
+        client2:                undefined,
+        db2:                    undefined,
+};
+
+
+var connectDB   = async function () {
+
+        console.log ('mongocfg.connect ()');
+
+        if (config.mongo_url && config.mongo_dbname) {
+                let     client      = await mongodb.MongoClient.connect (config.mongo_url, {
+                        useNewUrlParser:        true,
+                        useUnifiedTopology:     true,
+                        poolSize:               50
+                });
+
+                let     db          = client.db (config.mongo_dbname);
+                configMongoDB.client     = client;
+                configMongoDB.db         = db;
+        }
+
+
+        if (config.mongo_url2 && config.mongo_dbname2) {
+                console.log (`- url2 configured`);
+                let     client2     = await mongodb.MongoClient.connect (config.mongo_url2, {
+                        useNewUrlParser:        true,
+                        useUnifiedTopology:     true,
+                        poolSize:               50
+                });
+                let     db2         = client2.db (config.mongo_dbname2);
+
+                configMongoDB.client2    = client2;
+                configMongoDB.db2        = db2;
+        }
+
+
+        if (0) {
+                let     dirs    = [
+                        path.join (__dirname, '../mongoose_schemma'),
+                ];
+
+                for (let dir of dirs) {
+                        let     files   = await fs.promises.readdir (dir);
+                        files.forEach (async (file) => {
+                                if (file.search (/^.*.js$/) !== -1 && file !== 'base.class') {
+                                        // console.log (`- routefile: ${file}`);
+                                        let     model   = require (`${dir}/` + file);
+                                        await model.init ();
+                                }
+                        });
+                }
+
+        }
+};
+
+var closeDBA     = async function ()
+{
+        console.log (`- mongodb close ()`);
+        if (configMongoDB.client) {
+                await configMongoDB.client.close ();
+                delete configMongoDB.client;
+        }
+
+        if (configMongoDB.client2) {
+                await configMongoDB.client2.close ();
+                delete configMongoDB.client;
+        }
+};
+
+```

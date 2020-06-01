@@ -453,3 +453,19 @@ whiteSpace:             'nowrap',
 display:                'block',
 overflowX:              'hidden'
 ```
+
+<http://hackingui.com/front-end/a-pure-css-solution-for-multiline-text-truncation/>
+
+```js
+// height:                 '100%',
+whiteSpace:             'pre-wrap',
+overflow:               'hidden',
+// maxHeight:              `calc(${theme.typography.subtitle2.lineHeight}*3) ) ,
+height:                 `calc(${theme.typography.subtitle2.lineHeight}*6)`,
+
+// Hack overflow
+'& pre': {
+        overflow:       'hidden',
+}
+
+```

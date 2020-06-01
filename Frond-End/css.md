@@ -442,3 +442,14 @@ align-self: start | end | center | stretch
 ```js
   <img style={{margin: '0 60px', transform: 'scale(2)'}} src={filepath} alt='图片未找到' />
 ```
+
+### 段落超过显示... 省略
+
+```js
+textOverflow:           'ellipsis',
+// overFlow:               'hidden',
+width:                  '150px',
+whiteSpace:             'nowrap',
+display:                'block',
+overflowX:              'hidden'
+```

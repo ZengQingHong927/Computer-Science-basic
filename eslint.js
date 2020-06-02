@@ -83,3 +83,6 @@ Package.json
     "prettier-eslint-cli": "^4.7.1",
     "typescript": "^3.5.1"
   }
+
+// MD5js
+// new md5js ().update (pwd).digest ('hex');

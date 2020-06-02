@@ -485,3 +485,24 @@ submitButton: {
 
 
 ```
+
+## Meta tag in CSS
+
+<https://stackoverflow.com/questions/42515881/can-html-meta-tag-be-modified-in-css-file>
+
+```js
+// 监看screen size添加属性display : ‘node’
+media: {
+        borderTopRightRadius:           4,
+        borderBottomRightRadius:        4,
+        padding:                        theme.spacing (3),
+        color:                          theme.palette.white,
+        display:                        'flex',
+        flexDirection:                  'column',
+        justifyContent:                 'flex-end',
+        [theme.breakpoints.down ('md')]: {
+                display:                'none'
+        }
+},
+
+```

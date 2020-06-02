@@ -469,3 +469,19 @@ height:                 `calc(${theme.typography.subtitle2.lineHeight}*6)`,
 }
 
 ```
+
+## mouse hover change color
+
+```js
+// 鼠标移到target element 背景颜色变为 colorTeal[900]
+submitButton: {
+        marginTop:              theme.spacing (2),
+        width:                  '20%',
+        backgroundColor:        colorTeal[500],
+        '&:hover': {
+                backgroundColor:        colorTeal[900],
+        }
+}
+
+
+```

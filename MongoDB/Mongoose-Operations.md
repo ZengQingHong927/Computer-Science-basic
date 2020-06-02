@@ -610,3 +610,4 @@ var closeDBA     = async function ()
 <https://github.com/mongodb/node-mongodb-native/releases/tag/v3.2.1>
 <https://jira.mongodb.org/browse/SERVER-32946>
 <https://thecodebarbarian.com/slow-trains-in-mongodb-and-nodejs>
+<https://blog.csdn.net/newCheng/article/details/102943976>

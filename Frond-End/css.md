@@ -235,6 +235,10 @@ li::after { /* some style 2 */ }
 div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显示为整个银幕视窗
 
 ## Flex
+<https://mastery.games/post/the-difference-between-width-and-flex-basis/>
+flex items formula:
+content —> width —> flex-basis (limted by max|min-width)
+
 - container:
   display: flex; (弹性布局)
   flex-direction: row | row-reverse | column | column-reverse; （项目的排列方向）

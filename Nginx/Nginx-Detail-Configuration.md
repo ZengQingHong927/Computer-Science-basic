@@ -1,15 +1,18 @@
-# Nginx-Configuration  
-#### Path /etc/nginx/nginx.cnf
+# Nginx-Configuration
+
+## Path /etc/nginx/nginx.cnf
+
 添加用戶名和群組  
 groupadd nobody  
 useradd -g nodybody  
 配置文件結構：main，包含Events和Http，Http包含upsteam和多個server，Server包含多個location
 ***
-```
+
+```t
 #user  nobody; // 主機用戶名  
 worker_processes  1; // 工作進程數目根據CPU核心數，每個nginx進程耗費10~20M內存
 
-#error_log  /usr/local/webserver/nginx/logs/nginx_error.log crit; // 錯誤日誌位置和級別   
+#error_log  /usr/local/webserver/nginx/logs/nginx_error.log crit; // 錯誤日誌位置和級別
 #error_log  logs/error.log  notice;  
 #error_log  logs/error.log  info;  
 
@@ -29,20 +32,22 @@ events {
 }
 
 ### 設定http服務器，反向代理功能實現負載均衡
-``` 
+```
+
+```t
 http {
     include       mime.types; // 設定mime類型
     default_type  application/octet-stream;
 
      log_format  main  '$remote_addr - $remote_user [$time_local]‘ '$status $body_bytes_sent "$http_referer" ''"$http_user_agent" "$http_x_forwarded_for"';  
     log_format log404 '$status [$time_local] $remote_addr $host$request_uri $sent_http_location'; // 日誌格式設置  
-    $remote_addr与$http_x_forwarded_for用以記錄客戶端的ip地址； 
-    $remote_user：用來記錄客戶端的用戶名； 
-    $time_local： 用來記錄訪問的時間和時區； 
-    $request： 用來記錄請求的url和http協議； 
-    $status： 用來記錄請求狀態，成功是200； 
-    $body_bytes_sent ：紀錄發送給客戶端文件主體大小； 
-    $http_referer：用來記錄從那個頁面發送過來； 
+    $remote_addr与$http_x_forwarded_for用以記錄客戶端的ip地址；
+    $remote_user：用來記錄客戶端的用戶名；
+    $time_local： 用來記錄訪問的時間和時區；
+    $request： 用來記錄請求的url和http協議；
+    $status： 用來記錄請求狀態，成功是200；
+    $body_bytes_sent ：紀錄發送給客戶端文件主體大小；
+    $http_referer：用來記錄從那個頁面發送過來；
     $http_user_agent：記錄客戶端相關瀏覽器信息；  
 
 #access_log  logs/access.log  main; // 用了log_format指令設置日誌格式之後，需要access_log指令指定日誌文件存放路徑  
@@ -73,9 +78,10 @@ keepalive_timeout  120;
 #upstream bakend {
 #  server 127.0.0.1:8027;
 #  server 127.0.0.1:8028;
-#  server 127.0.0.1:8029; 
-#  hash $request_uri; 
-#} // nginx的upstream目前支持四種配置，1：輪詢（默認）每個請求按時間順序逐一分配到服務器後端，如果後端服務器掛掉，能自動剔除。2：weight指定輪詢權重，weight和訪問比率成正比，用於毫端服務器性能不均的情形。例如：upstream bakend { server 192.168.0.14 weight=10; server 192.168.0.15 weight=10; }。3：IP hash，每個請求按ip hash結果分配，如此每個訪客固定訪問同一個後端服務器，可以解决session的問題。例如 upstream bakend { ip_hash; server 192.168.0.14:88; server 192.168.0.15:80; }。3：fair（第三方 按後端服務器響應時間來分配，響應時間短的先分配。upstream backend { server server1; server server2; fair; }。4、url_hash（第三方）按訪問url hash結果來分配請求，是同一個url定向到同一個後端服務器，後端服務器為緩存時較有效。例：在upstream中加入hash語句，server語句中不能寫入weight等其它的參數，hash_method為使用的hash算法，upstream backend { server squid1:3128; server squid2:3128; hash $request_uri; hash_method crc32; }  
+#  server 127.0.0.1:8029;
+#  hash $request_uri;
+#}
+// nginx的upstream目前支持四種配置，1：輪詢（默認）每個請求按時間順序逐一分配到服務器後端，如果後端服務器掛掉，能自動剔除。2：weight指定輪詢權重，weight和訪問比率成正比，用於毫端服務器性能不均的情形。例如：upstream bakend { server 192.168.0.14 weight=10; server 192.168.0.15 weight=10; }。3：IP hash，每個請求按ip hash結果分配，如此每個訪客固定訪問同一個後端服務器，可以解决session的問題。例如 upstream bakend { ip_hash; server 192.168.0.14:88; server 192.168.0.15:80; }。3：fair（第三方 按後端服務器響應時間來分配，響應時間短的先分配。upstream backend { server server1; server server2; fair; }。4、url_hash（第三方）按訪問url hash結果來分配請求，是同一個url定向到同一個後端服務器，後端服務器為緩存時較有效。例：在upstream中加入hash語句，server語句中不能寫入weight等其它的參數，hash_method為使用的hash算法，upstream backend { server squid1:3128; server squid2:3128; hash $request_uri; hash_method crc32; }  
 #tips: upstream bakend{#定義負載均衡設備的ip和設備狀態}{ ip_hash; server 127.0.0.1:9090 down; server 127.0.0.1:8080 weight=2; server 127.0.0.1:6060; server 127.0.0.1:7070 backup; } 在需要使用負載均衡的server中增加proxy_pass http://bakend/; 每個設備狀態設置為: 1：down表示當前server不參與負載。2：weight越大，負載的權重越大。3：max_fails：允許請求失敗的次數默認為1，當超過最大次數時，返回proxy_next_upstream定義的錯誤。4：fail_timeout:max_fails次失敗後，暫停的時間。5：backup：其他所有非backup機器掛掉或忙碌的時候，qingqiubackup機器，因此這台機器壓力最輕。  
 
 #gzip  on; // 實時壓縮數據流  
@@ -97,7 +103,7 @@ server {
       proxy_set_header Host $host;  
       proxy_set_header X-Real-IP $remote_addr;  
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  
-      以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上 
+      以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上
     }  
     #root /var/www/html // 虛擬主機的網頁根目錄
     #修改反向代理地址

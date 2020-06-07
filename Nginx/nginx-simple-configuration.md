@@ -1,5 +1,7 @@
-# Nginx - configuration  
-https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/
+# Nginx - configuration
+
+<https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/>
+
 ```t
 http {
   # 设置 gzip, gzip_buffers,timeout
@@ -13,6 +15,7 @@ http {
   }
 }
 ```
+
 ```t
 server {
   listen 80;
@@ -23,7 +26,8 @@ server {
   }
 }
 ```
-```txt
+
+```t
 http {
     include       mime.types;
     default_type  application/octet-stream;
@@ -43,8 +47,8 @@ http {
     #gzip  on;
 
     upstream localhost {
-	    server 127.0.0.1:3000;
-	    server 127.0.0.1:4000;
+      server 127.0.0.1:3000;
+      server 127.0.0.1:4000;
     }
 
     server {
@@ -61,8 +65,8 @@ http {
             proxy_set_header Host  $http_host;
             proxy_set_header X-Nginx-Proxy true;
             proxy_set_header Connection "";
-      	    proxy_pass http://localhost;
-	    #root   html;
+            proxy_pass http://localhost;
+        #root   html;
             #index  index.html index.htm;
         }
 

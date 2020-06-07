@@ -1,5 +1,7 @@
 # Load Balance
+
 ## config
+
 sites-available/
 
 http {
@@ -16,7 +18,7 @@ http {
     }
     server {
         listen 80;
-        server_name http://backaaa;
+        server_name <http://backaaa;>
         location / {
             # 设置主机头和客户端真实地址，以便主机获取客户端真实ip
             proxy_set_header Host $host;

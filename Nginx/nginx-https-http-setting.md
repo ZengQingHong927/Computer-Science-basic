@@ -1,6 +1,9 @@
-# Nginx-Https/Http-setting  
-## Setting for HTTPS Server proxy  
-https://aotu.io/notes/2016/08/16/nginx-https/index.html  
+# Nginx-Https/Http-setting
+
+## Setting for HTTPS Server proxy
+
+<https://aotu.io/notes/2016/08/16/nginx-https/index.html>
+
 ```t
 server {
 
@@ -20,8 +23,8 @@ server {
   #
   # include snippets/snakeoil.conf;
 
-  # file path to access web page 
-  root /home/ubuntu/HTTPS-Dev/views; 
+  # file path to access web page
+  root /home/ubuntu/HTTPS-Dev/views;
 
   # Add index.php to the list if you are using PHP
   index index.html index.htm index.nginx-debian.html;
@@ -62,7 +65,9 @@ server {
   #}
 }
 ```
-### Setting for HTTP server proxy  
+
+## Setting for HTTP server proxy
+
 ```t
 server {
   listen 80;

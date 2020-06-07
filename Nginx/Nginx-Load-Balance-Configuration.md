@@ -4,6 +4,7 @@
 
 sites-available/
 
+```t
 http {
     ...
     upstream backaaa {
@@ -45,3 +46,4 @@ http {
         }
     }
 }
+```

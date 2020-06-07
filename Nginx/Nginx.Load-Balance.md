@@ -1,5 +1,6 @@
 # Nginx-Configuration  
 
+```t
 http {
 
   upstream localhhost {
@@ -24,3 +25,4 @@ http {
   }
 
 }
+```

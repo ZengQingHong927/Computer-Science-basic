@@ -8,6 +8,7 @@ https://material-ui.com/components/progress/
 
         const buttonClassname = clsx({
                 [classes.buttonSuccess]: success,
+                classes.avatar
         });
 
         React.useEffect(() => {

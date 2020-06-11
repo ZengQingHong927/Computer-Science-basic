@@ -76,6 +76,17 @@ console.log(`Timezone London: ${london.format('YYYY-MM-DDTHH:mm:ss.SSS')}`);
     let differenceDate = rd.diff(pd, 'days'); // years,months,days,weeks,hours,minutes,seconds
 ```
 
+## 時間計算（時區）
+
+```js
+// 獲取當地時區時間（分鐘）
+let     tzoff   = new Date ().getTimezoneOffset () // UTC+8:00, -480 mins
+
+// 數據庫取出的date，轉換為當地時間
+new Date (sporder.date.getTime () - tzoff*60000).toISOString ().replace ('T', ' ').slice (0, -5),
+
+```
+
 ## MongoDB
 
 時間輸入都會轉換成UTC-00，從數據庫讀取時間值，會自動轉換成當地時間

@@ -35,4 +35,13 @@ div{
 4. white-space:nowrap; // 强制不换行，都起作用
 5. white-space:nowrap; overflow:hidden; text-overflow:ellipsis; // 不换行，超出部分隐藏且以省略号形式出现（部分浏览器支持）
 
+.cardheader {
+    textOverflow:           'ellipsis',
+    // overFlow:               'hidden',
+    width:                  '150px',
+    whiteSpace:             'nowrap',
+    display:                'block',
+    overflowX:              'hidden'
+},
+
 ```

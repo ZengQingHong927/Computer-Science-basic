@@ -1,8 +1,13 @@
 # Vsftp
+
 ## 安装步骤
+
 安装
+
 - sudo apt-get install vsftpd -y
+
 起動
+
 - sudo systemctl start vsftpd
 - sudo systemctl enable vsftpd
 加入用戶
@@ -43,11 +48,15 @@ userlist_deny=NO
 ```
 
 添加用戶名單
+
 - sudo nano /etc/vsftpd.userlist (內容vsftp)
 - sudo systemctl restart vsftpd
-- ftp:// 主機ip, 瀏覽器測試vsftp服務器運行
+- ftp: // 主機ip, 瀏覽器測試vsftp服務器運行
+
 ## 使用SSL/TLS保護vsftp
+
 啟用SSL/TLS來加密通過FTP傳輸數據,創建證書使用openssl創建證書，執行完openssl會在/etc/cert/生成證書和/etc/cert/private生成key  
+
 - sudo mkdir /etc/cert  
 - sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/cert/vsftpd.pem -out /etc/cert/vsftpd.pem  
 - sudo nano /etc/vsftpd.conf  
@@ -67,13 +76,16 @@ ssl_ciphers=HIGH
 ```
 
 - sudo systemctl restart vsftpd
+
 ## 安裝Filezella使用SSL/TLS ftp加密服務
+
 - sudo apt-get install filezilla -y
 - 啟動filezella
 - file -> site manager -> new site, host, protocol:FTP, encrypt:require explicit FTP over TLS, Logon Type: ask for password, User/Password
 - connect
 
 vsftpd.conf新增設定項
+
 ```txt
 allow_writeable_chroot=YES
 pasv_max_port=11000
@@ -92,10 +104,12 @@ ssl_sslv3=NO
 require_ssl_reuse=NO
 ssl_ciphers=HIGH
 ```
+
 ## process failed solution
-https://askubuntu.com/questions/922056/vsftp-service-failed  
-https://blog.csdn.net/wangyaninglm/article/details/80400078  
-https://blog.csdn.net/sinat_27741463/article/details/86596947  
-https://www.linuxhilinux.com/2017/10/how-to-configure-or-setup-ftp-on-aws.html  
-https://blog.csdn.net/frank1q/article/details/46853981  
-https://linuxhint.com/setup_ftp_server_vsftpd_ubuntu/  
+
+<https://askubuntu.com/questions/922056/vsftp-service-failed>
+<https://blog.csdn.net/wangyaninglm/article/details/80400078>
+<https://blog.csdn.net/sinat_27741463/article/details/86596947>
+<https://www.linuxhilinux.com/2017/10/how-to-configure-or-setup-ftp-on-aws.html>
+<https://blog.csdn.net/frank1q/article/details/46853981>
+<https://linuxhint.com/setup_ftp_server_vsftpd_ubuntu/>

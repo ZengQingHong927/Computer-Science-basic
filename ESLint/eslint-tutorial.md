@@ -2,9 +2,10 @@
 
 * 用途  
 代碼設計規範，警示提醒代碼不符規範處  
-參考網址 http://eslint.cn/docs/user-guide/configuring
-https://www.itread01.com/ccqef.html
-https://www.jianshu.com/p/857a840cc9c6
+<http://eslint.cn/docs/user-guide/configuring>
+<https://www.itread01.com/ccqef.html>
+<https://www.jianshu.com/p/857a840cc9c6>
+<https://www.cnblogs.com/yayoi/p/12448429.html>
 
 ---
 

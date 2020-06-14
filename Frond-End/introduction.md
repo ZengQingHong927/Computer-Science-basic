@@ -1,6 +1,6 @@
 # 前端工程化
 
-參考網址：https://github.com/fouber/blog/issues/10
+參考網址：<https://github.com/fouber/blog/issues/10>
 
 ## 框架選型
 

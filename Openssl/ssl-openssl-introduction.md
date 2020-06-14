@@ -1,14 +1,17 @@
 # SSL/OpenSSL/SSH
-SSL 是一種Secure Sockets Layer協議，提供安全的網路傳輸。OpenSSL實現SSL協議的開源代碼，可以實現數據加解密，消息摘要，數字證書，數字簽名和隨機數字。Openssl官網https://www.openssl.org/source/，有三個工具，libssl，libcrypto和openssl。openssl是多功能命令行工具，libssl是實現ssl機制，libcrypto提供多種通用加密庫。  
+
+SSL 是一種Secure Sockets Layer協議，提供安全的網路傳輸。OpenSSL實現SSL協議的開源代碼，可以實現數據加解密，消息摘要，數字證書，數字簽名和隨機數字。Openssl官網<https://www.openssl.org/source/>，有三個工具，libssl，libcrypto和openssl。openssl是多功能命令行工具，libssl是實現ssl機制，libcrypto提供多種通用加密庫。  
 使用目的：保密性（防止數據被竊取），完整性（防止數據被竄改），身分驗證（確保信息來源可靠）
 
 Ubuntu and CentOS默認pki相關檔案路徑：/etc/pki  
-/etc/pki/CA/  
+/etc/pki/CA/
+
 * newcerts    存放CA簽署（頒發）數字證書（證書備份目錄）
 * private     存放CA備份私鑰
 * crl         吊銷的證書  
 
-/etc/pki/tls/  
+/etc/pki/tls/
+
 * cert.pem    軟連結certs/ca-bundle.crt  
 * certs/      該服務器上的證書存放目錄，可以防止自己的證書和內置證書  
 * ca-bundle.crt    内置信任的證書

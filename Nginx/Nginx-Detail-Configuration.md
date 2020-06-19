@@ -1,5 +1,7 @@
 # Nginx-Configuration
 
+<https://blog.csdn.net/tsummerb/article/details/79248015>
+
 ## Path /etc/nginx/nginx.cnf
 
 添加用戶名和群組  

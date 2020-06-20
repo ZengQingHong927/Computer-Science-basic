@@ -1,12 +1,18 @@
 # Openssl Installation
-## Linux  
-* 源碼連結 https://github.com/openssl/openssl.git
-* https://blog.csdn.net/qq_34924407/article/details/89427164
+
+## Linux
+
+* 源碼連結 <https://github.com/openssl/openssl.git>
+* <https://blog.csdn.net/qq_34924407/article/details/89427164>
 * TLS v1.3 support  (縮短時間和刪除不安全的加密算法)
+
 ### 前置作業toolkit gcc & make (build-essential,libtool)  
+
 * sudo apt-get update
 * sudo apt-get install gcc & make  
+
 ### 安裝步驟
+
 1.下載的壓縮包放在根目錄  
 2.解壓縮tar -zxf xxx.tar.gz  
 3.進入資料夾  
@@ -16,8 +22,9 @@
 7.編譯完執行make install  
 8.執行cd /usr/local
 9.查看版本openssl version
-## Mac OS
-### 安裝步驟
+
+## MacOS 安裝步驟
+
 * which openssl
 * openssl version
 * brew install openssl

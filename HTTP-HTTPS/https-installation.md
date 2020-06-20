@@ -115,6 +115,8 @@ http{
 
 ### 5.SSL for Free申請SSL證書
 
+#### 自己服務器做驗證
+
 1. SSL for Free 網址：<https://www.sslforfree.com/>
 2. Create Free SSL Certificate 輸入框 輸入申請的網域名稱  
 3. 選擇手動驗證 manual verification & 點擊Manually Verify Domain  
@@ -124,3 +126,17 @@ http{
 7. 點擊下一步驟兩個連結，測試是否成功取得.well-known/acme-challenge/file  
 8. 點擊Download SSL Certificate，下載SSL證書  
 9. 將SSL證書上傳至服務器，並引用certificate相關文件  
+
+#### 在雲服務器供應商做驗證（aws）
+
+1. Route 53 Management > Hosts zones
+2. Go to Records Set > Create Record Set
+3. type選擇CNAME，Name，ttl, value輸入SSLForFree要求的值
+4. 點擊create
+5. SSLForFree點擊驗證
+
+#### Web-Server
+
+將ca_bundle.crt和certificate.crt合併，編輯certificate.crt將分割線處理
+cat bundle.crt certificate.crt >> certificate.crt
+將兩個文件放置/etc/ssl下

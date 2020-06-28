@@ -1,8 +1,6 @@
 # Material-UI Theme
 
-
 ## Theme Provider
-
 
 ```js
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -41,4 +39,5 @@ const MuiThem = createMuiTheme ({
 ```
 
 ## useMediaQuery
+
 <https://material-ui.com/components/use-media-query/#simple-media-query>

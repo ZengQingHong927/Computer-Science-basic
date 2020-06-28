@@ -1,5 +1,8 @@
 # Mongoose CRUD Operations
 
+遠端連線mongodb
+<https://jasonwatmore.com/post/2020/02/05/connect-to-remote-mongodb-on-aws-ec2-simply-and-securely-via-ssh-tunnel>
+
 ## Mongoose建立連線
 
 - mongoose.connect(uri(s), [options], [options.useMongoClient], [callback])返回一個MongooseThenable對象，定義schema生成model操作數據
@@ -512,6 +515,7 @@ appends each element of [ 90, 92, 85 ] to the scores array and select last 3 ite
 ```
 
 ## Two phase commit
+
 <https://docs.mongodb.com/v3.4/tutorial/perform-two-phase-commits/>
 <http://learnmongodbthehardway.com/article/transactions/>
 <https://github.com/mongodb/node-mongodb-native/releases/tag/v3.2.1>

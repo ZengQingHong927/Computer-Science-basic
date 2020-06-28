@@ -1,2 +1,3 @@
 # Unsplash API
-https://unsplash.com/documentation#search-photos
+
+<https://unsplash.com/documentation#search-photos>

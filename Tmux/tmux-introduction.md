@@ -14,7 +14,7 @@ brew install tmux
 ## 使用方法  
 
 打開終端機，輸入tmux即可進入。  
-tmux list 列出所有開啟的會話  
+tmux list-sessions 列出所有開啟的會話  
 
 ### 常用指令
 
@@ -35,6 +35,9 @@ n 切換至下一個窗口
 
 tmux  
 tmux new -s session_name  
+
+## 連接指定會話
+
 tmux a -t session_name  
 tmux a -t 0  
 

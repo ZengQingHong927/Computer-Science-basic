@@ -7,6 +7,8 @@
 <https://javascript.info/fetch-crossorigin>
 node-fetch
 
+<https://www.csdn.net/gather_2f/MtTaQg1sODU2MzItYmxvZwO0O0OO0O0O.html>
+
 ```js
 headers = {
         'Content-Type': 'application/json'|'application/x-www-form-urlencoded; charset=UTF-8' | 'multipart/form-data' | 'application/octet-stream',

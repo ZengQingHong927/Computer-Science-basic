@@ -183,9 +183,14 @@ li::after { /* some style 2 */ }
 
 ## Height
 
+<https://segmentfault.com/a/1190000012707337>
+
 1. 内容区域
 100% vs 100vh
 div没内容物时，height: 100%, 高度显示为0, 而height: 100vh, 高度显示为整个银幕视窗
+
+2. 設置全屏元素100%，即使內容物不足撐高
+%按照w3c中的width和height属性，可以明確%設定寬高是根據父元素的寬高來的
 
 ## Flex
 

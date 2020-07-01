@@ -114,6 +114,12 @@ modelName.findById(_id)
 需要返回更新後的數據用findOneAndUpdate
 update只返回更新的結果，不返回數據
 
+## insert non-duplciate doc 避免插入重复数据
+
+<https://stackoverflow.com/questions/24122981/how-to-stop-insertion-of-duplicate-documents-in-a-mongodb-collection>
+
+
+
 ## 分頁查尋
 
 找出全部跳過10個返回4筆數據

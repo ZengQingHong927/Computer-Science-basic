@@ -3,7 +3,7 @@
 ```js
 import React from 'react';
 import { Fragment } from 'react';
-import { createPortal } from 'react';
+import { createPortal } from 'react-dom';
 import { Helmet } from 'react-helmet';
 import Typography from '@material-ui/Typography';
 

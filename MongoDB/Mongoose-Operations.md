@@ -621,3 +621,6 @@ var closeDBA     = async function ()
 <https://jira.mongodb.org/browse/SERVER-32946>
 <https://thecodebarbarian.com/slow-trains-in-mongodb-and-nodejs>
 <https://blog.csdn.net/newCheng/article/details/102943976>
+
+遠程連線EC2mongodb
+<https://jasonwatmore.com/post/2020/02/05/connect-to-remote-mongodb-on-aws-ec2-simply-and-securely-via-ssh-tunnel>

@@ -1,8 +1,9 @@
 # Replica Set Tutorial
 
-- mongodb集群所有實例需要啟動，mongodb副本集才能成功啟動  
+- mongodb集群所有實例需要啟動，mongodb副本集才能成功啟動
 <https://www.tutorialkart.com/mongodb/setup-mongodb-replica-set/>
 <https://gist.github.com/davisford/bb37079900888c44d2bbcb2c52a5d6e8>
+<https://www.jianshu.com/p/beebe1f50fc3>
 
 ## 安裝步驟
 

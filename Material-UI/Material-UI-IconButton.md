@@ -8,7 +8,7 @@
 
 import { Link } from 'react-router-dom'
 
-// <ModIconButton tooltip="进入" icon="keyboard_arrow_right" component={Link} to={`/pathname`} />
+// <ModIconButton tooltip="进入" icon="delete_forever" component={Link} to={`/pathname`} />
 
 import      Tooltip                                     from '@material-ui/core/Tooltip';
 

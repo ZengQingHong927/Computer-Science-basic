@@ -4,7 +4,7 @@
 
 ## Example
 
-處理promise併發即使，某些promise發生error，其他promise仍然成功執行完畢。
+處理promise併發，即使某些promise發生error，其他promise仍然成功執行完畢。
 
 ```js
 function apiRequest(url) {

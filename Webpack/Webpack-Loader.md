@@ -43,6 +43,7 @@ webpack工作流程：1. 載入webpack核心模塊，創建Compiler對象 2. Com
 ```js
 {
     test: /.s[ac]ss$/,
+    include: [path.resolve (__dirname, '/src/css')],
     exclude: /node_modules/,
     use: [
         { loader: 'style-loader' },

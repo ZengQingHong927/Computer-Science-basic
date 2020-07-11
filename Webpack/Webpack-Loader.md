@@ -1,5 +1,7 @@
 # Webpack Loader
 
+<https://developerhandbook.com/webpack/how-to-configure-scss-modules-for-webpack/>
+
 ## 打包核心工作過程
 
 前端項目的資源散落在各個文件，webpack通過打包將所有資源文件集中在一起。透過loader加載資源文件，透過Plugin實現各種自動化構建任務，例如：壓縮，發布。

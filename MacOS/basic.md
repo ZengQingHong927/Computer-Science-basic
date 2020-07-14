@@ -27,3 +27,4 @@ export NVM_DIR="$HOME/.nvm"
 ### 添加ll command in .bash_rpofile
 
 alias ll='ls -lGaf'
+alias sourcetree='open -a SourceTree'

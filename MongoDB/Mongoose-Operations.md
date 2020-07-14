@@ -5,7 +5,11 @@
 
 ## Mongoose建立連線
 
-- mongoose.connect(uri(s), [options], [options.useMongoClient], [callback])返回一個MongooseThenable對象，定義schema生成model操作數據
+- mongoose.connect(uri(s),
+  [options],
+  [options.useMongoClient],
+  [callback])返回一個MongooseThenable對象，定義schema生成model操作數據
+
 example:
 
 ```js
@@ -20,7 +24,16 @@ example:
   });
 ```
 
-- mongoose.createConnection([uri], [options], [options.config], [options.config.autoIndex], [options.useMongoClient])返回一個Connection對象。Connection對象中包含model，collection，dropDatabase等操作數據庫的方法，也包含connected，disconnected，error等事件觸發方法，但是没有Schema
+- mongoose.createConnection(
+  [uri],
+  [options],
+  [options.config],
+  [options.config.autoIndex],
+  [options.useMongoClient]
+)
+返回一個Connection對象。
+Connection對象中包含model，collection，dropDatabase等操作數據庫的方法，也包含connected，disconnected，error等事件觸發方法，但是没有Schema
+
 example:
 
 ```js
@@ -70,8 +83,14 @@ example:
 ## 加入時間屬性timestampes
 
 ```js
-new mongoose.Schema({},{ timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt', deletedAt: 'deletedAt'} });
-or timestamps: true
+new mongoose.Schema({},{
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  }
+});
+// or timestamps: true
 ```
 
 ## 關聯表的索引建立
@@ -118,8 +137,6 @@ update只返回更新的結果，不返回數據
 
 <https://stackoverflow.com/questions/24122981/how-to-stop-insertion-of-duplicate-documents-in-a-mongodb-collection>
 
-
-
 ## 分頁查尋
 
 找出全部跳過10個返回4筆數據
@@ -139,24 +156,35 @@ modelName.find().skip(10).limit(4)
         let sort = {};
 
         if (condition.exSellPrice) {
-            condition.exSellPrice = { $gte: Number(condition.exSellPrice.split('-')[0]), $lte: Number(condition.exSellPrice.split('-')[1]) };
+          condition.exSellPrice = {
+            $gte: Number(condition.exSellPrice.split('-')[0]),
+            $lte: Number(condition.exSellPrice.split('-')[1])
+          };
         }
 
         if (condition.exRentalPrice) {
-            condition.exRentalPrice = { $gte: Number(condition.exRentalPrice.split('-')[0]), $lte: Number(condition.exRentalPrice.split('-')[1]) };
+          condition.exRentalPrice = {
+            $gte: Number(condition.exRentalPrice.split('-')[0]),
+            $lte: Number(condition.exRentalPrice.split('-')[1])
+          };
         }
 
         if (condition.exYear) {
-            condition.exYear = { $gte: Number(condition.exYear.split('-')[0]), $lte: Number(condition.exYear.split('-')[1]) };
+          condition.exYear = {
+            $gte: Number(condition.exYear.split('-')[0]),
+            $lte: Number(condition.exYear.split('-')[1])
+          };
         }
 
         switch (search.exTradeType) {
             case 'lease': {
-                sort.exRentalPrice = search.sortPrice ? Number(search.sortPrice) : -1;
+                sort.exRentalPrice =
+                search.sortPrice ? Number(search.sortPrice) : -1;
             }
                 break;
             case 'sell': {
-                sort.exSellPrice = search.sortPrice ? Number(search.sortPrice) : -1;
+                sort.exSellPrice =
+                search.sortPrice ? Number(search.sortPrice) : -1;
             }
                 break;
             default: {
@@ -165,7 +193,8 @@ modelName.find().skip(10).limit(4)
                 break;
         }
 
-        sort.exYear = search.sortYear ? Number(search.sortYear) : -1;
+        sort.exYear =
+        search.sortYear ? Number(search.sortYear) : -1;
 
         const instances = await Excar.aggregate([
             { '$match': condition },
@@ -179,7 +208,9 @@ modelName.find().skip(10).limit(4)
 ## 時間區間搜索
 
 ```js
-{ $match: { refereeCode: user.profile.refId, createdAt: { $gt: firstDay, $lt: lastDay } } }, // Date object
+{ $match: {
+    refereeCode: user.profile.refId,
+    createdAt: { $gt: firstDay, $lt: lastDay } } }, // Date object
 ```
 
 ## 排序
@@ -213,7 +244,13 @@ db.collection.find(query);
 
 ```js
 modelName.find().count()
-modelName.aggregate({$group: {_id: 'fieldName', sumScroe:{$sum:'$score'}}}) //{$avg:'$score'}
+modelName.aggregate({
+  $group: {
+    _id: 'fieldName',
+    sumScroe:{$sum:'$score'
+  }
+}})
+// or {$avg:'$score'}
 ```
 
 ## 字段类型为数组（添加）
@@ -238,29 +275,38 @@ PersonModel.update(
 
 ## 聯合查詢
 
-URL <https://stackoverflow.com/questions/36019713/mongodb-nested-lookup-with-3-levels>
-aggregate operation
-$project 增加，刪除，重命名字段
-$match 條件匹配
-$limit 限制結果的數量
-$skip 跳過文檔的數量
-$sort 條件排序
-$group 條件組合結果
-$lookup 用以引入其他集合的數據
+<https://stackoverflow.com/questions/36019713/mongodb-nested-lookup-with-3-levels>
+
+- aggregate operation
+- $project 增加，刪除，重命名字段
+- $match 條件匹配
+- $limit 限制結果的數量
+- $skip 跳過文檔的數量
+- $sort 條件排序
+- $group 條件組合結果
+- $lookup 用以引入其他集合的數據
 
 ```js
 modelName.aggregate([
   {
-    { '$match': { 'refereeCode': refId, '$or':[ { 'level': 'basic' }, { 'level': 'register' } ], 'createdAt': { '$gt': date } } }, // date必須為Date instance
-    {'$group': { '_id': '$type', 'total': {'$sum': '$amount'}, 'count': { '$sum': 1 }}},
+    { '$match': {
+        'refereeCode': refId,
+        '$or':[ { 'level': 'basic' }, { 'level': 'register' } ],
+        'createdAt': { '$gt': date }
+      }
+    }, // date必須為Date instance
+    {'$group': {
+      '_id': '$type',
+      'total': { '$sum': '$amount'},
+      'count': { '$sum': 1 }
+    }},
     { '$count': 'total' },
     { '$lookup':{
       'from': 'modelName',
       'localField': 'fieldName',
       'foreignField': 'fieldName',
       'as': 'field to present'
-    }
-  },
+    }},
     {'$lookup':{
       'from': 'users',
       'localField': 'user',
@@ -275,9 +321,7 @@ modelName.aggregate([
             'as': 'memberinfo'
     }},
     {'$unwind': '$memberinfo'},
-  ,{
-    '$project': { 'fieldName.fieldName': 1, 'createdAt':1,'_id':0 },
-  }
+    { '$project': { 'fieldName.fieldName': 1, 'createdAt':1,'_id':0 }}
 ])
 ```
 
@@ -290,36 +334,52 @@ const User = mongoose.model('User')
 
 User.aggregate([
   {
-    // { $match: { amount: {$lte: 300}, status: req.query.status } },
-    // { $group : { _id: '$status', total: { $sum: '$amount' }}}
-    $match: { _id: ObjectId('560c24b853b558856ef193a3'), status: req.query.status }
+    { $match: {
+        amount: {$lte: 300},
+        status: req.query.status
+      }
+    },
+    { $group : {
+        _id: '$status',
+        total: { $sum: '$amount' }}}
+    $match: {
+      _id: ObjectId('560c24b853b558856ef193a3'),
+      status: req.query.status
+    }
   }
 ])
 ```
 
 ```js
 // date comparison
-const date = moment(req.query.startDate).format();
-const instance = await CommissionRecord.find({ startDate: { $gte: date } });
+const date = moment(req.query.startDate)
+  .format();
+const instance = await CommissionRecord
+  .find({ startDate: { $gte: date } });
 ```
 
 ```js
 // format date and date comparison
-instance.endDate = moment(instance.endDate).valueOf() + 365 * 24 * 60 * 60 * 1000;
-console.log(moment(Date.now()+5*365*24*60*60*1000).isBetween(instance.startDate, instance.endDate));
+instance.endDate = moment(instance.endDate)
+  .valueOf() + 365 * 24 * 60 * 60 * 1000;
+console.log(moment(Date.now()+5*365*24*60*60*1000)
+  .isBetween(instance.startDate, instance.endDate));
 ```
 
 ## 時間偏移
 
 ```js
-const condition = moment().substract(spacing, 'months').format('YYYY-MM-DDTHH:mm:ss.SSS');
+const condition = moment()
+  .substract(spacing, 'months')
+  .format('YYYY-MM-DDTHH:mm:ss.SSS');
 const date = new Date(condition)
 ```
 
 ## 查找更新返回新數據
 
 ```js
-const instance = await Exfavorite.findOneAndUpdate(filter, update, {new: true});
+const instance = await Exfavorite
+  .findOneAndUpdate(filter, update, {new: true});
 ```
 
 ## Nested Populate
@@ -347,8 +407,8 @@ const instance = await Exfavorite.findById(user.exFavorites._id)
 
 ## Transaction
 
-utl <https://stackoverflow.com/questions/51228059/mongo-db-4-0-transactions-with-mongoose-nodejs-express>
-url <https://medium.com/@radheyg11/mongodb-transaction-with-node-js-b81618bebae8>
+<https://stackoverflow.com/questions/51228059/mongo-db-4-0-transactions-with-mongoose-nodejs-express>
+<https://medium.com/@radheyg11/mongodb-transaction-with-node-js-b81618bebae8>
 
 ## 更新Embedded Document field
 
@@ -431,7 +491,11 @@ db.collection.find({
 
 db.stores.update(
     { },
-    { $pull: { fruits: { $in: [ "apples", "oranges" ] }, vegetables: "carrots" } },
+    { $pull: {
+        fruits: {
+          $in: [ "apples", "oranges" ]
+        },
+        vegetables: "carrots" } },
     { multi: true }
 )
 
@@ -451,7 +515,7 @@ db.stores.update(
 ```js
 db.collection.findOneAndUpdate(
    <filter>,
-   <update document or aggregation pipeline>, // Changed in MongoDB 4.2
+   <update document or aggregation pipeline>,
    {
      projection: <document>,
      sort: <document>,
@@ -464,8 +528,16 @@ db.collection.findOneAndUpdate(
 )
 
 filter: { "name" : "A.B. Abracus" },
-update: { $set: { "name" : "A.B. Abracus", "assignment" : 5}, $inc : { "points" : 5 } },
-options: { sort: { "points" : 1 }, upsert:true, returnNewDocument : true }
+update: {
+  $set: {
+    "name" : "A.B. Abracus", "assignment" : 5
+  },
+  $inc : { "points" : 5 } },
+options: {
+  sort: { "points" : 1 },
+  upsert: true,
+  returnNewDocument : true
+}
 
 filter: The same query selector as in find() operation
 
@@ -516,7 +588,17 @@ appends each element of [ 90, 92, 85 ] to the scores array and select last 3 ite
 
 ```js
   var query  = {name: 'klimt'}
-  var update = {$set: { name: 'jason bourne'}, $push: { scores: { $each: [ 90, 92, 85 ], $slice: -3 } } };
+  var update = {
+    $set: {
+      name: 'jason bourne'
+    },
+    $push: {
+      scores: {
+        $each: [ 90, 92, 85 ],
+        $slice: -3
+      }
+    }
+  };
   Model.findOneAndUpdate(query, update, options, callback)
 ```
 
@@ -568,7 +650,8 @@ var connectDB   = async function () {
 
         if (config.mongo_url2 && config.mongo_dbname2) {
                 console.log (`- url2 configured`);
-                let     client2     = await mongodb.MongoClient.connect (config.mongo_url2, {
+                let     client2     =
+                await mongodb.MongoClient.connect (config.mongo_url2, {
                         useNewUrlParser:        true,
                         useUnifiedTopology:     true,
                         poolSize:               50

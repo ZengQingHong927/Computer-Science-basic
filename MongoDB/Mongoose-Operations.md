@@ -602,6 +602,30 @@ appends each element of [ 90, 92, 85 ] to the scores array and select last 3 ite
   Model.findOneAndUpdate(query, update, options, callback)
 ```
 
+## 查询并更新 findOneAndUpdate
+
+判断mgr_accounts字段是否存在，存在并且数组对象的account_id不重复，符合条件的doc会被找出来，并在mgr_accounts字段写入更新
+
+```js
+let     query   = {
+        dpid,
+        $or:    [{mgr_accounts: {$elemMatch: {account_id: {$ne: member_id}}}}, {mgr_accounts: {$exists: false}}]
+};
+
+if (typeof account_id !== 'undefined') {
+        query.$or.push ({account_id});
+        query.$or.push ({mgr_accounts: {$elemMatch: {account_id}}});
+}
+
+let     update          = {
+        $push:  {mgr_accounts: {account_id: member_id, account_name: member_name, account_email: member_email, biz_priviledges: []}}
+};
+
+findOneAndUpdate (query, update)
+
+```
+
+
 ## Two phase commit
 
 <https://docs.mongodb.com/v3.4/tutorial/perform-two-phase-commits/>

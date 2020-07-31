@@ -602,7 +602,7 @@ appends each element of [ 90, 92, 85 ] to the scores array and select last 3 ite
   Model.findOneAndUpdate(query, update, options, callback)
 ```
 
-## 查询并更新 findOneAndUpdate
+## 查詢並更新 findOneAndUpdate (寫入數組對象)
 
 判断mgr_accounts字段是否存在，存在并且数组对象的account_id不重复，符合条件的doc会被找出来，并在mgr_accounts字段写入更新
 
@@ -625,6 +625,27 @@ findOneAndUpdate (query, update)
 
 ```
 
+## 查詢並更新 findOneAndUpdate (刪除數組對象)
+
+判断mgr_accounts字段是否存在，存在并且数组对象的account_id存在，符合条件的doc会被找出来，并在mgr_accounts字段写入更新
+
+```js
+let     query           = {
+        spid,
+        $or:    [{mgr_accounts: {$elemMatch: {account_id: {$eq: member_id}}}}]
+};
+
+if (typeof account_id !== 'undefined') {
+        query.$or.push ({account_id});
+        query.$or.push ({mgr_accounts: {$elemMatch: {account_id}}})
+}
+
+let     update          = {
+        $pull:  {mgr_accounts: {account_id: member_id}}
+};
+
+findOneAndUpdate (query, update)
+```
 
 ## Two phase commit
 

@@ -1,8 +1,11 @@
 # Preference Extensions
 
 Material Icons
+
 Auto Rename Tag
+
 Prettier Format
+
 Bracket Pair
 REST Client
 CSS Peek

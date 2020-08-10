@@ -43,3 +43,4 @@
 3. git checkout stella-v1.6 切换分支
 4. git describe —tags 查看当前所在位置
 5. git fetch apollo —tags -f 强制更新为远端版本
+6. for i in {24724..24785}; do git tag -d v1.6.$i; done 在命令行輸入指令循環刪除連續tag

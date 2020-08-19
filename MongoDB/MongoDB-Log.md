@@ -15,7 +15,10 @@ mongod -logpath=/data/log/mongodb/serverlog.log -logappend
 
 journal日誌功能則是 MongoDB 裡面非常重要的一個功能，它保證了數據庫服務器在意外斷電、自然災害等情況下數據的完整性。它通過預寫式的redo日誌為MongoDB增加了額外的可靠性保障。開啟該功能時，
 MongoDB會在進行寫入時建立一條Journal日誌，其中包含了此次寫入操作具體更改的磁盤地址和字節。因此一旦服務器停止運作，可在啟動時對日誌進行重放，從而重新執行那些停機前沒能夠刷新到磁盤的寫入操作。
-MongoDB配置WiredTiger引擎使用内存緩衝區來保存journal紀錄，WiredTiger根據以下間隔或條件將緩衝的日誌紀錄同步到磁盤
+MongoDB配置WiredTiger引擎使用内存緩衝區來保存journal紀錄，WiredTiger根據以下間隔或條件將緩衝的日誌紀錄同步到磁盤。
+1. 從MongoDB 3.2版本開始每隔50ms將緩衝的journal數據同步到磁盤
+2. 如果寫入操作設置了j:true，則WiredTiger強制同步日誌文件
+3. 由於MongoDB使用的journal文件大小限制為100MB，因此，WiredTiger大約每100MB數據創建一個新的日誌文件。當WiredTiger創建新的journal文件時，WiredTiger會同步以前journal文件
 
 ## oplog主從日誌
 

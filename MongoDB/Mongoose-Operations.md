@@ -52,19 +52,19 @@ example:
   });
 ```
 
-- mongoose.connection是mongoose模塊的默認引用，返回一個Connetion對象。因爲connect()方法并不能監聽數據庫連接情况，一般情况與connet()方法搭配使用
+- mongoose.connection是mongoose模塊的默認引用，返回一個Connetion對象。因爲connect()方法並不能監聽數據庫連接情况，一般情况與connet()方法搭配使用
 example:
 
 ```js
   mongoose.connect(URL);
 
   var db = mongoose.connection;//获取connection实例
-  //使用Connetion监听连接状态
+  //使用Connetion監聽連結狀態
   db.on('connected',function(err){
     if(err){
-        console.log('连接数据库失败：'+err);
+        console.log('連接數據庫失敗：'+err);
     }else{
-        console.log('连接数据库成功！');
+        console.log('連接數據庫成功！');
     }
   });
 
@@ -72,7 +72,7 @@ example:
     name:String,
     date:Date
   });
-  var User = mongoose.model('usert',userSchema);//默认表名：userts
+  var User = mongoose.model('usert',userSchema);//默認表名：userts
 
   var userm = new User({
     name:'yanghao',
@@ -119,9 +119,9 @@ schemaName.methods.encryptPassword = async function () {
 ## 時間資料形態
 
 MongoDB 數據類型為時間對象 Date Object，存儲時，將時間字符串轉換成時間對象
-直接用unix time赋值，取值时为GMT+00:00时间格式，moment().valueOf()，转换回unix time
+直接用unix time附值，取值時為GMT+00:00時間格式，moment().valueOf()，轉換回unix time
 
-## 关联查询
+## 關聯查詢
 
 ```js
 modelName.findById(_id)
@@ -131,9 +131,9 @@ modelName.findById(_id)
 ## update and findOneAndUpdate
 
 需要返回更新後的數據用findOneAndUpdate
-update只返回更新的結果，不返回數據
+update只返回更新的結果（OK：1 or 0），不返回document
 
-## insert non-duplciate doc 避免插入重复数据
+## insert non-duplciate doc 避免寫入重複數據
 
 <https://stackoverflow.com/questions/24122981/how-to-stop-insertion-of-duplicate-documents-in-a-mongodb-collection>
 
@@ -592,7 +592,7 @@ Account.update (
   true)
 ```
 
-## 聚合查询增加临时字段
+## 聚合查詢增加臨時字段
 
 ```js
 YMAccount.aggregateP ([
@@ -621,7 +621,7 @@ findManyByDateRangeAndName (name, start, end, options, ...rest) {
 
 ```
 
-## 查询并更新 findOneAndUpdate
+## 查詢並更新 findOneAndUpdate
 
 appends each element of [ 90, 92, 85 ] to the scores array and select last 3 items in scores array
 

@@ -627,7 +627,7 @@ findOneAndUpdate (query, update)
 
 ## 查詢並更新 findOneAndUpdate (刪除數組對象)
 
-判断mgr_accounts字段是否存在，存在并且数组对象的account_id存在，符合条件的doc会被找出来，并在mgr_accounts字段写入更新
+判斷mgr_accounts字段是否存在，存在並且數組對象的account_id存在，符合條件的doc會被找出来，並在mgr_accounts字段寫入更新
 
 ```js
 let     query           = {
@@ -645,6 +645,20 @@ let     update          = {
 };
 
 findOneAndUpdate (query, update)
+```
+
+## 隨機查詢document
+<https://stackoverflow.com/questions/52651723/mongo-find-a-random-document>
+以下例子：
+    找出匹配type=1000的documents，在多個documents中返回隨機1個樣本
+
+```js
+Model.aggregate([
+  {$match: {type: 1000}},
+  {$sample: {size: 1}}
+])
+
+
 ```
 
 ## Two phase commit

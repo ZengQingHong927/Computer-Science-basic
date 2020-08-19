@@ -628,6 +628,9 @@ findOneAndUpdate (query, update)
 ## 查詢並更新 findOneAndUpdate (刪除數組對象)
 
 判斷mgr_accounts字段是否存在，存在並且數組對象的account_id存在，符合條件的doc會被找出来，並在mgr_accounts字段寫入更新
+$setOnInsert搭配options：upsert: true, 實現若沒找到document，則寫入新document，寫入的字段包含$set，$push，$pull以及$setOnInsert的操作；
+若query有document則只做除了$setOnInsert的其他操作
+
 
 ```js
 let     query           = {
@@ -641,7 +644,8 @@ if (typeof account_id !== 'undefined') {
 }
 
 let     update          = {
-        $pull:  {mgr_accounts: {account_id: member_id}}
+        $pull:  {mgr_accounts: {account_id: member_id}},
+        $setOnInsert: { defaultQty: 100 }
 };
 
 findOneAndUpdate (query, update)

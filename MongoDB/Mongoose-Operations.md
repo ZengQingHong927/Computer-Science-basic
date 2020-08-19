@@ -240,7 +240,7 @@ db.collection.find(query);
 
 ```
 
-## 聚合查詢
+## 聚合查詢（範例）
 
 ```js
 modelName.find().count()
@@ -251,9 +251,48 @@ modelName.aggregate({
   }
 }})
 // or {$avg:'$score'}
+
+let matchObj = {
+  date:           {$gte: start, $lt: end},
+};
+let amount_key     = '';
+if (amount !== 0) {
+  amount_key      = `_${amount}`;
+}
+
+```js
+let     groupObj        = {
+  npay_att_amount:        {$sum: `$npay_att${amount_key}_amount`},
+  npay_atts:              {$sum: `$npay_att${amount_key}s`},
+  npay_orig_amount:       {$sum: `$npay_orig${amount_key}_amount`},
+  npay_origs:             {$sum: `$npay_orig${amount_key}s`},
+  nmatch_att_amount:      {$sum: `$nmatch_att${amount_key}_amount`},
+  nmatch_atts:            {$sum: `$nmatch_att${amount_key}s`},
+  nmatch_amount:          {$sum: `$nmatch${amount_key}_amount`},
+  nmatchs:                {$sum: `$nmatch${amount_key}s`},
+};
+let     projectObj      = {
+  _id:                    0,
+  npay_att_amount:        1,
+  npay_atts:              1,
+  npay_orig_amount:       1,
+  npay_origs:             1,
+  nmatch_att_amount:      1,
+  nmatch_atts:            1,
+  nmatch_amount:          1,
+  nmatchs:                1,
+};
+let     sortObj         = {};
+
+model.aggregate ([
+                        {$match: matchObj},
+                        {$group: groupObj},
+                        {$project: projectObj},
+                        {$sort: sortObj}
+]);
 ```
 
-## 字段类型为数组（添加）
+## 字段類型為數组（添加）
 
 ```js
 PersonModel.update(
@@ -263,7 +302,7 @@ PersonModel.update(
 );
 ```
 
-## 字段类型为数组（刪除）
+## 字段類型為數组（刪除）
 
 ```js
 PersonModel.update(

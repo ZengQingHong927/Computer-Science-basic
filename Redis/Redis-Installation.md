@@ -43,7 +43,7 @@ slaveof
 修改遠程連線IP
 bind
 開啟驗證
-requirepass
+requirepass `密碼`
 管理redis服務的應用
 supervised
 

@@ -5,6 +5,18 @@
 <https://gist.github.com/davisford/bb37079900888c44d2bbcb2c52a5d6e8>
 <https://www.jianshu.com/p/beebe1f50fc3>
 
+## Replicat Set 設置步驟
+
+1. 創建三個mongod 配置文件
+2. 創建三個dbpath資料夾，systemlog path（系統日誌文件）
+3. 分別啟動三個mongod process，sudo mongod --config /etc/mongod.rs0.conf, ...
+4. 連線mongo sudo mongod --host 127.0.0.1 --port 27021
+5. 初始化副本集，rs.initiate()
+6. 加入節點 rs.add("127.0.0.1:27022"), rs.add("127.0.0.1:27023")
+7. 查看副本集狀態 rs.status()
+8. secondary 節點要能讀數據，進入secondary節點，mongod --host 127.0.0.1 --port 27022
+9. 選擇數據庫名 use thrilled, 執行設置讀取權限 db.getMongo().setSlaveOk()
+
 ## 安裝步驟
 
 1. 在所有電腦主機安裝mongodb
@@ -59,7 +71,7 @@ rs.status()
 ```txt
 # Where and how to store data.
 storage:
-  dbPath: /var/lib/mongodb-rs-a
+  dbPath: /var/lib/rs0/data/db
   journal:
     enabled: true
 #  engine:
@@ -70,7 +82,7 @@ storage:
 systemLog:
   destination: file
   logAppend: true
-  path: /var/log/mongodb/mongod.log
+  path: /var/log/rs0/mongod.log
 
 # network interfaces
 net:
@@ -114,3 +126,5 @@ db.collection.find()
 ### connect to primary database to read data
 
 rs0:SECONDARY> db.getMongo().setReadPref('secondaryPreferred')
+or
+rs0:SECONDARY> db.getMongo().setSlaveOk()

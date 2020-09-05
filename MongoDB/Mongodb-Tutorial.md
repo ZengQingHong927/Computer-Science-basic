@@ -188,6 +188,12 @@ mongorestore -h 127.0.0.1 -d dbname backup-path
 - Example(整個遠端數據庫備份, user/pwd 必須是具有讀寫數據庫的權限)
 mongoexport -h ds123834.mlab.com:23834 -d fusion-dev -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
 mongoimport -d fusion-dev --file filename --headerline --type json/csv -f field
+
+ubuntu
 mongodump -h 127.0.0.1:27020 -d dev -u Nick -p abc123 -o /home/vermeer/Programming/koaDB
+
+macOs
+mongodump -h 127.0.0.1:27020 -d dev -u Nick -p abc123 -o /Users/nicktseng/Program/koaDB
+
 mongodump -h ds223343.mlab.com:23343 -d lendingcar-dev-2 -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
 mongorestore --host 127.0.0.1 --port 27020 -d blog /Home/Vermeer/Programming/koaDB/blog

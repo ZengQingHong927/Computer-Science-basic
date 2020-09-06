@@ -31,8 +31,11 @@ git push origin new_feature
 - 更新
 git pull
 - 還原至遠端倉庫的版本
+git commit --amend
+- 修改commit 備註
 git fetch
-git reset --hard origin/master
+git reset --hard sha (修改的部分完全刪除)
+git reset --soft sha (修改的部分保留在工作區)
 - 設定配置 name and email
 git config --global user.name "username"
 git config --global user.email username@example.com
@@ -40,6 +43,13 @@ git config --global user.email username@example.com
 git config --system --list
 git config --global --list
 git config --local --list
+
+- git checkout 檔名 or . (可以恢復檔案)
+- rebase後反悔
+git reset ORIG_HEAD --hard (返回上一個commit狀態，不管是rebase，merge動作)
+
+- 刪除分支（D強行刪除）
+git branch -D cat
 
 ## 分支回滚到上一版本
 
@@ -90,3 +100,15 @@ git fetch remote_repo remote_branch_name:local_branch_name：这将这将更新�
 *.log
 *.tmp
 node_modules/
+
+## gitk or Sourcetree
+
+1. 點擊commit的點，右鍵選擇reverse commit，會生成一個commit點，這個reverse commit的變更動作就是取消上一個commit的變更
+
+2. git reset HEAD^ --soft 回到前一個commit
+
+3. git reset HEAD～3 --soft 回到前三個commit
+
+4. git reset 165b8d5 --hard 往前跳至165b8d5 commit點（git reflog查看刪掉的commit點的sha）
+
+5. 假若merge 分支後，想reverse回merge前的commit，可以在gui介面想回到的commit點右鍵reset master to this commit

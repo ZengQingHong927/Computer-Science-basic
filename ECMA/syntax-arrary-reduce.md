@@ -1,7 +1,10 @@
 # Syntax
+
 ## Array reducer
+
 reducer 第一個參數爲fucntion，第二個爲起始值;function第一個參數爲累加變數，第二個參數爲數組迭代的數據。
 此函數在計算構成一個新對象
+
 ```js
 const exercises = [
         {

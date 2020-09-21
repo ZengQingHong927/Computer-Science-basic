@@ -1,8 +1,10 @@
 # nodejs commander
+
 - chalk (命令行指令颜色配置)
 - commander (nodejs命令行工具)
 
 ## example
+
 ```js
 const program = require('commander');
 function main () {
@@ -26,8 +28,8 @@ if (program.pizzaType) console.log(`- ${program.pizzaType}`);
 
 }
 
-
 ```
+
 ```js
 
 var program = require ('commander');

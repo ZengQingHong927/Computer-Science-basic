@@ -138,5 +138,14 @@ http{
 #### Web-Server
 
 將ca_bundle.crt和certificate.crt合併，編輯certificate.crt將分割線處理
-cat bundle.crt certificate.crt >> certificate.crt
+cat bundle.crt certificate.crt > certificate.crt
 將兩個文件放置/etc/ssl下
+
+```txt
+-----BEGIN CERTIFICATE-----
+certificate-1-text
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+certificate-2-text
+-----END CERTIFICATE-----
+```

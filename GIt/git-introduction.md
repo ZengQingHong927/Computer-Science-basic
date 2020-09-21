@@ -51,6 +51,9 @@ git reset ORIG_HEAD --hard (返回上一個commit狀態，不管是rebase，merg
 - 刪除分支（D強行刪除）
 git branch -D cat
 
+- 恢復分支（從新在commit上貼上標籤new_cat）
+git branch new_cat commitID
+
 ## 分支回滚到上一版本
 
 - 切換分支

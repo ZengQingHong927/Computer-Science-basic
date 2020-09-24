@@ -11,7 +11,7 @@ React - Rich Editor
 ```js
 var formidable = require (‘formidable’);
 
-// Koa把file文件放在ctx.req对象上处理
+// Koa把file文件放在ctx.req對象上處理
 req === ctx.req;
 
 function FormidableP (req, opts) {

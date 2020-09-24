@@ -1,4 +1,5 @@
 # Linux環境變量設定
+
 - 登入Linux時執行文件的過程如下：
 剛登入Linux時，首先啟動/etc/profile文件，然后再啟動用户目錄下的~/.bash_profile、~/.bash_login或~/.profile文件中的其中一個，執行的顺序為：~/.bash_profile、~/.bash_login，~/.profile。  
 如果~/.bash_profile文件存在的話，還會執行~/.bashrc文件。  

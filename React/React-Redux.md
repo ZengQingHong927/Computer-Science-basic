@@ -19,4 +19,5 @@ action, dispatch, reducer, store
 3. 使用createStore創建store
 4. 使用Provider在最外層組件注入store
 5. 在組件中使用useSelector取用store的狀態數據，或使用connect將store的狀態映射注入組件props
-
+6. 在組件中使用useDispatch函數創建dispatch傳入Action對象修改store狀態
+7. 使用Redux-thunk處理異步dispatch

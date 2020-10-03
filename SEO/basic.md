@@ -1,4 +1,5 @@
 # SEO 優化
+
 1. 網站的標題，關鍵字，描述必須設置
 2. 圖片加上alt <img src="../xxx.jpg" alt="flower">
 3. html標籤的合理使用，符合W3C標準，佈局div,列表ul,li,a,p,h1-h6等等

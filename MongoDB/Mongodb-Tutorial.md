@@ -197,3 +197,7 @@ mongodump -h 127.0.0.1:27020 -d dev -u Nick -p abc123 -o /Users/nicktseng/Progra
 
 mongodump -h ds223343.mlab.com:23343 -d lendingcar-dev-2 -u admin -p OC1234oc1234 -o /Users/lendingcar/Desktop/koaDB
 mongorestore --host 127.0.0.1 --port 27020 -d blog /Home/Vermeer/Programming/koaDB/blog
+
+先登入再import
+mongo --host 127.0.0.1 --port 27020 -u "Nick" -p "abc123" --authenticationDatabase dev
+mongoimport -d beer --file /Users/nicktseng/Desktop/beer-recipes/recipeData.csv --collection beerrecipes --headerline --ignoreBlanks --type csv

@@ -30,7 +30,7 @@ then 方法必须返回一个 promise 对象 promise2 = promise1.then(onFulfille
 如果 onFulfilled 不是函数且 promise1 状态变为已完成, promise2 必须成功执行并返回相
 同的值
 如果 onRejected 不是函数且 promise1 状态变为已拒绝, promise2 必须执行拒绝回调并返
-回相同的据因
+回相同的拒絕原因
 
 ```js
 var promise1 = new Promise((resolve, reject) => {reject();});

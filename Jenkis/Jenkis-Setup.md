@@ -14,3 +14,8 @@ brew services stop jenkis-lts
 ## config document
 
 Mac ~/.jenkins/config.xml
+
+## Uninstall on MacOS
+
+brew uninstall jenkins --force
+brew cleanup

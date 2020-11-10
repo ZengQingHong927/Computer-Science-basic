@@ -200,4 +200,4 @@ mongorestore --host 127.0.0.1 --port 27020 -d blog /Home/Vermeer/Programming/koa
 
 先登入再import
 mongo --host 127.0.0.1 --port 27020 -u "Nick" -p "abc123" --authenticationDatabase dev
-mongoimport -d beer --file /Users/nicktseng/Desktop/beer-recipes/recipeData.csv --collection beerrecipes --headerline --ignoreBlanks --type csv
+mongoimport --host 127.0.0.1 --port 27020 -d beer --file /Users/nicktseng/Desktop/beer-recipes/recipeData.csv --collection beerrecipes --headerline --ignoreBlanks --type csv

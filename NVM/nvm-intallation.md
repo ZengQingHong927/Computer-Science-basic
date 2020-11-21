@@ -10,6 +10,7 @@ Node JS 版本管理工具
 export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 * source ~/.bashrc
+* . ~/.nvm/nvm.sh，運行腳本
 * 運行nvm -v，是否正常顯示版本
 
 ## 基本指令

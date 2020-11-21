@@ -37,12 +37,12 @@ var program = require ('commander');
 var mainA = () => {
   await mongodb.init ()
   program
-    .option('-m, --mode[mode]', 'mode');
-    
+    .option('-m, --mode [mode]', 'mode');
+
   program.parse(process.argv);
-   
+
   let { mode }  = program;
-    
+
   // execute function based on different mode
   ...
   

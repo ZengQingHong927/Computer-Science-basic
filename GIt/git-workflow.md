@@ -35,6 +35,7 @@
 
 1. git reset —hard v1.6.xxxx
 2. git reset —hard xxxxxxxxxxxxx (SHA1 ID)
+3. git reset --soft HEAD~2 (回退兩個commit)
 
 ## Git 小技巧
 
@@ -44,3 +45,21 @@
 4. git describe —tags 查看当前所在位置
 5. git fetch apollo —tags -f 强制更新为远端版本
 6. for i in {24724..24785}; do git tag -d v1.6.$i; done 在命令行輸入指令循環刪除連續tag
+7. git push origin :<分支名稱> (刪除遠端分支)
+8. git push origin <分支名稱> (提交遠端分支)
+
+## Git conflict
+
+推送分支merge request 衝突（本地端解決衝突）
+
+1. git checkout master (local)
+2. git pull --rebase upstream master (local)
+3. git checkout BDM-3419
+4. git rebase master
+5. fix conflict
+6. git add xxx (修正的文件)
+7. git commit -a -m 'BDM-3419: xxx'
+8. git rebase --continue
+9. git push origin BDM-3419 (local 端更新master rebase到master最新代碼，解決rebase conflict，推分支到自己的repo)
+10. 若 git push origin BDM-3419被rejected（remote head behind local branch）
+11. git push origin :BDM-3419（刪除遠端分支） git push origin BDM-3419（提交本地分支）

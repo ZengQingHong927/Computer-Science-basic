@@ -63,3 +63,13 @@
 9. git push origin BDM-3419 (local 端更新master rebase到master最新代碼，解決rebase conflict，推分支到自己的repo)
 10. 若 git push origin BDM-3419被rejected（remote head behind local branch）
 11. git push origin :BDM-3419（刪除遠端分支） git push origin BDM-3419（提交本地分支）
+
+## Git 提交本地代碼
+
+1. 創建專案 create-react-app project-name
+2. git init
+3. git remote add origin https://github.com/ZengQingHong927/xxx.git
+4. git add .
+5. git commit -m 'init'
+6. git push origin master
+

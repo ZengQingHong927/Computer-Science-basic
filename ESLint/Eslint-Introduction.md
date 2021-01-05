@@ -11,12 +11,18 @@
 
 ## 使用步驟
 
-1. 在專案根目錄下安裝相關套件，npm install eslint eslint-config-airbnb eslint-friendly-formatter eslint-loader eslint-plugin-html eslint-plugin-import --save-dev  
+1. create-react-app
+2. npm i
+3. ./node_modules/.bin/eslint --init
+npm i eslint-config-airbnb eslint-friendly-formatter eslint-loader eslint-plugin-html eslint-plugin-import --save-dev
+4. edit .eslintrc.js
+
+<!-- 1. 在專案根目錄下安裝相關套件，npm install eslint eslint-config-airbnb eslint-friendly-formatter eslint-loader eslint-plugin-html eslint-plugin-import --save-dev  
 2. 在專案根目錄下運行 ./node_modules/.bin/eslint --init，創建新文件.eslintrc.js
 3. 編輯 .eslintrc.js配置
 4. 在VSCode設定相關配置 Code->Preferences->Settings，在User和Workspace編輯設定，“eslint.validate”:["javascript","javascriptreact",{"language":"vue","autofix":true}]
 5. airbnb-base代碼風格範例  
-.eslintrc.js
+.eslintrc.js -->
 
 ```js
 module,exports = {

@@ -45,6 +45,10 @@ sudo service nginx start
 
 sudo nginx -t -c /etc/nginx/nginx.conf
 
+## 啟動指定nginx.conf文件 (前端項目啟動)
+
+nginx -c /path/to/nginx.conf
+
 ## firewal list
 
 檢查防火牆

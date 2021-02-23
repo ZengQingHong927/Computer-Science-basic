@@ -127,7 +127,7 @@ db.createCollection("health");
 1. mongod
 2. use testdb
 3. db.createUser({user:'username',pwd:'password',roles:[{role:'dbAdmin',db:'wmg-sys-app-beta'}]})
-4. use admin->db.createUser({user:'username',pwd:'password',roles:[{role:'userAdminAnyDatabase',db:'admin'}]})
+4. use admin->db.createUser({user:'username',pwd:'password',roles:[{role:'userAdminAnyDatabase',db:'admin'}, {role:'readWriteAnyDatabase',db:'admin'}]})
 5. sudo nano /etc/mongodb.conf
 6. security:
     authorization: enabled

@@ -59,3 +59,7 @@ CREATE TABLE tableName (id int reference tableName(id) on delete cascade on upda
 \timing
 explain SELECT * FROM tableName where ...;
 PostgreSQL為每個收到查詢設計一個查詢規劃
+
+## psql: FATAL: role"postgres" does not exist
+
+查看數據庫角色: psql -l

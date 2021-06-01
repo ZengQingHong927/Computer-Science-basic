@@ -207,6 +207,11 @@ content —> width —> flex-basis (limted by max|min-width)
   align-items: flex-start | flex-end | center | baseline | stretch; (项目在交叉轴上对齐方式)
   align-content:  flex-start | flex-end | center | space-between | space-around | stretch; (多根轴线的对齐方式)
 
+- space-between vs space-around vs space-evenly
+  space-between：每個小方塊擁有相同的間隔，但與父容器之間沒有間隔。這裡會有 10px 的空隙是因為我將每個方塊預設有 10px 的 margin 的緣故。
+  space-around：每個小方塊之間與父容器有間隔，但小方塊與父容器之間的間隔是小方塊彼此間隔的一半。
+  space-evenly：每個小方塊之間和與父容器之間擁有相同的間隔。
+
 ```js
 // 第二个div flexGrow会把 Title div和Input div撑开至最外层的div宽度
 <div >
